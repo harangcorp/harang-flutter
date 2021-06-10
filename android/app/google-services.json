@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "164348675411",
+    "project_id": "harang-2ebeb",
+    "storage_bucket": "harang-2ebeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164348675411:android:ec71a707d96bdf9b304da6",
+        "android_client_info": {
+          "package_name": "com.iceluna.harang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164348675411-8n14io806tqr5ot0lrf45dgftkhqvfg1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceluna.harang",
+            "certificate_hash": "278a1062192bb12b387ef07ae17b10a577a48abf"
+          }
+        },
+        {
+          "client_id": "164348675411-kevisah56g29pbhrlnil3cf1n9mdnb59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPcTAqaGdmPb1Rh7UyFeE89tHtiirPVgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164348675411-kevisah56g29pbhrlnil3cf1n9mdnb59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
