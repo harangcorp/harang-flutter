@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "164348675411-jbo1uaa8mmh48lv83mkojrgtasu8ik2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceluna.harang",
+            "certificate_hash": "800f6dc8ac5e2122ad64153047ea4849d2954926"
+          }
+        },
+        {
           "client_id": "164348675411-kevisah56g29pbhrlnil3cf1n9mdnb59.apps.googleusercontent.com",
           "client_type": 3
         }
