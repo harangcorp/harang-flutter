@@ -37,3 +37,29 @@ final np_btn = TextStyle(
 
 final codetext = TextStyle(
     fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+final homeTitleStyle = TextStyle(
+    fontSize: 28,
+    color: Color(0xff000000),
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.w800);
+final homeDescriptionStyle = TextStyle(
+    fontSize: 14,
+    color: Color(0xff495057),
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.w600);
+final homeContentStyle_nuriPlayground = TextStyle(
+    fontSize: 14,
+    color: Color(0xff30B49D),
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.w700);
+final homeContentStyle_stepbystepStudy = TextStyle(
+    fontSize: 14,
+    color: Color(0xffAA48E1),
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.w700);
+
+final homeContentStyle_hallOfFame = TextStyle(
+    fontSize: 14,
+    color: Color(0xffCB42D4),
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.w700);
