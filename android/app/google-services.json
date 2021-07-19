@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "164348675411-hhmksh80ost8uasqq7jsd94c4jptt5i2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceluna.harang",
+            "certificate_hash": "f8ddd94f8198292efc62aad838b7afa227932de8"
+          }
+        },
+        {
           "client_id": "164348675411-jbo1uaa8mmh48lv83mkojrgtasu8ik2j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -45,6 +53,13 @@
             {
               "client_id": "164348675411-kevisah56g29pbhrlnil3cf1n9mdnb59.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "164348675411-qte7188r19qvmjq5o8bdn8tolnlc01o9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.iceluna.harang"
+              }
             }
           ]
         }
