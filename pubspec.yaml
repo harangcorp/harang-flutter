@@ -68,9 +68,9 @@ flutter:
     - family: NotoSansKR
       fonts:
         - asset: assets/fonts/NotoSansKR-Black.otf
-          weight: 700
+          weight: 900
         - asset: assets/fonts/NotoSansKR-Bold.otf
-          weight: 600
+          weight: 700
         - asset: assets/fonts/NotoSansKR-Medium.otf
           weight: 500
         - asset: assets/fonts/NotoSansKR-Regular.otf

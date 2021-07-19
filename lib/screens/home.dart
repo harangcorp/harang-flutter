@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/authController.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:harang/controllers/bindings/nuripgBinding.dart';
+import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
 
 import 'leaderboard/leaderboard.dart';
@@ -32,7 +34,10 @@ class Home extends GetWidget<AuthController> {
               itemHeight: 100,
               itemWidth: 100,
               itemCount: 3,
-              onTap: (index) => Get.to(articles[index]["page"]),
+              onTap: (index) => Get.to(
+                articles[index]["page"],
+                binding: NuripgBinding(),
+              ),
               itemBuilder: (context, index) => Column(
                 children: [
                   textBox(index),
