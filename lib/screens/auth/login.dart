@@ -22,7 +22,10 @@ class Login extends GetView<AuthController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Login_top_images(height: _height, width: _width),
+            Hero(
+              tag: "topImage",
+              child: Login_top_images(height: _height, width: _width),
+            ),
             Column(
               children: [
                 Container(

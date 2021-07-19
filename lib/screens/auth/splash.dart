@@ -19,8 +19,12 @@ class Splash extends GetWidget<AuthController> {
         child: Stack(
           children: [
             Positioned(
-                top: 0,
-                child: Login_top_images(height: _height, width: _width)),
+              top: 0,
+              child: Hero(
+                tag: "topImage",
+                child: Login_top_images(height: _height, width: _width),
+              ),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

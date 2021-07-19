@@ -21,7 +21,10 @@ class Signup extends GetView<AuthController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Login_top_images(height: _height * 0.8, width: _width),
+            Hero(
+              tag: "topImage",
+              child: Login_top_images(height: _height * 0.8, width: _width),
+            ),
             Container(
                 height: _height * 0.12,
                 decoration: BoxDecoration(
