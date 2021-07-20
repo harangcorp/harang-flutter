@@ -52,6 +52,9 @@ class _StudyMainState extends State<StudyMain> {
               style: homeDescriptionStyle,
               textAlign: TextAlign.center,
             ),
+            SizedBox(
+              height: _height * 0.025,
+            ),
             studyLevelBox(_height, _width, 0),
             studyLevelBox(_height, _width, 1),
             studyLevelBox(_height, _width, 2),
@@ -66,11 +69,11 @@ class _StudyMainState extends State<StudyMain> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 50.0, top: 8, bottom: 8),
+          padding: const EdgeInsets.only(left: 50.0, top: 9, bottom: 9),
         ),
         Container(
-            height: _height * 0.225,
-            width: _width * 0.85,
+            height: _height * 0.22,
+            width: _width * 0.87,
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 boxShadow: [
@@ -86,11 +89,11 @@ class _StudyMainState extends State<StudyMain> {
               children: [
                 Positioned(
                     top: -15,
-                    right: _width * 0.56,
+                    right: _width * 0.564,
                     child: Container(
                         margin: EdgeInsets.only(right: 40, top: 30),
                         width: 47,
-                        height: 16,
+                        height: 20,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             color: articles[articleIndex]["levelBox_color"],
@@ -105,19 +108,25 @@ class _StudyMainState extends State<StudyMain> {
                 ),
                 Positioned(
                     top: 10,
-                    right: _width * 0.345,
+                    right: _width * 0.354,
                     child: Container (
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.white,
+                            blurRadius: 3,
+                          )
+                        ],
                       ),
                     )
                 ),
                 Positioned(
                     top: 13,
-                    right: _width * 0.353,
+                    right: _width * 0.362,
                     child: Image.asset(
                       articles[articleIndex]["image"],
                       height: 45,
@@ -128,8 +137,8 @@ class _StudyMainState extends State<StudyMain> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 50,
-                        width: 50,
+                        height: 40,
+                        width: 40,
                       ),
                       Text(
                         articles[articleIndex]["title"],
