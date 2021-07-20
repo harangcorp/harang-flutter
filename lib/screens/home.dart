@@ -60,24 +60,21 @@ class Home extends GetWidget<AuthController> {
                               offset: Offset(0, 10))
                         ],
                         color: articles[index]["color"],
-                        borderRadius: BorderRadius.circular(30)
-                    ),
+                        borderRadius: BorderRadius.circular(30)),
                     child: Stack(
                       children: [
                         Positioned(
                             child: Image.asset(
-                              'assets/images/homepage_circle.png',
-                              height: 170,
-                            )
-                        ),
+                          'assets/images/homepage_circle.png',
+                          height: 170,
+                        )),
                         Positioned(
                             top: _height * 0.43,
                             right: _width * 0.03,
                             child: Image.asset(
                               articles[index]["buttonImage"],
                               height: 80,
-                            )
-                        ),
+                            )),
                         Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,8 +92,7 @@ class Home extends GetWidget<AuthController> {
                                 height: 270,
                                 width: 300,
                               ),
-                            ]
-                        ),
+                            ]),
                       ],
                     ),
                   ),
