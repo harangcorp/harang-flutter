@@ -14,6 +14,24 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(initialBinding: AuthBinding(), home: Root());
+    return GetMaterialApp(
+        builder: (context, child) => Scaffold(
+              // 화면 클릭 시, 키보드 숨기기
+              body: GestureDetector(
+                onTap: () {
+                  hideKeyboard(context);
+                },
+                child: child,
+              ),
+            ),
+        initialBinding: AuthBinding(),
+        home: Root());
+  }
+
+  void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
   }
 }

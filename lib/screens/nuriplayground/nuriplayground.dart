@@ -17,135 +17,138 @@ class NuriPlayGround extends GetWidget<NuripgController> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height: 9,
-                        width: 140,
-                        color: mint,
+        child: Center(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          height: 9,
+                          width: 140,
+                          color: mint,
+                        ),
                       ),
+                      Text(
+                        "누리 놀이터",
+                        style: np_title,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 48),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "코드",
+                          style: np_subtitle,
+                        ),
+                        Obx(() => controller.isCompiling.value
+                            ? loadingButton()
+                            : buildCompileButton()),
+                      ],
                     ),
-                    Text(
-                      "누리 놀이터",
-                      style: np_title,
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      height: height * 0.25,
+                      decoration: BoxDecoration(
+                          color: Color(0xfff8FFFE),
+                          border: Border.all(color: mint_shadow, width: 1),
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(color: mint_shadow, blurRadius: 8)
+                          ]),
+                      child: TextField(
+                        controller: controller.codeCtl,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 15,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          focusColor: Colors.amber,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "코드",
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        "입력",
                         style: np_subtitle,
                       ),
-                      Obx(() => controller.isCompiling.value
-                          ? loadingButton()
-                          : buildCompileButton()),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: height * 0.25,
-                    decoration: BoxDecoration(
-                        color: Color(0xfff8FFFE),
-                        border: Border.all(color: mint_shadow, width: 1),
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(color: mint_shadow, blurRadius: 8)
-                        ]),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        focusColor: Colors.amber,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      height: height * 0.07,
+                      decoration: BoxDecoration(
+                          color: Color(0xfff8FFFE),
+                          border: Border.all(color: mint_shadow, width: 1),
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(color: mint_shadow, blurRadius: 8)
+                          ]),
+                      child: TextField(
+                        controller: controller.inputCtl,
+                        style: codetext,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          focusColor: Colors.amber,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "입력",
-                    style: np_subtitle,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    height: height * 0.07,
-                    decoration: BoxDecoration(
-                        color: Color(0xfff8FFFE),
-                        border: Border.all(color: mint_shadow, width: 1),
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(color: mint_shadow, blurRadius: 8)
-                        ]),
-                    child: TextField(
-                      style: codetext,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        focusColor: Colors.amber,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        "출력",
+                        style: np_subtitle,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "출력",
-                    style: np_subtitle,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: height * 0.17,
-                    width: width,
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff8FFFE),
-                        border: Border.all(color: mint_shadow, width: 1),
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(color: mint_shadow, blurRadius: 8)
-                        ]),
-                    child: SingleChildScrollView(
-                        child: Text(
-                      "결과입니다",
-                      style: codetext,
-                    )),
-                  )
-                ],
-              ),
-            ],
+                    Container(
+                        height: height * 0.17,
+                        width: width,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            color: Color(0xfff8FFFE),
+                            border: Border.all(color: mint_shadow, width: 1),
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(color: mint_shadow, blurRadius: 8)
+                            ]),
+                        child: Obx(() => Text(
+                              "${controller.output}",
+                              style: codetext,
+                            ))),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -175,9 +178,8 @@ class NuriPlayGround extends GetWidget<NuripgController> {
   GestureDetector buildCompileButton() {
     return GestureDetector(
       onTap: () {
+        controller.compile();
         controller.isCompiling.value = true;
-        Future.delayed(Duration(milliseconds: 2000))
-            .then((value) => controller.isCompiling.value = false);
       },
       child: Hero(
         tag: "compilebutton",
