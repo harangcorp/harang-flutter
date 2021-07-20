@@ -6,6 +6,7 @@ import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:harang/controllers/bindings/nuripgBinding.dart';
 import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
+import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 
 import 'leaderboard/leaderboard.dart';
@@ -145,7 +146,7 @@ final List<Map> articles = [
     "description": "상상하고 이뤄라! 누리 놀이터에서!\n멋진 아이디어를 마음껏 펼칠 공간을 소개합니다.",
     "content": "누리를 사용해 무엇을\n만들어 볼까요?",
     "content_textStyle": homeContentStyle_nuriPlayground,
-    "color": Color(0xff8EF6E4),
+    "color": nuriPlayground,
     "buttonImage": "assets/images/nuri_playground_home_button.png",
     "image": "assets/images/nuri_playground.png",
     "page": NuriPlayGround()
@@ -155,7 +156,7 @@ final List<Map> articles = [
     "description": "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
     "content": "단계별로 배우기 때문에\n부담없이 공부할 수 있어요!",
     "content_textStyle": homeContentStyle_stepbystepStudy,
-    "color": Color(0xffD59BF6),
+    "color": nuriStudy,
     "buttonImage": "assets/images/stepbystep_study_home_button.png",
     "image": "assets/images/stepbystep_study.png",
     "page": StudyMain()
@@ -165,7 +166,7 @@ final List<Map> articles = [
     "description": " 다른 사용자들과 비교하며\n나의 실력을 확인 할 수 있습니다!",
     "content": "명예의 전당, 당신을 위한 자리\n높이 날아봐요!",
     "content_textStyle": homeContentStyle_hallOfFame,
-    "color": Color(0xffEDB1F1),
+    "color": hallOfFame,
     "buttonImage": "assets/images/hall_of_fame_home_button.png",
     "image": "assets/images/hall_of_fame.png",
     "page": LeaderBoard()

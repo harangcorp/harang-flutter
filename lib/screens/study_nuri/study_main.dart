@@ -12,7 +12,6 @@ class StudyMain extends StatefulWidget {
 }
 
 class _StudyMainState extends State<StudyMain> {
-  final SwiperController swController = SwiperController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class _StudyMainState extends State<StudyMain> {
                     child: Container(
                       height: 10,
                       width: 220,
-                      color: Color(0xffD59BF6),
+                      color: nuriStudy,
                     ),
                   ),
                   Text(
@@ -172,7 +171,7 @@ final List<Map> articles = [
     "description": "코딩의 세계 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
     "description_textStyle": stepStudyDescriptionStyle_worldOfCoding,
     "level": 1,
-    "levelBox_color": Color(0xff2CBCA3),
+    "levelBox_color": worldOfCoding,
     "image": "assets/images/world_of_coding.png",
     "color": mint,
   },
@@ -182,7 +181,7 @@ final List<Map> articles = [
     "description": "누리의 문법 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
     "description_textStyle": stepStudyDescriptionStyle_nuriGrammar,
     "level": 2,
-    "levelBox_color": Color(0xb36260be),
+    "levelBox_color": nuriGrammar,
     "image": "assets/images/nuri_grammar.png",
     "color": purpleThree,
   },
@@ -192,7 +191,7 @@ final List<Map> articles = [
     "description": "누리 실전 응용 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
     "description_textStyle": stepStudyDescriptionStyle_nuriPracticalApplication,
     "level": 3,
-    "levelBox_color": Color(0xff9F5BC6),
+    "levelBox_color": nuriPracticalApplication,
     "image": "assets/images/nuri_practical_application.png",
     "color": purpleOne,
   },
