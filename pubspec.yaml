@@ -29,6 +29,7 @@ dependencies:
   firebase_auth: ^3.0.1
   cloud_firestore: ^2.4.0
   flutter_card_swipper: ^0.4.0
+  pull_to_refresh: ^2.0.0
 
   google_sign_in: ^5.0.4
   flutter_svg: ^0.22.0
@@ -79,6 +80,12 @@ flutter:
           weight: 300
         - asset: assets/fonts/NotoSansKR-Thin.otf
           weight: 200
+        - asset: assets/fonts/GmarketSans-Bold.ttf
+          weight: 900
+        - asset: assets/fonts/GmarketSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/GmarketSans-Light.ttf
+          weight: 300
     # fonts:
 
   # For details regarding fonts from package dependencies,
