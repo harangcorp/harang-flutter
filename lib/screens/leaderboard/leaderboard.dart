@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 // 명예의 전당 페이지
 class LeaderBoard extends StatefulWidget {
@@ -35,27 +34,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
     "point": 225
   };
 
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
-
-  void _onRefresh() async{
-    // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use refreshFailed()
-    _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async{
-    // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use loadFailed(),if no data return,use LoadNodata()
-    //items.add((items.length+1).toString());
-    if(mounted)
-      setState(() {
-
-      });
-    _refreshController.loadComplete();
-  }
-
+  final Future<void> Function() onRefresh = () async => print('refresh!');
 
   @override
   Widget build(BuildContext context) {
@@ -63,383 +42,97 @@ class _LeaderBoardState extends State<LeaderBoard> {
     final _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        body: Center(
-            child: Column (
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 10,
-                  height: _height * 0.07,
-                ),
-                Stack(
-                    children: [
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          height: 10,
-                          width: 220,
-                          color: hallOfFame,
-                        ),
-                      ),
-                      Text(
-                        "명예의 전당",
-                        style: homeTitleStyle,
-                      ),
-                    ]
-                ),
-                SizedBox(
-                  width: 10,
-                  height: _height * 0.07,
-                ),
-                Stack(
-                  alignment: Alignment.topCenter,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        slivers: <Widget>[
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            delegate: Delegate("명예의 전당", _height),
+          ),
+          SliverAppBar(
+            pinned: false,
+            snap: true,
+            floating: true,
+            automaticallyImplyLeading: false,
+            expandedHeight: 175.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: MyProfileBox(dummyProfile["name"], dummyProfile["profileImage"], dummyProfile["rank"], dummyProfile["levelStage"], dummyProfile["levelDetailStage"], dummyProfile["point"]),
+            ),
+          ),
+          CupertinoSliverRefreshControl(
+            refreshTriggerPullDistance: 100.0,
+            refreshIndicatorExtent: 3.0,
+            onRefresh: onRefresh,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                (c, i) => Stack(
                   children: [
                     SizedBox(
-                      height: _height * 0.24,
-                      width: _width * 0.9,
+                      height: _height * 0.105,
+                      width: _width,
+                      child: Container(color: Colors.white,),
                     ),
-                    Container(
-                      height: _height * 0.17,
-                      width: _width * 0.87,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: hallOfFame,
-                              blurRadius: 7,
-                            )
-                          ],
-                          color: hallOfFame,
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Stack(
-                                  children: [
-                                    SizedBox(
-                                      width: _width * 0.187,
-                                      height: _height * 0.05,
-                                    ),
-                                    Container (
-                                      width: 60,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      left: 8,
-                                      child: Image.asset(
-                                        "assets/images/" + dummyProfile["profileImage"],
-                                        width: 45,
-                                        height: 45,
-                                      )
-                                    ),
-                                    Positioned(
-                                      left: 48,
-                                      child: Container (
-                                        width: 18,
-                                        height: 18,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 2.7,
-                                      left: 50.5,
-                                      child: Container (
-                                        width: 13,
-                                        height: 13,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: hallOfFame,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      left: 52,
-                                      child: Text(
-                                        dummyProfile["levelStage"].toString(),
-                                        style: hallOfFame_BoxProfileImagePointStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: _width * 0.08,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      dummyProfile["name"],
-                                      style: hallOfFame_BoxTitleStyle,
-                                    ),
-                                    SizedBox(
-                                      height: _height * 0.012,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container ( //최종 레벨
-                                          width: _width * 0.23,
-                                          height: _height * 0.031,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(30),
-                                            color: Colors.white,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Positioned(
-                                                top: 2,
-                                                left: 2.5,
-                                                child: Container (
-                                                  width: 17,
-                                                  height: 17,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(30),
-                                                    color: purpleFour,
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                  top: 4.8,
-                                                  left: 5.5,
-                                                  child: Image.asset(
-                                                    "assets/images/level.png",
-                                                    width: 10,
-                                                    height: 10,
-                                                  )
-                                              ),
-                                              Positioned(
-                                                top: 3.3,
-                                                left: (_width * 0.09) - ((dummyProfile["levelStage"].toString().length * 2) + (dummyProfile["levelDetailStage"].toString().length * 2)),
-                                                child: Text(
-                                                  "Lv. " + dummyProfile["levelStage"].toString() + "-" + dummyProfile["levelDetailStage"].toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style: hallOfFame_BoxDescriptionStyle,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 7,
-                                        ),
-                                        Container ( //포인트
-                                          width: _width * 0.2,
-                                          height: _height * 0.031,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(30),
-                                            color: Colors.white,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Positioned(
-                                                top: 2,
-                                                left: 2.5,
-                                                child: Container (
-                                                  width: 17,
-                                                  height: 17,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(30),
-                                                    color: purpleFour,
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                  top: 4.5,
-                                                  left: 4.7,
-                                                  child: Image.asset(
-                                                    "assets/images/coin.png",
-                                                    width: 11,
-                                                    height: 11,
-                                                  )
-                                              ),
-                                              Positioned(
-                                                top: 3.3,
-                                                left: (_width * 0.1) - (dummyProfile["point"].toString().length * 2),
-                                                child: Text(
-                                                  dummyProfile["point"].toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style: hallOfFame_BoxDescriptionStyle,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: _height * 0.02,
-                                    )
-                                  ],
-                                )
-                              ]
-                          ),
-                          SizedBox(
-                            height: _height * 0.02,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: _height * 0.14,
-                      left:  _width * 0.1,
-                      child: Container(
-                        width: _width * 0.7,
-                        height: _height * 0.073,
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: hallOfFame,
-                                  blurRadius: 15,
-                                  )
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)
-                        ),
-                        child: Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        getBlankBox(i),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              dummyProfile["rank"].toString() + "위",
-                              style: hallOfFame_subBoxRankStyle,
+                            SizedBox(
+                              width: 60,
+                              child: getRankPlayerPrize(i),
                             ),
                             SizedBox(
-                              width: _width * 0.025,
-                            ),
-                            Stack(
-                              children: [
-                                Container (
-                                  width: _width * 0.085,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    border: Border.all(
-                                      width: 2,
-                                      color: hallOfFame,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: _height * 0.02,
-                                  left: _width * 0.013,
-                                  child: Image.asset(
-                                    "assets/images/logo.png",
-                                    width: _width * 0.06,
-                                  ),
-                                ),
-                              ],
+                              width: 50,
+                              child: getRankPlayerIcon(i),
                             ),
                             SizedBox(
-                              width: _width * 0.02,
-                            ),
-                            Text(
-                              dummyProfile["name"],
-                              style: hallOfFame_subBoxNameStyle,
+                              width: 10,
                             ),
                             SizedBox(
-                              width: _width * 0.03,
+                              width: 130,
+                              child: getRankText(i, "name"),
                             ),
-                            Text(
-                              dummyProfile["point"].toString(),
-                              style: hallOfFame_subBoxPointStyle,
+                            SizedBox(
+                              width: 12,
+                            ),
+                            SizedBox(
+                              width: 45,
+                              child: getRankText(i, "point"),
                             ),
                           ],
                         ),
-                      ),
-                    )
+                        SizedBox(
+                          height: _height * 0.0225,
+                        )
+                      ],
+                    ),
                   ],
                 ),
-                Container(
-                  height: _height * 0.558,
-                  width: _width * 0.95,
-                  child: SmartRefresher(
-                    enablePullDown: true,
-                    enablePullUp: true,
-                    physics: BouncingScrollPhysics(),
-                    header: ClassicHeader(),
-                    footer: CustomFooter(
-                      builder: (context, mode){
-                        Widget body ;
-                        if(mode==LoadStatus.idle){
-                          body =  Text("밀어올려 로딩하기");
-                        }
-                        else if(mode==LoadStatus.loading){
-                          body =  CupertinoActivityIndicator();
-                        }
-                        else if(mode == LoadStatus.failed){
-                          body = Text("로딩 실패, 다시시도하세요");
-                        }
-                        else if(mode == LoadStatus.canLoading){
-                          body = Icon(Icons.arrow_upward_rounded);
-                        }
-                        else{
-                          body = Text("더 이상의 데이터가 없습니다.");
-                        }
-                        return Container(
-                          height: 55.0,
-                          child: Center(child:body),
-                        );
-                      },
-                    ),
-                    controller: _refreshController,
-                    onRefresh: _onRefresh,
-                    onLoading: _onLoading,
-                    child: ListView.builder(
-                      itemBuilder: (c, i) =>
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 60,
-                                child: getRankPlayerPrize(i),
-                              ),
-                              SizedBox(
-                                width: 50,
-                                child: getRankPlayerIcon(i),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              SizedBox(
-                                width: 120,
-                                child: getRankText(i, "name"),
-                              ),
-                              SizedBox(
-                                width: 12,
-                              ),
-                              SizedBox(
-                                width: 45,
-                                child: getRankText(i, "point"),
-                              ),
-                            ],
-                          ),
-                      itemExtent: 100.0,
-                      itemCount: dummyData.length,
-                    ),
-                  ),
-                )
-              ],
-            )
-        )
+              childCount: dummyData.length,
+            ),
+          ),
+        ],
+      ),
     );
+  }
+
+  SizedBox getBlankBox(int index) { //1등의 리스트박스가 위로 올라가 있어 그림자가 제대로 표시되지 않는 현상을 해결하기 위한 Method
+    SizedBox result = SizedBox();
+
+    if (index == 0) {
+      result = SizedBox(
+        height: 3,
+      );
+    }
+
+    return result;
   }
 
   SizedBox getRankPlayerPrize(int index) {
@@ -570,3 +263,347 @@ class _LeaderBoardState extends State<LeaderBoard> {
   }
 
 }
+
+class Delegate extends SliverPersistentHeaderDelegate {
+
+  final Color backgroundColor = Colors.white;
+  final String _title;
+  final double _height;
+
+  Delegate(this._title, this._height);
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: backgroundColor,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: _height * 0.065,
+            ),
+            Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: 10,
+                      width: 220,
+                      color: hallOfFame,
+                    ),
+                  ),
+                  Text(
+                    _title,
+                    style: homeTitleStyle,
+                  ),
+                ]
+            ),
+          ],
+        )
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 125;
+
+  @override
+  double get minExtent => 125;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
+
+class MyProfileBox extends StatelessWidget {
+  final String _name, _profileImage;
+  final int _rank, _levelStage, _levelDetailStage, _point;
+
+  MyProfileBox(this._name, this._profileImage, this._rank, this._levelStage, this._levelDetailStage, this._point);
+
+  @override
+  Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+        body: Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: _height,
+                  width: _width,
+                  child: Container(color: Colors.white,),
+                ),
+                Container(
+                  height: _height * 0.17,
+                  width: _width * 0.87,
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: hallOfFame,
+                          blurRadius: 7,
+                        )
+                      ],
+                      color: hallOfFame,
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Stack(
+                              children: [
+                                SizedBox(
+                                  width: _width * 0.187,
+                                  height: _height * 0.05,
+                                ),
+                                Container (
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 5,
+                                    left: 8,
+                                    child: Image.asset(
+                                      "assets/images/" + _profileImage,
+                                      width: 45,
+                                      height: 45,
+                                    )
+                                ),
+                                Positioned(
+                                  left: 48,
+                                  child: Container (
+                                    width: 18,
+                                    height: 18,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 2.7,
+                                  left: 50.5,
+                                  child: Container (
+                                    width: 13,
+                                    height: 13,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: hallOfFame,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 5,
+                                  left: 52,
+                                  child: Text(
+                                    _levelStage.toString(),
+                                    style: hallOfFame_BoxProfileImagePointStyle,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: _width * 0.08,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  _name,
+                                  style: hallOfFame_BoxTitleStyle,
+                                ),
+                                SizedBox(
+                                  height: _height * 0.012,
+                                ),
+                                Row(
+                                  children: [
+                                    Container ( //최종 레벨
+                                      width: _width * 0.23,
+                                      height: _height * 0.031,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.white,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          Positioned(
+                                            top: 2,
+                                            left: 2.5,
+                                            child: Container (
+                                              width: 17,
+                                              height: 17,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(30),
+                                                color: purpleFour,
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                              top: 4.8,
+                                              left: 5.5,
+                                              child: Image.asset(
+                                                "assets/images/level.png",
+                                                width: 10,
+                                                height: 10,
+                                              )
+                                          ),
+                                          Positioned(
+                                            top: 3.3,
+                                            left: (_width * 0.08) - (_levelStage.toString().length * 2) + (_levelDetailStage.toString().length * 2),
+                                            child: Text(
+                                              "Lv. " + _levelStage.toString() + "-" + _levelDetailStage.toString(),
+                                              textAlign: TextAlign.center,
+                                              style: hallOfFame_BoxDescriptionStyle,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 7,
+                                    ),
+                                    Container ( //포인트
+                                      width: _width * 0.2,
+                                      height: _height * 0.031,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.white,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          Positioned(
+                                            top: 2,
+                                            left: 2.5,
+                                            child: Container (
+                                              width: 17,
+                                              height: 17,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(30),
+                                                color: purpleFour,
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                              top: 4.5,
+                                              left: 4.7,
+                                              child: Image.asset(
+                                                "assets/images/coin.png",
+                                                width: 11,
+                                                height: 11,
+                                              )
+                                          ),
+                                          Positioned(
+                                            top: 3.3,
+                                            left: (_width * 0.11) - (_point.toString().length * 2),
+                                            child: Text(
+                                              _point.toString(),
+                                              textAlign: TextAlign.center,
+                                              style: hallOfFame_BoxDescriptionStyle,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: _height * 0.02,
+                                )
+                              ],
+                            )
+                          ]
+                      ),
+                      SizedBox(
+                        height: _height * 0.02,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: _height * 0.195,
+                  left:  _width * 0.145,
+                  child: Container(
+                    width: _width * 0.7,
+                    height: _height * 0.073,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: hallOfFame,
+                            blurRadius: 15,
+                          )
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _rank.toString() + "위",
+                          style: hallOfFame_subBoxRankStyle,
+                        ),
+                        SizedBox(
+                          width: _width * 0.025,
+                        ),
+                        Stack(
+                          children: [
+                            Container (
+                              width: _width * 0.085,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                border: Border.all(
+                                  width: 2,
+                                  color: hallOfFame,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: _height * 0.02,
+                              left: _width * 0.013,
+                              child: Image.asset(
+                                "assets/images/logo.png",
+                                width: _width * 0.06,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: _width * 0.02,
+                        ),
+                        Text(
+                          _name,
+                          style: hallOfFame_subBoxNameStyle,
+                        ),
+                        SizedBox(
+                          width: _width * 0.03,
+                        ),
+                        Text(
+                          _point.toString(),
+                          style: hallOfFame_subBoxPointStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+        )
+    );
+  }}
