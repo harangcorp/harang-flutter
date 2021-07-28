@@ -56,7 +56,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
             snap: true,
             floating: true,
             automaticallyImplyLeading: false,
-            expandedHeight: 175.0,
+            expandedHeight: _height * 0.26,
             flexibleSpace: FlexibleSpaceBar(
               background: MyProfileBox(dummyProfile["name"], dummyProfile["profileImage"], dummyProfile["rank"], dummyProfile["levelStage"], dummyProfile["levelDetailStage"], dummyProfile["point"]),
             ),
