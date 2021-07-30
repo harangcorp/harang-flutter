@@ -79,6 +79,8 @@ flutter:
           weight: 300
         - asset: assets/fonts/NotoSansKR-Thin.otf
           weight: 200
+    - family: GmarketSans
+      fonts:
         - asset: assets/fonts/GmarketSans-Bold.ttf
           weight: 900
         - asset: assets/fonts/GmarketSans-Medium.ttf
