@@ -32,7 +32,7 @@ class Splash extends GetWidget<AuthController> {
                   children: [
                     SizedBox(height: _height * 0.3),
                     Container(
-                        height: _height * 0.12,
+                        height: _height * 0.1,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                           image: new AssetImage('assets/images/logo.png'),
@@ -45,7 +45,7 @@ class Splash extends GetWidget<AuthController> {
                       '한글이 만드는 코딩',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 23,
+                          fontSize: 22,
                           color: Color(0xFF495057)),
                     ),
                     Text(
@@ -62,7 +62,7 @@ class Splash extends GetWidget<AuthController> {
                       '하랑은 어린이 코딩 교육 플랫폼입니다.\n한글을 이용해 코딩을 재미있게 배워봐요!',
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 13,
+                          fontSize: 12,
                           color: Color(0xFFD59BF6)),
                     ),
                   ],
@@ -72,7 +72,7 @@ class Splash extends GetWidget<AuthController> {
                     GestureDetector(
                       onTap: () => Get.to(() => Login()),
                       child: Container(
-                        width: _width * 0.6,
+                        width: _width * 0.55,
                         height: 40,
                         decoration: BoxDecoration(
                             color: Color(0xFFD59BF6),
@@ -88,18 +88,18 @@ class Splash extends GetWidget<AuthController> {
                           child: Text('로그인',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                                  fontSize: 17,
                                   color: Colors.white)),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 25,
                     ),
                     GestureDetector(
                       onTap: () => Get.to(() => Signup()),
                       child: Container(
-                        width: _width * 0.6,
+                        width: _width * 0.55,
                         height: 40,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -115,7 +115,7 @@ class Splash extends GetWidget<AuthController> {
                           child: Text('회원가입',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                                  fontSize: 17,
                                   color: Color(0xFFD59BF6))),
                         ),
                       ),
@@ -148,7 +148,7 @@ class Splash extends GetWidget<AuthController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () => {controller.signInWithApple()},
+                      onTap: () => {controller.signInWithFacebook()},
                       child: Container(
                         margin: EdgeInsets.only(right: 8, bottom: 16),
                         padding: EdgeInsets.all(6),

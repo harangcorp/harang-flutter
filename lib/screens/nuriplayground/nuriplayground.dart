@@ -55,7 +55,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                         ),
                         Obx(() => controller.isCompiling.value
                             ? loadingButton()
-                            : buildCompileButton()),
+                            : buildCompileButton(context)),
                       ],
                     ),
                     Container(
@@ -175,11 +175,12 @@ class NuriPlayGround extends GetWidget<NuripgController> {
         ));
   }
 
-  GestureDetector buildCompileButton() {
+  GestureDetector buildCompileButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
         controller.compile();
         controller.isCompiling.value = true;
+        hideKeyboard(context);
       },
       child: Hero(
         tag: "compilebutton",
@@ -218,5 +219,12 @@ class NuriPlayGround extends GetWidget<NuripgController> {
         ),
       ),
     );
+  }
+
+  void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
   }
 }

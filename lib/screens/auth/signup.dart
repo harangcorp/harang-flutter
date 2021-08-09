@@ -26,7 +26,7 @@ class Signup extends GetView<AuthController> {
               child: Login_top_images(height: _height * 0.8, width: _width),
             ),
             Container(
-                height: _height * 0.12,
+                height: _height * 0.1,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                   image: new AssetImage('assets/images/logo.png'),

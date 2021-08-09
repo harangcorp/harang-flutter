@@ -8,10 +8,10 @@ final btnText = TextStyle(
     fontWeight: FontWeight.w700);
 
 final hintStyle = TextStyle(
-    fontSize: 15,
-    color: Color(0xffE6C0FC),
+    fontSize: 13,
+    color: Color(0xffDC9EFF),
     fontFamily: 'NotoSansKR',
-    fontWeight: FontWeight.w700);
+    fontWeight: FontWeight.w500);
 
 final signuptext = TextStyle(
     fontSize: 16,
@@ -20,7 +20,7 @@ final signuptext = TextStyle(
     fontWeight: FontWeight.w700);
 final signuphintStyle = TextStyle(
     fontSize: 13,
-    color: Color(0xffE6C0FC),
+    color: Color(0xffDC9EFF),
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.w500);
 

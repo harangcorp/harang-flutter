@@ -29,6 +29,7 @@ dependencies:
   firebase_auth: ^3.0.1
   cloud_firestore: ^2.4.0
   flutter_card_swipper: ^0.4.0
+  flutter_facebook_auth: ^3.5.0
 
   google_sign_in: ^5.0.4
   flutter_svg: ^0.22.0

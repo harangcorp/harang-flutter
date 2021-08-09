@@ -99,5 +99,5 @@ class AuthController extends GetxController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  void signInWithApple() {}
+  void signInWithFacebook() {}
 }
