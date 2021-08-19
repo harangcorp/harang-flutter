@@ -6,7 +6,12 @@ final btnText = TextStyle(
     color: Colors.white,
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.w700);
-
+final logoHarang = TextStyle(
+  fontSize: 28,
+  fontWeight: FontWeight.w900,
+  fontFamily: 'NanumSquareRound',
+    color: Color(0xFFC067F3)
+);
 final hintStyle = TextStyle(
     fontSize: 13,
     color: Color(0xffDC9EFF),

@@ -5,6 +5,7 @@ import 'package:harang/controllers/authController.dart';
 import 'package:harang/screens/auth/login.dart';
 import 'package:harang/screens/auth/signup.dart';
 import 'package:harang/themes/color_theme.dart';
+import 'package:harang/themes/text_theme.dart';
 import 'package:harang/widgets/login_top_images.dart';
 
 class Splash extends GetWidget<AuthController> {
@@ -26,7 +27,7 @@ class Splash extends GetWidget<AuthController> {
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
@@ -39,21 +40,21 @@ class Splash extends GetWidget<AuthController> {
                           fit: BoxFit.fitHeight,
                         ))),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
-                      '한글이 만드는 코딩',
+                      '한글이 만드는 코딩,',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        fontFamily: 'NotoSansKR',
+                          fontWeight: FontWeight.w700,
                           fontSize: 22,
                           color: Color(0xFF495057)),
+                    ), SizedBox(
+                      height: 10,
                     ),
                     Text(
-                      '[하랑]',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                          color: Color(0xFFD59BF6)),
+                      '하랑',
+                      style: logoHarang,
                     ),
                     SizedBox(
                       height: 15,
@@ -64,6 +65,7 @@ class Splash extends GetWidget<AuthController> {
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                           color: Color(0xFFD59BF6)),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
@@ -80,8 +82,7 @@ class Splash extends GetWidget<AuthController> {
                             boxShadow: [
                               BoxShadow(
                                   color: Color(0xffE4CBFF),
-                                  blurRadius: 10,
-                                  spreadRadius: 3,
+                                  blurRadius: 12,
                                   offset: Offset(0, 0)),
                             ]),
                         child: Center(
@@ -107,8 +108,7 @@ class Splash extends GetWidget<AuthController> {
                             boxShadow: [
                               BoxShadow(
                                   color: Color(0xffE4CBFF),
-                                  blurRadius: 10,
-                                  spreadRadius: 3,
+                                  blurRadius: 12,
                                   offset: Offset(0, 0)),
                             ]),
                         child: Center(
@@ -161,7 +161,7 @@ class Splash extends GetWidget<AuthController> {
                               BoxShadow(
                                   color: purpleShadow,
                                   blurRadius: 10,
-                                  spreadRadius: 3)
+                                  spreadRadius: 1)
                             ]),
                         child: SvgPicture.asset('assets/images/googleIcon.svg',
                             color: Colors.white),
@@ -181,7 +181,7 @@ class Splash extends GetWidget<AuthController> {
                               BoxShadow(
                                   color: purpleShadow,
                                   blurRadius: 10,
-                                  spreadRadius: 3)
+                                  spreadRadius: 1)
                             ]),
                         child: SvgPicture.asset(
                           'assets/images/googleIcon.svg',

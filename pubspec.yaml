@@ -88,6 +88,12 @@ flutter:
           weight: 500
         - asset: assets/fonts/GmarketSans-Light.ttf
           weight: 300
+    - family: NanumSquareRound
+      fonts:
+        - asset: assets/fonts/NanumSquareRoundEB.ttf
+          weight: 900
+        - asset: assets/fonts/NanumSquareRoundB.ttf
+          weight: 700
     # fonts:
 
   # For details regarding fonts from package dependencies,

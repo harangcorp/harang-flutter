@@ -36,27 +36,28 @@ class Login extends GetView<AuthController> {
                       fit: BoxFit.fitHeight,
                     ))),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Text(
-                  '한글이 만드는 코딩',
+                  '한글이 만드는 코딩,',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                    fontFamily: 'NotoSansKR',
+                      fontWeight: FontWeight.w700,
                       fontSize: 22,
                       color: Color(0xFF495057)),
                 ),
+                SizedBox(height: 10,),
                 Text(
-                  '[하랑]',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                      color: Color(0xFFD59BF6)),
-                ),  Text(
+                  '하랑',
+                  style: logoHarang,
+                ),                 SizedBox(height: 15,),
+                Text(
                   '하랑은 어린이 코딩 교육 플랫폼입니다.\n한글을 이용해 코딩을 재미있게 배워봐요!',
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Color(0xFFD59BF6)),
+                      color: Color(0xFFD59BF6),),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),

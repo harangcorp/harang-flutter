@@ -22,13 +22,14 @@ class Login_top_images extends StatelessWidget {
         decoration: BoxDecoration(gradient: buildLinearGradient()),
         child: Stack(
           children: [
-            Align(
-              child: Image.asset(
-                'assets/images/login_man.png',
-                width: _width * 0.85,
+           Align(
+                child: Image.asset(
+                  'assets/images/login_man.png',
+                  width: _width * 0.85,
+                  height: _height * 0.25,
+                ),
+                alignment: Alignment.bottomCenter,
               ),
-              alignment: Alignment.bottomCenter,
-            ),
             Positioned(
                 top: 10,
                 right: _width * 0.2,

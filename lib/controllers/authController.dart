@@ -28,6 +28,7 @@ class AuthController extends GetxController {
         id: _authResult.user?.uid,
         name: name,
         email: _authResult.user?.email,
+        score: 0
       );
       if (await Database().createNewUser(_user)) {
         Get.find<UserController>().user = _user;
@@ -90,6 +91,7 @@ class AuthController extends GetxController {
       id: googleUser?.id,
       name: googleUser?.displayName,
       email: googleUser?.email,
+      score: 0
     );
 
     if (await Database().createNewUser(_user)) {
@@ -99,5 +101,7 @@ class AuthController extends GetxController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  void signInWithFacebook() {}
+  void signInWithFacebook() {
+
+  }
 }
