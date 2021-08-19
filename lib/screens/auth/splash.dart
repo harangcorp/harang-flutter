@@ -163,7 +163,7 @@ class Splash extends GetWidget<AuthController> {
                                   blurRadius: 10,
                                   spreadRadius: 1)
                             ]),
-                        child: SvgPicture.asset('assets/images/googleIcon.svg',
+                        child: SvgPicture.asset('assets/images/facebookIcon.svg',
                             color: Colors.white),
                       ),
                     ),

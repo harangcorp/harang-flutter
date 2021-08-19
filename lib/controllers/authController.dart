@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:harang/controllers/userController.dart';
@@ -101,7 +103,30 @@ class AuthController extends GetxController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  void signInWithFacebook() {
+  void signInWithFacebook() async {
+    //TODO iOS 부분 페이스북 로그인은 맥북이 없으므로 작성하지 않았음, 추후 iOS 배포할 시 관련 작업 필요.
 
+    try {
+      final facebookLoginResult = await FacebookAuth.instance.login();
+      final userData = await FacebookAuth.instance.getUserData();
+
+      final facebookAuthCredential = FacebookAuthProvider.credential(facebookLoginResult.accessToken!.token);
+      await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+
+      await FirebaseFirestore.instance.collection('users').add({
+        'email': userData['email'],
+        'name': userData['name'],
+        //'imageUrl': userData['picture']['data']['url'],
+      });
+
+      print("login on");
+      print(userData['name']);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+          var title = "This account exists with a different sign in provider";
+          break;
+      }
+    }
   }
 }
