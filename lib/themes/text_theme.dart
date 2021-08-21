@@ -102,3 +102,28 @@ final hallOfFame_defaultMedalNameStyle = TextStyle(
     fontSize: 15, color: defaultMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_defaultMedalPointStyle = TextStyle(
     fontSize: 15, color: defaultMedal, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+
+final stepStudy_startPage_stageNum = TextStyle(
+    fontSize: 13, color: Colors.white, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
+final stepStudy_startPage_mint_title = TextStyle(
+    fontSize: 28, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_mint_description = TextStyle(
+    fontSize: 12, color: mintThree, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+final stepStudy_startPage_mint_startButton = TextStyle(
+    fontSize: 18, color: Color(0xAD0D7462), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_purple_title = TextStyle(
+    fontSize: 28, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_purple_description = TextStyle(
+    fontSize: 12, color: nuriGrammar, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+final stepStudy_startPage_purple_startButton = TextStyle(
+    fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
+final stepStudy_studyPage_mint_title = TextStyle(
+    fontSize: 21, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_studyPage_mint_contentDefault = TextStyle(
+    fontSize: 14, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
+final stepStudy_studyPage_mint_contentBold = TextStyle(
+    fontSize: 14, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700, height: 2.1);
+final stepStudy_studyPage_mint_contentExtraBold = TextStyle(
+    fontSize: 16, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700, height: 1.6);

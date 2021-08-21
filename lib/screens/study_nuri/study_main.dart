@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:harang/screens/study_nuri/study_start.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
+import 'package:get/get.dart';
 
 // 단계별 학습하기 메인 페이지
 class StudyMain extends StatefulWidget {
@@ -12,6 +13,7 @@ class StudyMain extends StatefulWidget {
 }
 
 class _StudyMainState extends State<StudyMain> {
+
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
@@ -51,9 +53,24 @@ class _StudyMainState extends State<StudyMain> {
             SizedBox(
               height: _height * 0.025,
             ),
-            studyLevelBox(_height, _width, 0),
-            studyLevelBox(_height, _width, 1),
-            studyLevelBox(_height, _width, 2),
+            SizedBox(
+              width:  _width,
+              height: _height * 0.75,
+              child: ListView(
+                padding: const EdgeInsets.all(24.0),
+                children: [
+                  GestureDetector(
+                    onTap: () => Get.to(StudyStart(chapterNum: 1, stageNum: 1)),
+                    child: studyLevelBox(_height, _width, 0),
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.to(StudyStart(chapterNum: 2, stageNum: 1)),
+                    child: studyLevelBox(_height, _width, 1),
+                  ),
+                  studyLevelBox(_height, _width, 2),
+                ],
+              ),
+            )
           ],
         ),
       ),
