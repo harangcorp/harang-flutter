@@ -118,13 +118,10 @@ class AuthController extends GetxController {
         'name': userData['name'],
         //'imageUrl': userData['picture']['data']['url'],
       });
-
-      print("login on");
-      print(userData['name']);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'account-exists-with-different-credential':
-          var title = "This account exists with a different sign in provider";
+          print("This account exists with a different sign in provider");
           break;
       }
     }
