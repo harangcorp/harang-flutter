@@ -4,7 +4,12 @@ final purpleOne = Color(0xFFD59BF6);
 final purpleTwo = Color(0xFFD491FA);
 final purpleThree = Color(0xFF9896f1);
 final purpleFour = Color(0xFFCF50D8);
+final purpleFive = Color(0xFFE3E3FD);
+final purpleSix = Color(0xFFE3E2FD);
+final purpleSeven = Color(0xFF605F9C);
+final purpleEight = Color(0xFF1B0D74);
 final purpleShadow = Color(0xFFE4CBFF);
+final purpleShadow2 = Color(0xFFBEBBFF);
 
 final nuriPlayground = Color(0xff8EF6E4);
 final nuriStudy = Color(0xffD59BF6);
@@ -15,6 +20,12 @@ final nuriGrammar = Color(0xb36260be);
 final nuriPracticalApplication = Color(0xff9F5BC6);
 
 final mint = Color(0xff8EF6E4);
+final mintTwo = Color(0xFFECFAF7);
+final mintThree = Color(0xFF2CBCA3);
+final mintThree_shadow = Color(0x4D2CBCA3);
+final mintFour = Color(0xFF0D7462);
+final mintFive = Color(0xFFEDFCF9);
+final mintSix = Color(0xFFADDBD3);
 final mint_shadow = Color(0xB38EF6E4);
 
 final goldMedal = Color(0xFFFFAC3E);
