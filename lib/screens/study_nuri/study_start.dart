@@ -238,6 +238,7 @@ class backgroundPainter extends CustomClipper<Path> {
 final Map studyContentMap = {
     1: {
       "color": "mint",
+      "stageAmount": 4,
       1: {
         "title": "0과 1로 이루어진 세상",
         "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
@@ -247,12 +248,32 @@ final Map studyContentMap = {
         "title": "프로그래밍이란?",
         "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
         "content": Stage2_WhatIsProgramming(),
+      },
+      3: {
+        "title": "왜 배워야 할까요?",
+        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
+        "content": Stage2_WhatIsProgramming(),
+      },
+      4: {
+        "title": "누리 소개",
+        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
+        "content": Stage2_WhatIsProgramming(),
       }
     },
   2: {
     "color": "purple",
+    "stageAmount": 1,
     1: {
       "title": "화면에 출력하기",
+      "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
+      "content": Stage1_WorldOfZeroAndOne(),
+    }
+  },
+  3: {
+    "color": "purple",
+    "stageAmount": 1,
+    1: {
+      "title": "손전등 켜보기",
       "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
       "content": Stage1_WorldOfZeroAndOne(),
     }
@@ -270,7 +291,12 @@ final Map colorMap = {
     "titleStyle": stepStudy_startPage_mint_title,
     "descriptionStyle": stepStudy_startPage_mint_description,
     "startBtnStyle": stepStudy_startPage_mint_startButton,
-    "startBtnImg": "assets/images/studyNuri/startBtn_mint.png"
+    "startBtnImg": "assets/images/studyNuri/startBtn_mint.png",
+
+    "stageBoxInList_background": mintTwo,
+    "stageBoxInList_border": mintThree,
+    "stageBoxInList_shadow": mintThree_shadow,
+    "stageBoxInList_stageNameStyle": stepStudy_startPage_mint_stageName,
   },
   "purple": {
     "teaserTop": purpleThree,
@@ -282,6 +308,11 @@ final Map colorMap = {
     "titleStyle": stepStudy_startPage_purple_title,
     "descriptionStyle": stepStudy_startPage_purple_description,
     "startBtnStyle": stepStudy_startPage_purple_startButton,
-    "startBtnImg": "assets/images/studyNuri/startBtn_purple.png"
+    "startBtnImg": "assets/images/studyNuri/startBtn_purple.png",
+
+    "stageBoxInList_background": purpleFive,
+    "stageBoxInList_border": purpleSeven,
+    "stageBoxInList_shadow": purpleShadow2,
+    "stageBoxInList_stageNameStyle": stepStudy_startPage_purple_stageName,
   },
 };
