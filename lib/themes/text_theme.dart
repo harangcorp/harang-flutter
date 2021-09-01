@@ -112,12 +112,18 @@ final stepStudy_startPage_mint_description = TextStyle(
     fontSize: 12, color: mintThree, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
 final stepStudy_startPage_mint_startButton = TextStyle(
     fontSize: 18, color: Color(0xAD0D7462), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_mint_stageName = TextStyle(
+    fontSize: 12, color: mintSeven, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_startPage_purple_title = TextStyle(
     fontSize: 28, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_startPage_purple_description = TextStyle(
     fontSize: 12, color: nuriGrammar, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
 final stepStudy_startPage_purple_startButton = TextStyle(
     fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_purple_stageName = TextStyle(
+    fontSize: 12, color: purpleThree, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_lock_stageName = TextStyle(
+    fontSize: 12, color: grayTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final stepStudy_studyPage_mint_title = TextStyle(
     fontSize: 21, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);

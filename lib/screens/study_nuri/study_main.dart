@@ -1,4 +1,6 @@
+import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:harang/screens/study_nuri/study_start.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
@@ -28,20 +30,22 @@ class _StudyMainState extends State<StudyMain> {
             SizedBox(
               height: _height * 0.07,
             ),
-            Stack(children: [
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: 10,
-                  width: 220,
-                  color: nuriStudy,
-                ),
-              ),
-              Text(
-                "단계별 학습하기",
-                style: homeTitleStyle,
-              ),
-            ]),
+            Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: 10,
+                      width: 220,
+                      color: nuriStudy,
+                    ),
+                  ),
+                  Text(
+                    "단계별 학습하기",
+                    style: homeTitleStyle,
+                  ),
+                ]
+            ),
             SizedBox(
               height: _height * 0.025,
             ),
@@ -55,20 +59,58 @@ class _StudyMainState extends State<StudyMain> {
             ),
             SizedBox(
               width:  _width,
-              height: _height * 0.75,
-              child: ListView(
-                padding: const EdgeInsets.all(24.0),
-                children: [
-                  GestureDetector(
-                    onTap: () => Get.to(StudyStart(chapterNum: 1, stageNum: 1)),
-                    child: studyLevelBox(_height, _width, 0),
-                  ),
-                  GestureDetector(
-                    onTap: () => Get.to(StudyStart(chapterNum: 2, stageNum: 1)),
-                    child: studyLevelBox(_height, _width, 1),
-                  ),
-                  studyLevelBox(_height, _width, 2),
-                ],
+              height: _height * 0.767,
+              child: ListView.builder(
+                padding: const EdgeInsets.only(bottom: 32.0),
+                itemCount: 3,
+                itemBuilder: (context, chapterIndex) {
+                  return ConfigurableExpansionTile(
+                    header: studyLevelBox(_height, _width, chapterIndex),
+                    children: [
+                      SizedBox(
+                        width: _width,
+                        height: ((_height * 0.05) * studyContentMap[chapterIndex+1]["stageAmount"]) + _height * 0.01,
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemCount: studyContentMap[chapterIndex+1]["stageAmount"],
+                            itemBuilder: (context, stageIndex) {
+                              String boxMode = "lock";
+                              if (playerStageProgressMap[chapterIndex+1][stageIndex + 1]) {
+                                if (playerStageProgressMap["requiredStage"] == "${chapterIndex+1}-${stageIndex + 1}") {
+                                  boxMode = "nowLevel";
+                                } else {
+                                  boxMode = "unlock";
+                                }
+                              }
+                              return Column(
+                                children: [
+                                  SizedBox(height: _height * 0.01),
+                                  GestureDetector(
+                                      onTap: () {
+                                        if (playerStageProgressMap[chapterIndex+1][stageIndex + 1]) {
+                                          Get.to(StudyStart(chapterNum: (chapterIndex+1), stageNum: (stageIndex + 1)));
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: "스테이지가 잠겨있습니다. 열려있는 스테이지를 클릭해주세요.",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Color(0xE6FFFFFF),
+                                              textColor: Colors.black,
+                                              fontSize: 16.0
+                                          );
+                                        }
+                                      },
+                                      child: stageBox(_height, _width, studyContentMap[chapterIndex+1]["color"], boxMode, studyContentMap[chapterIndex+1][stageIndex+1]["title"])
+                                  ),
+                                ],
+                              );
+                            }
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             )
           ],
@@ -86,7 +128,7 @@ class _StudyMainState extends State<StudyMain> {
         ),
         Container(
           height: _height * 0.22,
-          width: _width * 0.87,
+          width: _width * 0.866,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               boxShadow: [
@@ -96,7 +138,8 @@ class _StudyMainState extends State<StudyMain> {
                 )
               ],
               color: articles[articleIndex]["color"],
-              borderRadius: BorderRadius.circular(30)),
+              borderRadius: BorderRadius.circular(30),
+          ),
           child: Stack(
             children: [
               Positioned(
@@ -112,7 +155,7 @@ class _StudyMainState extends State<StudyMain> {
                       ),
                       child: Center(
                         child: Text(
-                          "Lv.${articles[articleIndex]["level"]}",
+                          "${articles[articleIndex]["level"]-1}단계",
                           style: stepStudy_levelText,
                           textAlign: TextAlign.center,
                         ),
@@ -171,6 +214,110 @@ class _StudyMainState extends State<StudyMain> {
       ],
     );
   }
+
+  Container stageBox(double _height, double _width, String color, String boxMode, String stageName) { //boxMode: lock, unlock, nowLevel
+    BoxDecoration boxDecoration = BoxDecoration();
+    TextStyle stageNameStyle = TextStyle();
+    SizedBox lockIconBox = SizedBox();
+    Color playBtnColor = Colors.white;
+
+    if (boxMode == "lock") {
+      boxDecoration = BoxDecoration(
+        color: gray,
+        borderRadius: BorderRadius.circular(30),
+      );
+      stageNameStyle = stepStudy_startPage_lock_stageName;
+      lockIconBox = SizedBox(
+        child: Icon(
+          Icons.lock,
+          size: _width * 0.05,
+          color: grayTwo,
+        ),
+      );
+      playBtnColor = grayTwo;
+    } else if (boxMode == "unlock") {
+      boxDecoration = BoxDecoration(
+          color: colorMap[color]["stageBoxInList_background"],
+          borderRadius: BorderRadius.circular(30),
+      );
+      stageNameStyle = colorMap[color]["stageBoxInList_stageNameStyle"];
+      playBtnColor = colorMap[color]["stageBox"];
+    } else if (boxMode == "nowLevel") {
+      boxDecoration = BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: colorMap[color]["stageBoxInList_shadow"],
+              blurRadius: 4,
+            )
+          ],
+          color: colorMap[color]["stageBoxInList_background"],
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+              width: 2,
+              color: colorMap[color]["stageBoxInList_border"]
+          )
+      );
+      stageNameStyle = colorMap[color]["stageBoxInList_stageNameStyle"];
+      playBtnColor = colorMap[color]["stageBox"];
+    }
+
+    return Container(
+      height: _height * 0.04,
+      width: _width * 0.76,
+      alignment: Alignment.center,
+      decoration: boxDecoration,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                stageName,
+                style: stageNameStyle,
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: _width * 0.04,
+              ),
+              lockIconBox
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                width: _width * 0.06,
+                height: _width * 0.06,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: playBtnColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white,
+                      blurRadius: 3,
+                    )
+                  ],
+                ),
+                child: Icon(
+                  Icons.play_arrow,
+                  size: _width * 0.045,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: _width * 0.03,
+              )
+            ],
+          ),
+        ],
+      )
+    );
+  }
 }
 
 final List<Map> articles = [
@@ -205,3 +352,19 @@ final List<Map> articles = [
     "color": purpleOne,
   },
 ];
+
+final Map playerStageProgressMap = { //UI 구현을 위해 임시로 작성된 변수로, 사용자 변수에 스테이지 진행상황이 포함될 경우 교체 필요.
+  "requiredStage": "1-2",
+  1: {
+    1: true,
+    2: true,
+    3: false,
+    4: false,
+  },
+  2: {
+    1: true,
+  },
+  3: {
+    1: false,
+  }
+};

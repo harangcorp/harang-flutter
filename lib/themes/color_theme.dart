@@ -26,7 +26,11 @@ final mintThree_shadow = Color(0x4D2CBCA3);
 final mintFour = Color(0xFF0D7462);
 final mintFive = Color(0xFFEDFCF9);
 final mintSix = Color(0xFFADDBD3);
+final mintSeven = Color(0xFF3DA493);
 final mint_shadow = Color(0xB38EF6E4);
+
+final gray = Color(0xFFE9ECEF);
+final grayTwo = Color(0xFFADB5BD);
 
 final goldMedal = Color(0xFFFFAC3E);
 final silverMedal = Color(0xFF898989);
