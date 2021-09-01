@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/authController.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:harang/controllers/bindings/leaderboardBinding.dart';
 import 'package:harang/controllers/bindings/nuripgBinding.dart';
 import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
@@ -167,7 +168,7 @@ class Home extends GetWidget<AuthController> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Get.to(LeaderBoard()),
+                    onTap: () => Get.to(()=>LeaderBoard(), binding: LeaderboardBinding()),
                     child: Container(
                       width: _width * 0.8,
                       height: _height * 0.2,

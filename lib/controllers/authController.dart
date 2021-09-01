@@ -27,11 +27,11 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
       //create user in database.dart
       UserModel _user = UserModel(
-        id: _authResult.user?.uid,
-        name: name,
-        email: _authResult.user?.email,
-        score: 0
-      );
+          id: _authResult.user?.uid,
+          name: name,
+          email: _authResult.user?.email,
+          score: 0);
+
       if (await Database().createNewUser(_user)) {
         Get.find<UserController>().user = _user;
         Get.offAll(Root());
@@ -75,7 +75,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  void signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -88,19 +88,30 @@ class AuthController extends GetxController {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+    UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
     UserModel _user = UserModel(
-      id: googleUser?.id,
-      name: googleUser?.displayName,
-      email: googleUser?.email,
-      score: 0
-    );
+        id: _authResult.user?.uid,
+        name: googleUser?.displayName,
+        email: googleUser?.email,
+        score: 0);
 
-    if (await Database().createNewUser(_user)) {
-      Get.find<UserController>().user = _user;
-    }
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(_authResult.user?.uid)
+        .get()
+        .then((doc) async {
+      if (doc.exists) {
+        print("exists");
+      } else {
+        if (await Database().createNewUser(_user)) {
+          Get.find<UserController>().user = _user;
+        }
+      }
+    });
+
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+
   }
 
   void signInWithFacebook() async {
@@ -110,14 +121,30 @@ class AuthController extends GetxController {
       final facebookLoginResult = await FacebookAuth.instance.login();
       final userData = await FacebookAuth.instance.getUserData();
 
-      final facebookAuthCredential = FacebookAuthProvider.credential(facebookLoginResult.accessToken!.token);
-      await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      final facebookAuthCredential = FacebookAuthProvider.credential(
+          facebookLoginResult.accessToken!.token);
+      UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 
-      await FirebaseFirestore.instance.collection('users').add({
-        'email': userData['email'],
-        'name': userData['name'],
-        //'imageUrl': userData['picture']['data']['url'],
+      UserModel _user = UserModel(
+          id: _authResult.user?.uid,
+          email: userData['email'],
+          name: userData['name'],
+          score: 0);
+
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(_authResult.user?.uid)
+          .get()
+          .then((doc) async {
+        if (doc.exists) {
+          print("exists");
+        } else {
+          if (await Database().createNewUser(_user)) {
+            Get.find<UserController>().user = _user;
+          }
+        }
       });
+
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'account-exists-with-different-credential':

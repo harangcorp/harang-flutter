@@ -9,7 +9,7 @@ class Database {
       await _firestore.collection("users").doc(user.id).set({
         "name": user.name,
         "email": user.email,
-        "score": user.score
+        "score": user.score,
       });
       return true;
     } catch (e) {
@@ -22,7 +22,6 @@ class Database {
     try {
       DocumentSnapshot _doc =
           await _firestore.collection("users").doc(uid).get();
-
       return UserModel?.fromDocumentSnapshot(documentSnapshot: _doc);
     } catch (e) {
       print(e);
