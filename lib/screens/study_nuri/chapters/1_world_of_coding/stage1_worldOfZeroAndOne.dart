@@ -4,6 +4,8 @@ import 'package:harang/screens/study_nuri/chapters/studyui_template.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 
+import 'package:harang/screens/study_nuri/study_end.dart';
+
 class Stage1_WorldOfZeroAndOne extends StatelessWidget {
 
   @override
@@ -16,6 +18,7 @@ class Stage1_WorldOfZeroAndOne extends StatelessWidget {
       _width,
       1,
       "0과 1로 이루어진 세상",
+      StudyEnd(color: "mint", stageNum: 1, stageTitle: "0과 1로 이루어진 세상"),
       Column(
         children: [
           RichText(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
+import 'package:get/get.dart';
 
 class StudyUiTemplate {
 
-  Scaffold chapter1UiTemplate(double _height, double _width, int stageNum, String stageName, Column educationContent) {
+  Scaffold chapter1UiTemplate(double _height, double _width, int stageNum, String stageName, dynamic nextWindow, Column educationContent) {
 
     return Scaffold (
         body: Center(
@@ -92,14 +93,17 @@ class StudyUiTemplate {
                                     child: educationContent,
                                   ),
                                   Positioned(
-                                    top: _height * 0.415,
-                                    left: _width * 0.62,
-                                    child: Image.asset(
-                                      "assets/images/studyNuri/nextPageBtn_mint.png",
-                                      height: _width * 0.22,
-                                      width: _width * 0.22,
-                                    ),
-                                  ),
+                                      top: _height * 0.415,
+                                      left: _width * 0.62,
+                                      child: GestureDetector(
+                                        onTap: () => Get.to(nextWindow),
+                                        child: Image.asset(
+                                          "assets/images/studyNuri/nextPageBtn_mint.png",
+                                          height: _width * 0.22,
+                                          width: _width * 0.22,
+                                        ),
+                                      )
+                                  )
                                 ],
                               ),
                             )

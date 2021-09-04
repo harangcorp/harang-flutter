@@ -8,8 +8,12 @@ final purpleFive = Color(0xFFE3E3FD);
 final purpleSix = Color(0xFFE3E2FD);
 final purpleSeven = Color(0xFF605F9C);
 final purpleEight = Color(0xFF1B0D74);
+final purpleNine = Color(0xFFD2D1FF);
+final purpleTen = Color(0xFFEAEAFF);
+final purpleEleven = Color(0xFF6156CC);
 final purpleShadow = Color(0xFFE4CBFF);
 final purpleShadow2 = Color(0xFFBEBBFF);
+final purpleShadow3 = Color(0x4D685DD6);
 
 final nuriPlayground = Color(0xff8EF6E4);
 final nuriStudy = Color(0xffD59BF6);
@@ -23,11 +27,18 @@ final mint = Color(0xff8EF6E4);
 final mintTwo = Color(0xFFECFAF7);
 final mintThree = Color(0xFF2CBCA3);
 final mintThree_shadow = Color(0x4D2CBCA3);
+final mintThree_shadowTwo = Color(0x662CBCA3);
 final mintFour = Color(0xFF0D7462);
 final mintFive = Color(0xFFEDFCF9);
 final mintSix = Color(0xFFADDBD3);
 final mintSeven = Color(0xFF3DA493);
+final mintEight = Color(0xFFB9FFF3);
 final mint_shadow = Color(0xB38EF6E4);
+
+final pinkOne = Color(0xFFF6E7FF);
+final pinkTwo = Color(0xFF69149A);
+final pinkThree = Color(0xFFEDCCFF);
+final pinkShadow = Color(0x669F5BC6);
 
 final gray = Color(0xFFE9ECEF);
 final grayTwo = Color(0xFFADB5BD);

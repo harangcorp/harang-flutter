@@ -59,7 +59,7 @@ class _StudyMainState extends State<StudyMain> {
             ),
             SizedBox(
               width:  _width,
-              height: _height * 0.767,
+              height: _height * 0.758,
               child: ListView.builder(
                 padding: const EdgeInsets.only(bottom: 32.0),
                 itemCount: 3,
@@ -365,6 +365,6 @@ final Map playerStageProgressMap = { //UI 구현을 위해 임시로 작성된 �
     1: true,
   },
   3: {
-    1: false,
+    1: true,
   }
 };

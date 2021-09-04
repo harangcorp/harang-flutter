@@ -114,6 +114,7 @@ final stepStudy_startPage_mint_startButton = TextStyle(
     fontSize: 18, color: Color(0xAD0D7462), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_startPage_mint_stageName = TextStyle(
     fontSize: 12, color: mintSeven, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
 final stepStudy_startPage_purple_title = TextStyle(
     fontSize: 28, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_startPage_purple_description = TextStyle(
@@ -122,6 +123,16 @@ final stepStudy_startPage_purple_startButton = TextStyle(
     fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_startPage_purple_stageName = TextStyle(
     fontSize: 12, color: purpleThree, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
+final stepStudy_startPage_pink_title = TextStyle(
+    fontSize: 28, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_pink_description = TextStyle(
+    fontSize: 12, color: nuriPracticalApplication, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+final stepStudy_startPage_pink_startButton = TextStyle(
+    fontSize: 18, color: nuriPracticalApplication, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_pink_stageName = TextStyle(
+    fontSize: 12, color: nuriPracticalApplication, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
 final stepStudy_startPage_lock_stageName = TextStyle(
     fontSize: 12, color: grayTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
@@ -133,3 +144,24 @@ final stepStudy_studyPage_mint_contentBold = TextStyle(
     fontSize: 14, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700, height: 2.1);
 final stepStudy_studyPage_mint_contentExtraBold = TextStyle(
     fontSize: 16, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700, height: 1.6);
+
+final stepStudy_endPage_mint_title = TextStyle(
+    fontSize: 18, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_endPage_mint_congratsText = TextStyle(
+    fontSize: 13, color: mintThree, fontWeight: FontWeight.bold);
+final stepStudy_endPage_mint_resultText = TextStyle(
+    fontSize: 10, color: mintThree, fontWeight: FontWeight.normal);
+
+final stepStudy_endPage_purple_title = TextStyle(
+    fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_endPage_purple_congratsText = TextStyle(
+    fontSize: 13, color: purpleSeven, fontWeight: FontWeight.bold);
+final stepStudy_endPage_purple_resultText = TextStyle(
+    fontSize: 10, color: purpleSeven, fontWeight: FontWeight.normal);
+
+final stepStudy_endPage_pink_title = TextStyle(
+    fontSize: 18, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_endPage_pink_congratsText = TextStyle(
+    fontSize: 13, color: nuriPracticalApplication, fontWeight: FontWeight.bold);
+final stepStudy_endPage_pink_resultText = TextStyle(
+    fontSize: 10, color: nuriPracticalApplication, fontWeight: FontWeight.normal);

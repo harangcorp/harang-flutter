@@ -270,7 +270,7 @@ final Map studyContentMap = {
     }
   },
   3: {
-    "color": "purple",
+    "color": "pink",
     "stageAmount": 1,
     1: {
       "title": "손전등 켜보기",
@@ -297,6 +297,17 @@ final Map colorMap = {
     "stageBoxInList_border": mintThree,
     "stageBoxInList_shadow": mintThree_shadow,
     "stageBoxInList_stageNameStyle": stepStudy_startPage_mint_stageName,
+
+    "endPage_background": mintEight,
+    "endPage_decoration": mint,
+    "endPage_boxColor": mintTwo,
+    "endPage_boxShadow": mintThree_shadowTwo,
+    "endPage_closeIconColor": mintThree,
+    "endPage_titleStyle": stepStudy_endPage_mint_title,
+    "endPage_congratsTextStyle": stepStudy_endPage_mint_congratsText,
+    "endPage_resultTextStyle": stepStudy_endPage_mint_resultText,
+    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_mint.png",
+    "endPage_textDecorationColor": mintThree
   },
   "purple": {
     "teaserTop": purpleThree,
@@ -314,5 +325,44 @@ final Map colorMap = {
     "stageBoxInList_border": purpleSeven,
     "stageBoxInList_shadow": purpleShadow2,
     "stageBoxInList_stageNameStyle": stepStudy_startPage_purple_stageName,
+
+    "endPage_background": purpleNine,
+    "endPage_decoration": purpleThree,
+    "endPage_boxColor": purpleTen,
+    "endPage_boxShadow": purpleShadow3,
+    "endPage_closeIconColor": purpleEleven,
+    "endPage_titleStyle": stepStudy_endPage_purple_title,
+    "endPage_congratsTextStyle": stepStudy_endPage_purple_congratsText,
+    "endPage_resultTextStyle": stepStudy_endPage_purple_resultText,
+    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_purple.png",
+    "endPage_textDecorationColor": purpleSeven
+  },
+  "pink": {
+    "teaserTop": purpleOne,
+    "background": pinkOne,
+    "stageBox": nuriPracticalApplication,
+    "startBtn": pinkOne,
+    "startBtnShadow": purpleOne,
+    "startBtnBorder": Color(0xFFF3FFFD),
+    "titleStyle": stepStudy_startPage_pink_title,
+    "descriptionStyle": stepStudy_startPage_pink_description,
+    "startBtnStyle": stepStudy_startPage_pink_startButton,
+    "startBtnImg": "assets/images/studyNuri/startBtn_pink.png",
+
+    "stageBoxInList_background": pinkOne,
+    "stageBoxInList_border": nuriPracticalApplication,
+    "stageBoxInList_shadow": purpleTwo,
+    "stageBoxInList_stageNameStyle": stepStudy_startPage_pink_stageName,
+
+    "endPage_background": pinkThree,
+    "endPage_decoration": purpleOne,
+    "endPage_boxColor": pinkOne,
+    "endPage_boxShadow": pinkShadow,
+    "endPage_closeIconColor": purpleEleven,
+    "endPage_titleStyle": stepStudy_endPage_pink_title,
+    "endPage_congratsTextStyle": stepStudy_endPage_pink_congratsText,
+    "endPage_resultTextStyle": stepStudy_endPage_pink_resultText,
+    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_pink.png",
+    "endPage_textDecorationColor": nuriPracticalApplication
   },
 };

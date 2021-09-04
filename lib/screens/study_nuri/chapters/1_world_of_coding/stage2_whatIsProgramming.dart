@@ -4,6 +4,8 @@ import 'package:harang/screens/study_nuri/chapters/studyui_template.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 
+import 'package:harang/screens/study_nuri/study_end.dart';
+
 class Stage2_WhatIsProgramming extends StatelessWidget {
 
   @override
@@ -16,6 +18,7 @@ class Stage2_WhatIsProgramming extends StatelessWidget {
       _width,
       2,
       "프로그래밍이란?",
+      StudyEnd(color: "mint", stageNum: 2, stageTitle: "프로그래밍이란?"),
       Column(
         children: [
           RichText(
