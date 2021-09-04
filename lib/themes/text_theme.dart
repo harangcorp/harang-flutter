@@ -165,3 +165,11 @@ final stepStudy_endPage_pink_congratsText = TextStyle(
     fontSize: 13, color: nuriPracticalApplication, fontWeight: FontWeight.bold);
 final stepStudy_endPage_pink_resultText = TextStyle(
     fontSize: 10, color: nuriPracticalApplication, fontWeight: FontWeight.normal);
+
+
+final leaderBoard_subtitle = TextStyle(
+  color: black,
+  fontFamily: 'NotoSans',
+  fontSize: 15,
+  fontWeight: FontWeight.bold
+);

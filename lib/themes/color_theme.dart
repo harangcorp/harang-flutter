@@ -47,3 +47,6 @@ final goldMedal = Color(0xFFFFAC3E);
 final silverMedal = Color(0xFF898989);
 final bronzeMedal = Color(0xFFCE7430);
 final defaultMedal = Color(0xFF212529);
+
+
+final black = Color(0xff212529);

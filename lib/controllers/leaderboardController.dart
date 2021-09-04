@@ -26,6 +26,7 @@ class LeaderBoardController extends GetxController {
   //   "levelDetailStage": 3,
   //   "point": 225
   // };
+  final isSelected = false.obs;
   late UserModel _user;
   final level = '10';
   Rx<int> score = 0.obs;
