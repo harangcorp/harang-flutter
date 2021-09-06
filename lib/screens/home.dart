@@ -5,13 +5,14 @@ import 'package:harang/controllers/authController.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:harang/controllers/bindings/leaderboardBinding.dart';
 import 'package:harang/controllers/bindings/nuripgBinding.dart';
+import 'package:harang/controllers/bindings/nuristudyBinding.dart';
 import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 
 import 'leaderboard/leaderboard.dart';
-import 'study_nuri/study_main.dart';
+import 'nuristudy/study_main.dart';
 
 class Home extends GetWidget<AuthController> {
   Home({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class Home extends GetWidget<AuthController> {
                         style: logoHarang,
                       ),
                   GestureDetector(
-                    onTap: () => Get.to(StudyMain(), transition: Transition.cupertino),
+                    onTap: () => Get.to(StudyMain(), binding: NuriStudyBinding(), transition: Transition.cupertino),
                     child: Container(
                       width: _width * 0.8,
                       height: _height * 0.2,

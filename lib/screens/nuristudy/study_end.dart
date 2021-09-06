@@ -1,133 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:get/get.dart';
 
-import 'package:harang/screens/study_nuri/study_start.dart';
+import 'package:harang/screens/nuristudy/study_start.dart';
 
-class StudyEnd extends StatefulWidget {
-  const StudyEnd({Key? key, required String color, required int stageNum, required String stageTitle}) :
-        color = color, stageNum = stageNum, stageTitle = stageTitle, super(key: key);
-
-  final String color;
-  final int stageNum;
-  final String stageTitle;
-
-  @override
-  _StudyEndState createState() => _StudyEndState(color: color, stageNum: stageNum, stageTitle: stageTitle);
-}
-
-class _StudyEndState extends State<StudyEnd> {
-  final String color;
-  final int stageNum;
-  final String stageTitle;
-
-  _StudyEndState({required this.color, required this.stageNum, required this.stageTitle});
+class StudyEnd extends GetView<NuriStudyController> {
 
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
 
+    int chapterNum = controller.chapter;
+    int stageNum = controller.stageNum;
+    String stageTitle = controller.stageName;
+    String color = controller.chapterColor[chapterNum];
+
     return Scaffold(
       body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              color: colorMap[color]["endPage_decoration"],
-              width: _width,
-              height: _height,
-            ),
-            ClipPath(
-              clipper: backgroundPainter(),
-              child: Container(
-                height: _height,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                color: controller.colorMap[color]["endPage_decoration"],
                 width: _width,
-                decoration: BoxDecoration(color: colorMap[color]["endPage_background"]),
+                height: _height,
               ),
-            ),
-            Container(
-              height: _height * 0.45,
-              width: _width * 0.88,
-              decoration: BoxDecoration(
-                color: colorMap[color]["endPage_boxColor"],
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorMap[color]["endPage_boxShadow"],
-                    offset: Offset(-8, 20),
-                    blurRadius: 30,
-                  )
-                ],
+              ClipPath(
+                clipper: backgroundPainter(),
+                child: Container(
+                  height: _height,
+                  width: _width,
+                  decoration: BoxDecoration(color: controller.colorMap[color]["endPage_background"]),
+                ),
               ),
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Positioned(
-                    top: _height * 0.022,
-                    right: _height * 0.022,
-                    child: Icon(
-                      Icons.close_rounded,
-                      color: colorMap[color]["endPage_closeIconColor"],
-                      size: _width * 0.07,
-                    ),
+              Container(
+                  height: _height * 0.45,
+                  width: _width * 0.88,
+                  decoration: BoxDecoration(
+                    color: controller.colorMap[color]["endPage_boxColor"],
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: controller.colorMap[color]["endPage_boxShadow"],
+                        offset: Offset(-8, 20),
+                        blurRadius: 30,
+                      )
+                    ],
                   ),
-                  Positioned(
-                    top: _height * 0.308,
-                    left: _width * 0.415,
-                    child: Text(
-                    "결과",
-                    style: colorMap[color]["endPage_resultTextStyle"],
-                    textAlign: TextAlign.center,
-                  ),
-                  ),
-                  Column(
+                  child: Stack(
+                    alignment: Alignment.topCenter,
                     children: [
-                      SizedBox(height: _height * 0.035),
-                      Container(
-                          width: _width * 0.14,
-                          height: _height * 0.0325,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: colorMap[color]["stageBox"],
+                      Positioned(
+                        top: _height * 0.022,
+                        right: _height * 0.022,
+                        child: Icon(
+                          Icons.close_rounded,
+                          color: controller.colorMap[color]["endPage_closeIconColor"],
+                          size: _width * 0.07,
+                        ),
+                      ),
+                      Positioned(
+                        top: _height * 0.308,
+                        left: _width * 0.415,
+                        child: Text(
+                          "결과",
+                          style: controller.colorMap[color]["endPage_resultTextStyle"],
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: _height * 0.035),
+                          Container(
+                              width: _width * 0.14,
+                              height: _height * 0.0325,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: controller.colorMap[color]["stageBox"],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "$stageNum/4",
+                                  style: stepStudy_startPage_stageNum,
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
                           ),
-                          child: Center(
-                            child: Text(
-                              "$stageNum/4",
-                              style: stepStudy_startPage_stageNum,
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                      ),
-                      SizedBox(height: _height * 0.015),
-                      Text(
-                        stageTitle,
-                        style: colorMap[color]["endPage_titleStyle"],
-                      ),
-                      SizedBox(height: _height * 0.02),
-                      Image.asset(
-                        colorMap[color]["endPage_finishIconImg"],
-                        width: _width * 0.237,
-                      ),
-                      SizedBox(height: _height * 0.005),
-                      Text(
-                          "학습을 완료했어요!",
-                          style: colorMap[color]["endPage_congratsTextStyle"],
-                      ),
-                      SizedBox(height: _height * 0.02),
-                      Image.asset(
-                        "assets/images/studyNuri/endPage_textDecoration.png",
-                        color: colorMap[color]["endPage_textDecorationColor"],
-                        width: _width * 0.725,
-                      ),
+                          SizedBox(height: _height * 0.015),
+                          Text(
+                            stageTitle,
+                            style: controller.colorMap[color]["endPage_titleStyle"],
+                          ),
+                          SizedBox(height: _height * 0.02),
+                          Image.asset(
+                            controller.colorMap[color]["endPage_finishIconImg"],
+                            width: _width * 0.237,
+                          ),
+                          SizedBox(height: _height * 0.005),
+                          Text(
+                            "학습을 완료했어요!",
+                            style: controller.colorMap[color]["endPage_congratsTextStyle"],
+                          ),
+                          SizedBox(height: _height * 0.02),
+                          Image.asset(
+                            "assets/images/studyNuri/endPage_textDecoration.png",
+                            color: controller.colorMap[color]["endPage_textDecorationColor"],
+                            width: _width * 0.725,
+                          ),
+                        ],
+                      )
                     ],
                   )
-                ],
-              )
-            ),
-          ],
-        )
+              ),
+            ],
+          )
       ),
     );
   }

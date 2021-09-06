@@ -1,34 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:harang/screens/study_nuri/chapters/1_world_of_coding/stage1_worldOfZeroAndOne.dart';
-import 'package:harang/screens/study_nuri/chapters/1_world_of_coding/stage2_whatIsProgramming.dart';
-import 'package:harang/themes/color_theme.dart';
+import 'package:harang/controllers/nuristudyController.dart';
+import 'package:harang/screens/nuristudy/study_learn.dart';
 import 'package:harang/themes/text_theme.dart';
 
-class StudyStart extends StatefulWidget {
-  const StudyStart({Key? key, required int chapterNum, required int stageNum })
-      : chapterNum = chapterNum, stageNum = stageNum, super(key: key);
-
-  final int chapterNum;
-  final int stageNum;
-
-
-  @override
-  _StudyStartState createState() => _StudyStartState(chapterNum: chapterNum, stageNum: stageNum);
-}
-
-class _StudyStartState extends State<StudyStart> {
-  final int chapterNum;
-  final int stageNum;
-
-  _StudyStartState({required this.chapterNum, required this.stageNum});
+class StudyStart extends GetView<NuriStudyController> {
 
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
 
-    String color = studyContentMap[chapterNum]["color"];
+    int chapterNum = controller.chapter;
+    int stageNum = controller.stageNum;
+    String color = controller.chapterColor[chapterNum];
 
     return Scaffold(
       body: Center(
@@ -36,13 +21,13 @@ class _StudyStartState extends State<StudyStart> {
           alignment: Alignment.topCenter,
           children: [
             Container(
-              color: colorMap[color]["background"],
+              color: controller.colorMap[color]["background"],
               width: _width,
               height: _height,
             ),
             Positioned(
               top: 0,
-              child: TeaserTopImage(height: _height, width: _width, imageName: "stage_${chapterNum}_$stageNum.png", backgroundColor: colorMap[color]["teaserTop"]),
+              child: TeaserTopImage(height: _height, width: _width, imageName: "stage_${chapterNum}_$stageNum.png", backgroundColor: controller.colorMap[color]["teaserTop"]),
             ),
             Positioned(
               top: _height * 0.455,
@@ -57,7 +42,7 @@ class _StudyStartState extends State<StudyStart> {
                       height: _height * 0.0325,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: colorMap[color]["stageBox"],
+                        color: controller.colorMap[color]["stageBox"],
                       ),
                       child: Center(
                         child: Text(
@@ -71,30 +56,30 @@ class _StudyStartState extends State<StudyStart> {
                     height: _height * 0.04,
                   ),
                   Text(
-                    studyContentMap[chapterNum][stageNum]["title"],
-                    style: colorMap[color]["titleStyle"],
+                    controller.chapterContent[chapterNum][stageNum]["title"],
+                    style: controller.colorMap[color]["titleStyle"],
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: _height * 0.02,
                   ),
                   Text(
-                    studyContentMap[chapterNum][stageNum]["description"],
-                    style: colorMap[color]["descriptionStyle"],
+                    (controller.chapterContent[chapterNum][stageNum]["description"] as String).replaceAll("\\n", "\n"),
+                    style: controller.colorMap[color]["descriptionStyle"],
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: _height * 0.0225,
                   ),
                   GestureDetector(
-                    onTap: () => Get.to(studyContentMap[chapterNum][stageNum]["content"]),
+                    onTap: () => Get.to(StudyLearn()),
                     child: Container(
                       height: _height * 0.3,
                       width: _width * 0.45,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: colorMap[color]["startBtn"],
-                        border: Border.all(color: colorMap[color]["startBtnBorder"], width: 1),
+                        color: controller.colorMap[color]["startBtn"],
+                        border: Border.all(color: controller.colorMap[color]["startBtnBorder"], width: 1),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.white,
@@ -102,7 +87,7 @@ class _StudyStartState extends State<StudyStart> {
                             blurRadius: 24,
                           ),
                           BoxShadow(
-                            color: colorMap[color]["startBtnShadow"],
+                            color: controller.colorMap[color]["startBtnShadow"],
                             offset: Offset(12, 12),
                             blurRadius: 24,
                           )
@@ -112,12 +97,12 @@ class _StudyStartState extends State<StudyStart> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            colorMap[color]["startBtnImg"],
+                            controller.colorMap[color]["startBtnImg"],
                             width: _width * 0.18,
                           ),
                           Text(
                             "시작하기",
-                            style: colorMap[color]["startBtnStyle"],
+                            style: controller.colorMap[color]["startBtnStyle"],
                           ),
                         ],
                       ),
@@ -235,134 +220,3 @@ class backgroundPainter extends CustomClipper<Path> {
   }
 }
 
-final Map studyContentMap = {
-    1: {
-      "color": "mint",
-      "stageAmount": 4,
-      1: {
-        "title": "0과 1로 이루어진 세상",
-        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-        "content": Stage1_WorldOfZeroAndOne(),
-      },
-      2: {
-        "title": "프로그래밍이란?",
-        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-        "content": Stage2_WhatIsProgramming(),
-      },
-      3: {
-        "title": "왜 배워야 할까요?",
-        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-        "content": Stage2_WhatIsProgramming(),
-      },
-      4: {
-        "title": "누리 소개",
-        "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-        "content": Stage2_WhatIsProgramming(),
-      }
-    },
-  2: {
-    "color": "purple",
-    "stageAmount": 1,
-    1: {
-      "title": "화면에 출력하기",
-      "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-      "content": Stage1_WorldOfZeroAndOne(),
-    }
-  },
-  3: {
-    "color": "pink",
-    "stageAmount": 1,
-    1: {
-      "title": "손전등 켜보기",
-      "description": "스테이지 설명 아주 간략하게 한두 줄 정도로만 \n바로 여기에 적어주세요.",
-      "content": Stage1_WorldOfZeroAndOne(),
-    }
-  },
-};
-
-final Map colorMap = {
-  "mint": {
-    "teaserTop": mint,
-    "background": mintTwo,
-    "stageBox": mintThree,
-    "startBtn": mintFive,
-    "startBtnShadow": mintSix,
-    "startBtnBorder": Color(0x80F3FFFD),
-    "titleStyle": stepStudy_startPage_mint_title,
-    "descriptionStyle": stepStudy_startPage_mint_description,
-    "startBtnStyle": stepStudy_startPage_mint_startButton,
-    "startBtnImg": "assets/images/studyNuri/startBtn_mint.png",
-
-    "stageBoxInList_background": mintTwo,
-    "stageBoxInList_border": mintThree,
-    "stageBoxInList_shadow": mintThree_shadow,
-    "stageBoxInList_stageNameStyle": stepStudy_startPage_mint_stageName,
-
-    "endPage_background": mintEight,
-    "endPage_decoration": mint,
-    "endPage_boxColor": mintTwo,
-    "endPage_boxShadow": mintThree_shadowTwo,
-    "endPage_closeIconColor": mintThree,
-    "endPage_titleStyle": stepStudy_endPage_mint_title,
-    "endPage_congratsTextStyle": stepStudy_endPage_mint_congratsText,
-    "endPage_resultTextStyle": stepStudy_endPage_mint_resultText,
-    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_mint.png",
-    "endPage_textDecorationColor": mintThree
-  },
-  "purple": {
-    "teaserTop": purpleThree,
-    "background": purpleFive,
-    "stageBox": purpleSeven,
-    "startBtn": purpleSix,
-    "startBtnShadow": purpleShadow2,
-    "startBtnBorder": Color(0xFFF3FFFD),
-    "titleStyle": stepStudy_startPage_purple_title,
-    "descriptionStyle": stepStudy_startPage_purple_description,
-    "startBtnStyle": stepStudy_startPage_purple_startButton,
-    "startBtnImg": "assets/images/studyNuri/startBtn_purple.png",
-
-    "stageBoxInList_background": purpleFive,
-    "stageBoxInList_border": purpleSeven,
-    "stageBoxInList_shadow": purpleShadow2,
-    "stageBoxInList_stageNameStyle": stepStudy_startPage_purple_stageName,
-
-    "endPage_background": purpleNine,
-    "endPage_decoration": purpleThree,
-    "endPage_boxColor": purpleTen,
-    "endPage_boxShadow": purpleShadow3,
-    "endPage_closeIconColor": purpleEleven,
-    "endPage_titleStyle": stepStudy_endPage_purple_title,
-    "endPage_congratsTextStyle": stepStudy_endPage_purple_congratsText,
-    "endPage_resultTextStyle": stepStudy_endPage_purple_resultText,
-    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_purple.png",
-    "endPage_textDecorationColor": purpleSeven
-  },
-  "pink": {
-    "teaserTop": purpleOne,
-    "background": pinkOne,
-    "stageBox": nuriPracticalApplication,
-    "startBtn": pinkOne,
-    "startBtnShadow": purpleOne,
-    "startBtnBorder": Color(0xFFF3FFFD),
-    "titleStyle": stepStudy_startPage_pink_title,
-    "descriptionStyle": stepStudy_startPage_pink_description,
-    "startBtnStyle": stepStudy_startPage_pink_startButton,
-    "startBtnImg": "assets/images/studyNuri/startBtn_pink.png",
-
-    "stageBoxInList_background": pinkOne,
-    "stageBoxInList_border": nuriPracticalApplication,
-    "stageBoxInList_shadow": purpleTwo,
-    "stageBoxInList_stageNameStyle": stepStudy_startPage_pink_stageName,
-
-    "endPage_background": pinkThree,
-    "endPage_decoration": purpleOne,
-    "endPage_boxColor": pinkOne,
-    "endPage_boxShadow": pinkShadow,
-    "endPage_closeIconColor": purpleEleven,
-    "endPage_titleStyle": stepStudy_endPage_pink_title,
-    "endPage_congratsTextStyle": stepStudy_endPage_pink_congratsText,
-    "endPage_resultTextStyle": stepStudy_endPage_pink_resultText,
-    "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_pink.png",
-    "endPage_textDecorationColor": nuriPracticalApplication
-  },
-};

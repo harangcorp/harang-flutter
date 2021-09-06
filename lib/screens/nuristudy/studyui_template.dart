@@ -4,9 +4,7 @@ import 'package:harang/themes/text_theme.dart';
 import 'package:get/get.dart';
 
 class StudyUiTemplate {
-
-  Scaffold chapter1UiTemplate(double _height, double _width, int stageNum, String stageName, dynamic nextWindow, Column educationContent) {
-
+  Scaffold textStageTemplate(double _height, double _width, int stageNum, String stageName, dynamic nextWindow, Column educationContent) {
     return Scaffold (
         body: Center(
           child: Stack(
@@ -94,13 +92,33 @@ class StudyUiTemplate {
                                   ),
                                   Positioned(
                                       top: _height * 0.415,
-                                      left: _width * 0.62,
+                                      left: _width * 0.65,
                                       child: GestureDetector(
                                         onTap: () => Get.to(nextWindow),
-                                        child: Image.asset(
-                                          "assets/images/studyNuri/nextPageBtn_mint.png",
-                                          height: _width * 0.22,
-                                          width: _width * 0.22,
+                                        child: Container(
+                                          width: _width * 0.16,
+                                          height: _width * 0.16,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: mintThree_shadow,
+                                                offset: Offset(-4, 8),
+                                                blurRadius: 10,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/studyNuri/nextPageBtnArrow.png',
+                                                color: mintThree,
+                                                width: _width * 0.09,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       )
                                   )
@@ -128,7 +146,6 @@ class StudyUiTemplate {
 }
 
 class bottomDesignPainter extends CustomClipper<Path> {
-
   @override
   Path getClip(Size size) {
     Path path = Path();
