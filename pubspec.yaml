@@ -33,6 +33,8 @@ dependencies:
 
   configurable_expansion_tile_null_safety: ^2.0.0
   fluttertoast: ^8.0.8
+  syncfusion_flutter_charts: ^19.2.59
+  fl_chart: ^0.40.0
 
   google_sign_in: ^5.0.4
   flutter_svg: ^0.22.0

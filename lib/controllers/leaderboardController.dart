@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:harang/models/ranking.dart';
 import 'package:harang/models/user.dart';
 import 'package:harang/services/database.dart';
 import 'userController.dart';
@@ -31,12 +33,20 @@ class LeaderBoardController extends GetxController {
   final level = '10';
   Rx<int> score = 0.obs;
   Rx<String> name = ''.obs;
+  RxList<RankingModel> rankingData = RxList.empty(growable: true);
+
   @override
   onInit() async {
     //TODO 데이터 가져오기
     _user = await Database().getUser(FirebaseAuth.instance.currentUser?.uid);
     score.value = _user.score ?? 0;
     name.value = _user.name ?? "이름 없음";
+
+    // 랭킹 데이터
+    rankingData(await Database().getRanking(6));
+    print(rankingData.value);
+
+
     print(name.value);
     print(FirebaseAuth.instance.currentUser?.email);
   }

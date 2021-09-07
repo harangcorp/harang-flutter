@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:harang/themes/color_theme.dart';
 
 final btnText = TextStyle(
@@ -169,7 +171,20 @@ final stepStudy_endPage_pink_resultText = TextStyle(
 
 final leaderBoard_subtitle = TextStyle(
   color: black,
-  fontFamily: 'NotoSans',
+  fontFamily: 'NotoSansKR',
   fontSize: 15,
+  fontWeight: FontWeight.bold
+);
+final ranking_tiny_name = TextStyle(
+  color: black,
+  fontSize: 10,
+  fontWeight: FontWeight.bold,
+  fontFamily:'NotoSansKR',
+);
+
+final ranking_tiny_number = TextStyle(
+  color: black,
+  fontFamily: 'GmarketSans',
+  fontSize: 12,
   fontWeight: FontWeight.bold
 );
