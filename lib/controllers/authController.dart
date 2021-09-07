@@ -25,17 +25,8 @@ class AuthController extends GetxController {
       if (password != passwordCheck) throw Exception('비밀번호가 일치하지 않습니다.');
       UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
-      //create user in database.dart
-      UserModel _user = UserModel(
-          id: _authResult.user?.uid,
-          name: name,
-          email: _authResult.user?.email,
-          score: 0);
 
-      if (await Database().createNewUser(_user)) {
-        Get.find<UserController>().user = _user;
-        Get.offAll(Root());
-      }
+      writeAccountInfo(_authResult.user?.uid, _authResult.user?.email, name, true);
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "회원가입 오류",
@@ -90,25 +81,7 @@ class AuthController extends GetxController {
     );
     UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
-    UserModel _user = UserModel(
-        id: _authResult.user?.uid,
-        name: googleUser?.displayName,
-        email: googleUser?.email,
-        score: 0);
-
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(_authResult.user?.uid)
-        .get()
-        .then((doc) async {
-      if (doc.exists) {
-        print("exists");
-      } else {
-        if (await Database().createNewUser(_user)) {
-          Get.find<UserController>().user = _user;
-        }
-      }
-    });
+    writeAccountInfo(_authResult.user?.uid, googleUser?.email, googleUser?.displayName, false);
 
     // Once signed in, return the UserCredential
 
@@ -125,15 +98,47 @@ class AuthController extends GetxController {
           facebookLoginResult.accessToken!.token);
       UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 
-      UserModel _user = UserModel(
-          id: _authResult.user?.uid,
-          email: userData['email'],
-          name: userData['name'],
-          score: 0);
+      writeAccountInfo(_authResult.user?.uid, userData['email'], userData['name'], false);
 
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+          print("This account exists with a different sign in provider");
+          break;
+      }
+    }
+  }
+
+  void writeAccountInfo(String? userID, String? email, String? name, bool isEmailSignUp) async {
+    UserModel _user = UserModel(
+        id: userID,
+        email: email,
+        name: name,
+        score: 0,
+        stageProgress: {
+          "requiredStage": "1-1",
+          "1": {
+            "1": true,
+            "2": false,
+          },
+          "2": {
+            "1": false,
+          },
+          "3": {
+            "1": false,
+          }
+        }
+    );
+
+    if (isEmailSignUp) {
+      if (await Database().createNewUser(_user)) {
+        Get.find<UserController>().user = _user;
+        Get.offAll(Root());
+      }
+    } else {
       FirebaseFirestore.instance
           .collection("users")
-          .doc(_authResult.user?.uid)
+          .doc(userID)
           .get()
           .then((doc) async {
         if (doc.exists) {
@@ -143,14 +148,8 @@ class AuthController extends GetxController {
             Get.find<UserController>().user = _user;
           }
         }
-      });
-
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'account-exists-with-different-credential':
-          print("This account exists with a different sign in provider");
-          break;
       }
+      );
     }
   }
 }
