@@ -26,6 +26,7 @@ class NuripgController extends GetxController {
   void compile() async {
     Nuri result = await nuriAPI.postReq(codeCtl.text, input: inputCtl.text);
     output?.value = result.output;
+    output?.value.removeAllWhitespace;
     await Future.delayed(Duration(seconds: 1));
     isCompiling.value = false;
   }

@@ -53,6 +53,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                           "코드",
                           style: np_subtitle,
                         ),
+
                         Obx(() => controller.isCompiling.value
                             ? loadingButton()
                             : buildCompileButton(context)),
@@ -70,9 +71,11 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                             BoxShadow(color: mint_shadow, blurRadius: 8)
                           ]),
                       child: TextField(
+
                         controller: controller.codeCtl,
                         keyboardType: TextInputType.multiline,
                         maxLines: 15,
+                        style: codetext,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           focusColor: Colors.amber,
@@ -141,10 +144,13 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                             boxShadow: [
                               BoxShadow(color: mint_shadow, blurRadius: 8)
                             ]),
-                        child: Obx(() => Text(
-                              "${controller.output}",
-                              style: codetext,
-                            ))),
+                        child: Obx(() => SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                                "${controller.output}",
+                                style: codetext,
+                              ),
+                        ))),
                   ],
                 ),
               ],
@@ -156,23 +162,21 @@ class NuriPlayGround extends GetWidget<NuripgController> {
   }
 
   Widget loadingButton() {
-    return Hero(
-        tag: "compilebutton",
-        child: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: mint, width: 1),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [BoxShadow(color: mint_shadow, blurRadius: 8)]),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(
-              color: mint,
-            ),
-          ),
-        ));
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: mint, width: 1),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [BoxShadow(color: mint_shadow, blurRadius: 8)]),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircularProgressIndicator(
+          color: mint,
+        ),
+      ),
+    );
   }
 
   GestureDetector buildCompileButton(BuildContext context) {

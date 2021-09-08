@@ -39,17 +39,19 @@ final np_content = TextStyle(
 
 final np_subtitle = TextStyle(
     fontSize: 22, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
 final np_btn = TextStyle(
     fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final codetext = TextStyle(
-    fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+    fontSize: 8, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
 
 final homeTitleStyle = TextStyle(
     fontSize: 28,
     color: Color(0xff000000),
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.w800);
+
 final homeDescriptionStyle = TextStyle(
     fontSize: 14, color: Color(0xff495057), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w600);
 final homeContentStyle_nuriPlayground = TextStyle(
@@ -187,4 +189,25 @@ final ranking_tiny_number = TextStyle(
   fontFamily: 'GmarketSans',
   fontSize: 12,
   fontWeight: FontWeight.bold
+);
+
+final ranking_large_name = TextStyle(
+  color: black,
+  fontSize: 13,
+  fontWeight: FontWeight.bold,
+  fontFamily:'NotoSansKR',
+);
+
+final ranking_large_number = TextStyle(
+    color: black,
+    fontFamily: 'NotoSansKR',
+    fontSize: 16,
+    fontWeight: FontWeight.bold
+);
+
+final ranking_large_score = TextStyle(
+    color: black,
+    fontFamily: 'GmarketSans',
+    fontSize: 15,
+    fontWeight: FontWeight.bold
 );

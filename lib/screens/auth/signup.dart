@@ -91,7 +91,7 @@ class Signup extends GetView<AuthController> {
           child: TextField(
             controller: tc,
             decoration: InputDecoration(
-              hintText: "${title}을 입력해주세요.",
+              hintText: "${title} 입력해주세요.",
               hintStyle: signuphintStyle,
               border: InputBorder.none,
               focusColor: Colors.amber,

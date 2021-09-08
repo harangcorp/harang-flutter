@@ -169,15 +169,18 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                       fontWeight:
                                                           FontWeight.bold))))
                                     ], series: <CircularSeries>[
-                                      DoughnutSeries<ChartData, String>(
+                                      RadialBarSeries<ChartData, String>(
                                         dataSource: [
-                                          ChartData('Others', 52 )
+                                          ChartData('studypercent', 52 ) //TODO: 학습 데이터 연결하기
                                         ],
+                                        maximumValue: 100,
                                         xValueMapper: (ChartData data, _) =>
                                             data.x,
                                         yValueMapper: (ChartData data, _) =>
                                             data.y,
-                                        strokeColor: Color(0xffCF50D8),
+                                        trackColor: Color(0xffF8C0FC),
+
+                                        pointColorMapper: (datum, index) => Color(0xffCF50D8),
                                         // Radius of doughnut
                                         selectionBehavior: SelectionBehavior(
                                             unselectedColor: Color(0xffF8C0FC)),
@@ -212,18 +215,34 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                           ? height * 0.6
                                           : width * 0.43,
                                       child: controller.isSelected.value
-                                          ? Icon(Icons.close)
+                                          ?
+                                          ListView.builder(itemCount: controller.rankingData.length,
+                                        itemBuilder: (context, index) => Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 24,vertical: 16),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("${index + 1}위", style: ranking_large_number,),
+                                              CircleAvatar(backgroundColor: Colors.pinkAccent,),
+                                              Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
+                                              Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
+                                            ],
+                                          ),
+                                        ),)
+
+
                                           : ListView.builder(
                                           itemCount: controller.rankingData.length,
                                           itemBuilder: (context, index) => Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 16,vertical: 4),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text("${index + 1}", style: ranking_tiny_number,),
-                                                  SizedBox(width: 10,),
-                                                  Text("${controller.rankingData.value[index].name}", style: ranking_tiny_name,),
-                                              ],
+                                            padding: EdgeInsets.only(left: 16,bottom: 8, right: 16),
+                                            child: Expanded(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text("${index + 1}", style: ranking_tiny_number,),
+                                                    Expanded(child: Center(child: Text("${controller.rankingData.value[index].name}", style: ranking_tiny_name,))),
+                                                ],
+                                              ),
                                             ),
                                           ),)
                                       ),

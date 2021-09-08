@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:harang/models/lecture.dart';
+import 'package:harang/models/ranking.dart';
 import 'package:harang/models/user.dart';
 
 class Database {
