@@ -44,7 +44,7 @@ final np_btn = TextStyle(
     fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final codetext = TextStyle(
-    fontSize: 8, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+    fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
 
 final homeTitleStyle = TextStyle(
     fontSize: 28,
@@ -60,7 +60,6 @@ final homeContentStyle_stepbystepStudy = TextStyle(
     fontSize: 14, color: Color(0xffAA48E1), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final homeContentStyle_hallOfFame = TextStyle(
     fontSize: 14, color: Color(0xffCB42D4), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
-
 final stepStudy_levelText = TextStyle(
     fontSize: 11, color: Colors.white, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w900);
 final stepStudyTitleStyle_worldOfCoding = TextStyle(
@@ -210,4 +209,12 @@ final ranking_large_score = TextStyle(
     fontFamily: 'GmarketSans',
     fontSize: 15,
     fontWeight: FontWeight.bold
+);
+
+final  ranking_large_title = TextStyle(
+  color: black,
+    fontFamily: 'NotoSansKR',
+    fontSize: 18,
+    fontWeight: FontWeight.bold
+
 );

@@ -48,86 +48,80 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                       blurRadius: 20)
                                 ])
                           : BoxDecoration(
-                              color: Color(0xffEDB1F1),
-                              borderRadius: BorderRadius.circular(20),
+                          color: Colors.white.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.7),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xffEDB1F1).withOpacity(0.5),
+                                offset: Offset(-4, 4),
+                                blurRadius: 20)
+                          ]
                             ),
-                      height: controller.isSelected.value
-                          ? height * 0.07
-                          : height * 0.12,
+                      height: height * 0.07,
                       width: controller.isSelected.value
                           ? width * 0.69
-                          : width * 0.84,
-                      child: AnimatedCrossFade(
-                        duration: Duration(milliseconds: 200),
-                        crossFadeState: controller.isSelected.value
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                        firstChild: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          : width * 0.80,
+                      child: controller.isSelected.value ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "916위",
+                            style: TextStyle(
+                                color: Color(0xffCF50D8),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                          CircleAvatar(backgroundImage: ExactAssetImage(controller.profile_image),backgroundColor: Colors.transparent,),
+                          Text(
+                            "${controller.name}",
+                            style: TextStyle(
+                                fontFamily: 'NotoSans',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: black),
+                          ),
+                          Text("${controller.score}",
+                              style: TextStyle(
+                                  color: black,
+                                  fontFamily: 'GmarketSans',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15))
+                        ],
+                      ): Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              "916위",
-                              style: TextStyle(
-                                  color: Color(0xffCF50D8),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17),
+                            CircleAvatar(
+                              backgroundImage: ExactAssetImage(controller.profile_image),
+                              backgroundColor: Colors.transparent,
                             ),
-                            CircleAvatar(),
-                            Text(
-                              "${controller.name}",
-                              style: TextStyle(
-                                  fontFamily: 'NotoSans',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13,
-                                  color: black),
-                            ),
-                            Text("${controller.score}",
+                            Center(
+                              child: Text(
+                                controller.name.value,
                                 style: TextStyle(
                                     color: black,
-                                    fontFamily: 'GmarketSans',
+                                    fontFamily: 'NotoSans',
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15))
-                          ],
-                        ),
-                        secondChild: Row(
-                          children: [
-                            Stack(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  controller.name.value,
-                                  style: TextStyle(
-                                      color: Color(0xffCF50D8),
-                                      fontFamily: 'NotoSans',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                                Row(
-                                  children: [
-                                    Container(),
-                                    Container(
-                                      child: Text(
-                                        "${controller.score.value}",
-                                        style: TextStyle(
-                                            color: Color(0xffCF50D8),
-                                            fontFamily: 'GmarketSans',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
+                                    fontSize: 20),
+                              ),
+                            ), Text(
+                              "${controller.score.value}",
+                              style: TextStyle(
+                                  color: Color(0xffCF50D8),
+                                  fontFamily: 'GmarketSans',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
                             )
                           ],
                         ),
-                      )),
+                      ),
+                     ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
@@ -161,7 +155,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                         CircularChartAnnotation>[
                                       CircularChartAnnotation(
                                           widget: Container(
-                                              child: const Text('62%',
+                                              child: Text("${controller.progess_percent}%",
                                                   style: TextStyle(
                                                       color: Color(0xffCF50D8),
                                                       fontSize: 18,
@@ -171,7 +165,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                     ], series: <CircularSeries>[
                                       RadialBarSeries<ChartData, String>(
                                         dataSource: [
-                                          ChartData('studypercent', 52 ) //TODO: 학습 데이터 연결하기
+                                          ChartData('studypercent', controller.progess_percent.value.toDouble() )
                                         ],
                                         maximumValue: 100,
                                         xValueMapper: (ChartData data, _) =>
@@ -199,10 +193,8 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                   if (!controller.isSelected.value)
                                     Text("사용자 랭킹", style: leaderBoard_subtitle),
                                   if (!controller.isSelected.value)
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                  GestureDetector(
+                                    SizedBox(height: 10,),
+                                    GestureDetector(
                                     onTap: () => controller.isSelected.value =
                                         !controller.isSelected.value,
                                     child: AnimatedContainer(
@@ -216,33 +208,51 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                           : width * 0.43,
                                       child: controller.isSelected.value
                                           ?
-                                          ListView.builder(itemCount: controller.rankingData.length,
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Padding(padding: EdgeInsets.all(16),child:
+                                                Stack(
+                                                  children: [
+                                                     Align(
+                                                         alignment: Alignment.center,
+                                                         child: Text("사용자 랭킹", style: ranking_large_title,)),
+                                                    Align(
+                                                        alignment: Alignment.centerRight,
+                                                        child: Icon(Icons.close_rounded))
+                                                  ],
+                                                ),),
+                                                Expanded(
+                                                  child: ListView.builder(
+
+                                                      itemCount: controller.rankingData.length,
                                         itemBuilder: (context, index) => Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: 24,vertical: 16),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("${index + 1}위", style: ranking_large_number,),
-                                              CircleAvatar(backgroundColor: Colors.pinkAccent,),
-                                              Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
-                                              Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
-                                            ],
-                                          ),
-                                        ),)
-
-
+                                                  padding: EdgeInsets.only(right: 24, left: 24,bottom: 32),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text("${index+1}위", style: ranking_large_number,),
+                                                      CircleAvatar(backgroundColor: Colors.pinkAccent,),
+                                                      Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
+                                                      Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
+                                                    ],
+                                                  ),
+                                        )),
+                                                ),
+                                              ],
+                                            ),
+                                          )
                                           : ListView.builder(
                                           itemCount: controller.rankingData.length,
                                           itemBuilder: (context, index) => Padding(
                                             padding: EdgeInsets.only(left: 16,bottom: 8, right: 16),
-                                            child: Expanded(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Text("${index + 1}", style: ranking_tiny_number,),
-                                                    Expanded(child: Center(child: Text("${controller.rankingData.value[index].name}", style: ranking_tiny_name,))),
-                                                ],
-                                              ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Text("${index + 1}", style: ranking_tiny_number,),
+                                                  Expanded(child: Center(child: Text("${controller.rankingData.value[index].name}", style: ranking_tiny_name,))),
+                                              ],
                                             ),
                                           ),)
                                       ),
@@ -269,7 +279,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                         decoration: buildBoxDecoration(),
                         width: controller.isSelected.value ? 0 : width * 0.84,
                         height: controller.isSelected.value ? 0 : height * 0.23,
-                        child: WeeklyChart(),
+                        child: controller.isSelected.value ? null : WeeklyChart(),
                       )
                     ],
                   )),

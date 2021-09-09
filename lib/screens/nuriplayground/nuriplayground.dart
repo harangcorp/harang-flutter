@@ -68,7 +68,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                           border: Border.all(color: mint_shadow, width: 1),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
-                            BoxShadow(color: mint_shadow, blurRadius: 8)
+                            BoxShadow(color: mint_shadow.withOpacity(0.4), blurRadius: 8)
                           ]),
                       child: TextField(
 
@@ -106,7 +106,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                           border: Border.all(color: mint_shadow, width: 1),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
-                            BoxShadow(color: mint_shadow, blurRadius: 8)
+                            BoxShadow(color: mint_shadow.withOpacity(0.4), blurRadius: 8)
                           ]),
                       child: TextField(
                         controller: controller.inputCtl,
@@ -142,7 +142,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                             border: Border.all(color: mint_shadow, width: 1),
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
-                              BoxShadow(color: mint_shadow, blurRadius: 8)
+                              BoxShadow(color: mint_shadow.withOpacity(0.4), blurRadius: 8)
                             ]),
                         child: Obx(() => SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -194,9 +194,9 @@ class NuriPlayGround extends GetWidget<NuripgController> {
           height: 40,
           decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: mint, width: 1),
+              border: Border.all(color: mint, width: 2),
               borderRadius: BorderRadius.circular(30),
-              boxShadow: [BoxShadow(color: mint_shadow, blurRadius: 8)]),
+    ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

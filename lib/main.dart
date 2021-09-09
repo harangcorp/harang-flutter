@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/bindings/authBinding.dart';
 
+import 'themes/harang_theme.dart';
 import 'utils/root.dart';
 
 void main() async {
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: harang_theme,
         builder: (context, child) => Scaffold(
               // 화면 클릭 시, 키보드 숨기기
               body: GestureDetector(
