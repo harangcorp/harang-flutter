@@ -95,6 +95,8 @@ class Login extends GetView<AuthController> {
               child: TextField(
                 maxLines: 1,
                 controller: passwordController,
+                obscureText: true,
+
                 decoration: InputDecoration(
                   hintText: "비밀번호",
                   hintStyle: hintStyle,

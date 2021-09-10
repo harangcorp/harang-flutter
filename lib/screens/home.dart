@@ -69,7 +69,7 @@ class Home extends GetWidget<AuthController> {
               GestureDetector(
                 onTap: () => Get.to(StudyMain(),
                     binding: NuriStudyBinding(),
-                    transition: Transition.cupertino),
+                    transition: Transition.rightToLeft),
                 child: Container(
                   width: _width * 0.8,
                   height: _height * 0.2,
@@ -115,7 +115,7 @@ class Home extends GetWidget<AuthController> {
                 ),
               ),
               GestureDetector(
-                onTap: () => Get.to(NuriPlayGround(), binding: NuripgBinding()),
+                onTap: () => Get.to(NuriPlayGround(), binding: NuripgBinding(),  transition: Transition.rightToLeft),
                 child: Container(
                   width: _width * 0.8,
                   height: _height * 0.2,
@@ -164,7 +164,7 @@ class Home extends GetWidget<AuthController> {
               ),
               GestureDetector(
                 onTap: () =>
-                    Get.to(() => LeaderBoard(), binding: LeaderboardBinding()),
+                    Get.to(() => LeaderBoard(),transition: Transition.rightToLeft, binding: LeaderboardBinding()),
                 child: Container(
                   width: _width * 0.8,
                   height: _height * 0.2,

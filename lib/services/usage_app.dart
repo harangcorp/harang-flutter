@@ -3,7 +3,7 @@ import 'package:app_usage/app_usage.dart';
 //TODO: 데이터 가져오기 
 
 class UsageApp {
-  List<int> _info = [];
+  List<int> _info = [0,0,0,0,0,0,0];
   Future<List<int>> getUsageStats() async {
     try {
       DateTime nowDate = new DateTime.now();
@@ -16,18 +16,15 @@ class UsageApp {
         print("i = ${i} start = ${startDate.toString()} , end = ${endDate.toString()}");
         List<AppUsageInfo> infoList =
         await AppUsage.getAppUsage(startDate, endDate);
-        endDate = startDate;
+        endDate = startDate.subtract(Duration(microseconds: 1));
         startDate = startDate.subtract(Duration(days: 1));
         for (var info in infoList) {
-          if (info.appName == 'harang') _info.add(info.usage.inMinutes);
-          if (info.appName == 'harang') print(info.appName );
-
+          if (info.appName == 'harang'){
+            _info[DateTime.now().weekday - i - 1] = info.usage.inMinutes;
+            print(info.usage);
+            print(info);
+          }
         }
-      }
-      var length = _info.length;
-      print(length);
-      for(var i=0;i<7-length;i++){
-        _info.add(0);
       }
       return _info;
     } on AppUsageException catch (exception) {

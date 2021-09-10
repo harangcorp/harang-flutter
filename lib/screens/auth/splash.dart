@@ -72,7 +72,7 @@ class Splash extends GetWidget<AuthController> {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.to(() => Login()),
+                      onTap: () => Get.to(() => Login(),transition: Transition.noTransition),
                       child: Container(
                         width: _width * 0.55,
                         height: 40,
@@ -98,7 +98,7 @@ class Splash extends GetWidget<AuthController> {
                       height: 25,
                     ),
                     GestureDetector(
-                      onTap: () => Get.to(() => Signup()),
+                      onTap: () => Get.to(() => Signup(),transition: Transition.noTransition),
                       child: Container(
                         width: _width * 0.55,
                         height: 40,

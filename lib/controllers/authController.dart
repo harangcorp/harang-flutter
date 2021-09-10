@@ -42,7 +42,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
       Get.find<UserController>().user =
           await Database().getUser(_authResult.user?.uid);
-      Get.offAll(Root());
+      Get.offAll(Root(),transition: Transition.rightToLeft);
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "로그인 오류",
@@ -56,7 +56,7 @@ class AuthController extends GetxController {
     try {
       await _auth.signOut();
       Get.find<UserController>().clear();
-      Get.offAll(Root());
+      Get.offAll(Root(), transition: Transition.leftToRight);
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "로그아웃 오류",

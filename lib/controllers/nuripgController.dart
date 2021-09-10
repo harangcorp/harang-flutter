@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:harang/models/nuri.dart';
 import 'package:harang/services/api_provider.dart';
-
 import 'nuriHighLighter.dart';
 
 class NuripgController extends GetxController {

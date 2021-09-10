@@ -34,8 +34,8 @@ class Signup extends GetView<AuthController> {
                 ))),
             textFormBox(nameController, "이름"),
             textFormBox(emailController, "아이디"),
-            textFormBox(passwordController, "비밀번호"),
-            textFormBox(passwordCheckController, "비밀번호 확인"),
+            textFormBox(passwordController, "비밀번호", true),
+            textFormBox(passwordCheckController, "비밀번호 확인",true),
             Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
@@ -69,7 +69,7 @@ class Signup extends GetView<AuthController> {
     );
   }
 
-  Column textFormBox(TextEditingController tc, String title) {
+  Column textFormBox(TextEditingController tc, String title, [ispwd = false]) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,6 +89,7 @@ class Signup extends GetView<AuthController> {
               borderRadius: BorderRadius.circular(30),
               boxShadow: [BoxShadow(color: purpleShadow, blurRadius: 10)]),
           child: TextField(
+            obscureText: ispwd,
             controller: tc,
             decoration: InputDecoration(
               hintText: "${title} 입력해주세요.",
