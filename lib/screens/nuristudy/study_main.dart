@@ -72,6 +72,7 @@ class StudyMain extends GetView<NuriStudyController> {
                                     width: _width,
                                     height: ((_height * 0.05) * controller.chapterStageAmount[chapterIndex+1]) + _height * 0.01,
                                     child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
                                         padding: const EdgeInsets.all(8),
                                         itemCount: controller.chapterStageAmount[chapterIndex+1],
                                         itemBuilder: (context, stageIndex) {
@@ -129,7 +130,63 @@ class StudyMain extends GetView<NuriStudyController> {
                       ],
                     );
                   } else { //데이터를 불러오는 중
-                    return CircularProgressIndicator();
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SizedBox(
+                          width: _width,
+                          height: _height,
+                        ),
+                        Positioned(
+                          top: _height * 0.02,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: _height * 0.07,
+                              ),
+                              Stack(
+                                  children: [
+                                    Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                        height: 10,
+                                        width: 220,
+                                        color: nuriStudy,
+                                      ),
+                                    ),
+                                    Text(
+                                      "단계별 학습하기",
+                                      style: homeTitleStyle,
+                                    ),
+                                  ]
+                              ),
+                              SizedBox(
+                                height: _height * 0.025,
+                              ),
+                              Text(
+                                "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
+                                style: homeDescriptionStyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: _height * 0.55,
+                          child: Column(
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(
+                                height: _height * 0.01,
+                              ),
+                              Text(
+                                "학습 데이터를 로딩중입니다.."
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
                   }
                 }
             ),
