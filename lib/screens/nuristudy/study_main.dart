@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/screens/nuristudy/study_start.dart';
+import 'package:harang/screens/home.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:get/get.dart';
@@ -16,181 +17,188 @@ class StudyMain extends GetView<NuriStudyController> {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            FutureBuilder(
-                future: controller.getChapterContent(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) { //데이터를 정상적으로 받았을때
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: _height * 0.07,
-                        ),
-                        Stack(
-                            children: [
-                              Positioned(
-                                bottom: 0,
-                                child: Container(
-                                  height: 10,
-                                  width: 220,
-                                  color: nuriStudy,
-                                ),
-                              ),
-                              Text(
-                                "단계별 학습하기",
-                                style: homeTitleStyle,
-                              ),
-                            ]
-                        ),
-                        SizedBox(
-                          height: _height * 0.025,
-                        ),
-                        Text(
-                          "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
-                          style: homeDescriptionStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          height: _height * 0.025,
-                        ),
-                        SizedBox(
-                          width:  _width,
-                          height: _height * 0.758,
-                          child: ListView.builder(
-                            padding: const EdgeInsets.only(bottom: 32.0),
-                            itemCount: 3,
-                            itemBuilder: (context, chapterIndex) {
-                              return ConfigurableExpansionTile(
-                                header: studyLevelBox(_height, _width, chapterIndex),
-                                children: [
-                                  SizedBox(
-                                    width: _width,
-                                    height: ((_height * 0.05) * controller.chapterStageAmount[chapterIndex+1]) + _height * 0.01,
-                                    child: ListView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        padding: const EdgeInsets.all(8),
-                                        itemCount: controller.chapterStageAmount[chapterIndex+1],
-                                        itemBuilder: (context, stageIndex) {
-                                          String boxMode = "lock";
-                                          if (controller.stageProgress[(chapterIndex+1).toString()][(stageIndex + 1).toString()] ?? false) {
-                                            if (controller.stageProgress["requiredStage"] == "${chapterIndex+1}-${stageIndex + 1}") {
-                                              boxMode = "nowLevel";
-                                            } else {
-                                              boxMode = "unlock";
-                                            }
-                                          }
-                                          return Column(
-                                            children: [
-                                              SizedBox(height: _height * 0.01),
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    int chapterNum = chapterIndex+1;
-                                                    int stageNum = stageIndex+1;
-                                                    bool? isStageProgress = controller.stageProgress[chapterNum.toString()][stageNum.toString()];
-                                                    if (controller.stageProgress[chapterNum.toString()][stageNum.toString()] ?? false) {
-                                                      controller.chapter = chapterNum;
-                                                      controller.stageNum = stageNum;
-                                                      controller.stageName = controller.chapterContent[chapterNum][stageNum]["title"];
-                                                      Get.to(StudyStart());
-                                                    } else {
-                                                      Fluttertoast.showToast(
-                                                          msg: "스테이지가 잠겨있습니다. 열려있는 스테이지를 클릭해주세요.",
-                                                          toastLength: Toast.LENGTH_SHORT,
-                                                          gravity: ToastGravity.BOTTOM,
-                                                          timeInSecForIosWeb: 1,
-                                                          backgroundColor: Color(0xE6FFFFFF),
-                                                          textColor: Colors.black,
-                                                          fontSize: 16.0
-                                                      );
-                                                    }
-                                                  },
-                                                  child: stageBox(_height, _width, controller.chapterColor[chapterIndex+1], boxMode, controller.chapterContent[chapterIndex+1][stageIndex+1]["title"])
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAll(Home(), transition: Transition.leftToRight);
+
+        return true;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              FutureBuilder(
+                  future: controller.getChapterContent(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) { //데이터를 정상적으로 받았을때
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: _height * 0.07,
                           ),
-                        )
-                      ],
-                    );
-                  } else if (snapshot.hasError) { //데이터를 정상적으로 불러오지 못했을 때
-                    return Column(
-                      children: [
-                        Text("데이터를 정상적으로 불러오지 못했습니다. \n다시 시도해 주세요.")
-                      ],
-                    );
-                  } else { //데이터를 불러오는 중
-                    return Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SizedBox(
-                          width: _width,
-                          height: _height,
-                        ),
-                        Positioned(
-                          top: _height * 0.02,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: _height * 0.07,
-                              ),
-                              Stack(
+                          Stack(
+                              children: [
+                                Positioned(
+                                  bottom: 0,
+                                  child: Container(
+                                    height: 10,
+                                    width: 220,
+                                    color: nuriStudy,
+                                  ),
+                                ),
+                                Text(
+                                  "단계별 학습하기",
+                                  style: homeTitleStyle,
+                                ),
+                              ]
+                          ),
+                          SizedBox(
+                            height: _height * 0.025,
+                          ),
+                          Text(
+                            "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
+                            style: homeDescriptionStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: _height * 0.025,
+                          ),
+                          SizedBox(
+                            width:  _width,
+                            height: _height * 0.758,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(bottom: 32.0),
+                              itemCount: 3,
+                              itemBuilder: (context, chapterIndex) {
+                                return ConfigurableExpansionTile(
+                                  header: studyLevelBox(_height, _width, chapterIndex),
                                   children: [
-                                    Positioned(
-                                      bottom: 0,
-                                      child: Container(
-                                        height: 10,
-                                        width: 220,
-                                        color: nuriStudy,
+                                    SizedBox(
+                                      width: _width,
+                                      height: ((_height * 0.05) * controller.chapterStageAmount[chapterIndex+1]) + _height * 0.01,
+                                      child: ListView.builder(
+                                          physics: NeverScrollableScrollPhysics(),
+                                          padding: const EdgeInsets.all(8),
+                                          itemCount: controller.chapterStageAmount[chapterIndex+1],
+                                          itemBuilder: (context, stageIndex) {
+                                            String boxMode = "lock";
+                                            if (controller.stageProgress[(chapterIndex+1).toString()][(stageIndex + 1).toString()] ?? false) {
+                                              if (controller.stageProgress["requiredStage"] == "${chapterIndex+1}-${stageIndex + 1}") {
+                                                boxMode = "nowLevel";
+                                              } else {
+                                                boxMode = "unlock";
+                                              }
+                                            }
+                                            return Column(
+                                              children: [
+                                                SizedBox(height: _height * 0.01),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      int chapterNum = chapterIndex+1;
+                                                      int stageNum = stageIndex+1;
+                                                      bool? isStageProgress = controller.stageProgress[chapterNum.toString()][stageNum.toString()];
+                                                      if (isStageProgress ?? false) {
+                                                        controller.chapter = chapterNum;
+                                                        controller.stageNum = stageNum;
+                                                        controller.stageName = controller.chapterContent[chapterNum][stageNum]["title"];
+                                                        Get.to(StudyStart(), transition: Transition.rightToLeft);
+                                                      } else {
+                                                        Fluttertoast.showToast(
+                                                            msg: "스테이지가 잠겨있습니다. 열려있는 스테이지를 클릭해주세요.",
+                                                            toastLength: Toast.LENGTH_SHORT,
+                                                            gravity: ToastGravity.BOTTOM,
+                                                            timeInSecForIosWeb: 1,
+                                                            backgroundColor: Color(0xE6FFFFFF),
+                                                            textColor: Colors.black,
+                                                            fontSize: 16.0
+                                                        );
+                                                      }
+                                                    },
+                                                    child: stageBox(_height, _width, controller.chapterColor[chapterIndex+1], boxMode, controller.chapterContent[chapterIndex+1][stageIndex+1]["title"])
+                                                ),
+                                              ],
+                                            );
+                                          }
                                       ),
                                     ),
-                                    Text(
-                                      "단계별 학습하기",
-                                      style: homeTitleStyle,
-                                    ),
-                                  ]
-                              ),
-                              SizedBox(
-                                height: _height * 0.025,
-                              ),
-                              Text(
-                                "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
-                                style: homeDescriptionStyle,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                                  ],
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      );
+                    } else if (snapshot.hasError) { //데이터를 정상적으로 불러오지 못했을 때
+                      return Column(
+                        children: [
+                          Text("데이터를 정상적으로 불러오지 못했습니다. \n다시 시도해 주세요.")
+                        ],
+                      );
+                    } else { //데이터를 불러오는 중
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            width: _width,
+                            height: _height,
                           ),
-                        ),
-                        Positioned(
-                          top: _height * 0.55,
-                          child: Column(
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(
-                                height: _height * 0.01,
-                              ),
-                              Text(
-                                "학습 데이터를 로딩중입니다.."
-                              )
-                            ],
+                          Positioned(
+                            top: _height * 0.02,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: _height * 0.07,
+                                ),
+                                Stack(
+                                    children: [
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          height: 10,
+                                          width: 220,
+                                          color: nuriStudy,
+                                        ),
+                                      ),
+                                      Text(
+                                        "단계별 학습하기",
+                                        style: homeTitleStyle,
+                                      ),
+                                    ]
+                                ),
+                                SizedBox(
+                                  height: _height * 0.025,
+                                ),
+                                Text(
+                                  "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요 :)",
+                                  style: homeDescriptionStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    );
+                          Positioned(
+                            top: _height * 0.55,
+                            child: Column(
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(
+                                  height: _height * 0.01,
+                                ),
+                                Text(
+                                  "학습 데이터를 로딩중입니다.."
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }
                   }
-                }
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

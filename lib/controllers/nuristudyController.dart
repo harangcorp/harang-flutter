@@ -4,6 +4,8 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:get/get.dart';
 import 'package:harang/models/lecture.dart';
 import 'package:harang/models/user.dart';
+import 'package:harang/screens/nuristudy/study_end.dart';
+import 'package:harang/screens/nuristudy/study_learn.dart';
 import 'package:harang/services/database.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
@@ -14,6 +16,7 @@ class NuriStudyController extends GetxController {
   int stageNum = 1;
   int pageNum = 1;
   String stageName = "";
+  int finalProvisionPoint = 0;
 
   Map chapterColor = {};
   Map chapterContent = {};
@@ -52,11 +55,19 @@ class NuriStudyController extends GetxController {
     return true;
   }
 
-  void pageRefresh() {
-    update();
+  void goNextPage(int pageAmount) {
+    pageNum++;
+
+    if (pageNum <= pageAmount) { //다음 페이지가 있을 경우
+      Get.back();
+      Get.to(StudyLearn(), transition: Transition.rightToLeft);
+    } else { //마지막 페이지일 경우
+      pageNum = 1;
+      Get.to(StudyEnd(), transition: Transition.rightToLeft);
+    }
   }
 
-  Future<void> quizAnswer(bool guessAnswer, int index) async {
+  Future<void> quizAnswer(bool guessAnswer, int index, int pageAmount) async {
     if (guessAnswer) {
       quizStage_chooseBoxType[index] = "success";
     } else {
@@ -75,6 +86,8 @@ class NuriStudyController extends GetxController {
           for (int i=0; i<4; i++) {
             quizStage_chooseBoxType[i] = "default";
           }
+
+          if (guessAnswer) { goNextPage(pageAmount); }
         }
     );
   }
@@ -125,7 +138,9 @@ class NuriStudyController extends GetxController {
       "endPage_congratsTextStyle": stepStudy_endPage_mint_congratsText,
       "endPage_resultTextStyle": stepStudy_endPage_mint_resultText,
       "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_mint.png",
-      "endPage_textDecorationColor": mintThree
+      "endPage_textDecorationColor": mintThree,
+      "endPage_pointCircle": mintThree,
+      "endPage_pointTextStyle": stepStudy_endPage_mint_pointText,
     },
     "purple": {
       "teaserTop": purpleThree,
@@ -154,6 +169,15 @@ class NuriStudyController extends GetxController {
       "textStage_nextBtnArrow": purpleSeven,
       "textStage_nextBtnShadow": purpleSeven_shadow,
 
+      "quizStage_background": purpleNine,
+      "quizStage_topBackgroundGradient1": purpleThree,
+      "quizStage_topBackgroundGradient2": Color(0x669896F1),
+      "quizStage_questionBoxShadow": purpleTwelve,
+      "quizStage_pointIndicator": purpleEight,
+      "quizStage_chooseBoxBorder": purpleEight,
+      "quizStage_chooseBoxCircle": purpleEight,
+      "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_purple_choiceText,
+
       "endPage_background": purpleNine,
       "endPage_decoration": purpleThree,
       "endPage_boxColor": purpleTen,
@@ -163,7 +187,9 @@ class NuriStudyController extends GetxController {
       "endPage_congratsTextStyle": stepStudy_endPage_purple_congratsText,
       "endPage_resultTextStyle": stepStudy_endPage_purple_resultText,
       "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_purple.png",
-      "endPage_textDecorationColor": purpleSeven
+      "endPage_textDecorationColor": purpleSeven,
+      "endPage_pointCircle": purpleEight,
+      "endPage_pointTextStyle": stepStudy_endPage_purple_pointText,
     },
     "pink": {
       "teaserTop": purpleOne,
@@ -201,7 +227,9 @@ class NuriStudyController extends GetxController {
       "endPage_congratsTextStyle": stepStudy_endPage_pink_congratsText,
       "endPage_resultTextStyle": stepStudy_endPage_pink_resultText,
       "endPage_finishIconImg": "assets/images/studyNuri/finishIcon_pink.png",
-      "endPage_textDecorationColor": nuriPracticalApplication
+      "endPage_textDecorationColor": nuriPracticalApplication,
+      "endPage_pointCircle": nuriPracticalApplication,
+      "endPage_pointTextStyle": stepStudy_endPage_pink_pointText,
     },
   };
 }

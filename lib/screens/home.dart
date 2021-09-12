@@ -201,7 +201,7 @@ class Home extends GetWidget<AuthController> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "누리의 응용 설명 아주 간략하게 한두 줄 정도로\n만 바로 여기에 적어주세요",
+                        "자신의 실력을 체크해보세요!\n점점 더 나아가는 발판이 될 거예요",
                         style: TextStyle(
                           color: Color(0xFF9F5BC6),
                           fontSize: 12,

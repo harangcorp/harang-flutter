@@ -72,7 +72,11 @@ class StudyStart extends GetView<NuriStudyController> {
                     height: _height * 0.0225,
                   ),
                   GestureDetector(
-                    onTap: () => Get.to(StudyLearn()),
+                    onTap: () {
+                      controller.pageNum = 1;
+                      controller.finalProvisionPoint = controller.chapterContent[chapterNum][stageNum]["point"];
+                      Get.to(StudyLearn(), transition: Transition.rightToLeft);
+                    },
                     child: Container(
                       height: _height * 0.3,
                       width: _width * 0.45,

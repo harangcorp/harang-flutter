@@ -154,6 +154,8 @@ final stepStudy_studyPage_textStage_purple_title = TextStyle(
     fontSize: 21, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_textStage_purple_contentDefault = TextStyle(
     fontSize: 15, color: nuriGrammar, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
+final stepStudy_studyPage_quizStage_purple_choiceText = TextStyle(
+    fontSize: 18, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_studyPage_textStage_pink_title = TextStyle(
     fontSize: 21, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -169,6 +171,8 @@ final stepStudy_endPage_mint_congratsText = TextStyle(
     fontSize: 13, color: mintThree, fontWeight: FontWeight.bold);
 final stepStudy_endPage_mint_resultText = TextStyle(
     fontSize: 10, color: mintThree, fontWeight: FontWeight.normal);
+final stepStudy_endPage_mint_pointText = TextStyle(
+    fontSize: 20, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_endPage_purple_title = TextStyle(
     fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -176,6 +180,8 @@ final stepStudy_endPage_purple_congratsText = TextStyle(
     fontSize: 13, color: purpleSeven, fontWeight: FontWeight.bold);
 final stepStudy_endPage_purple_resultText = TextStyle(
     fontSize: 10, color: purpleSeven, fontWeight: FontWeight.normal);
+final stepStudy_endPage_purple_pointText = TextStyle(
+    fontSize: 20, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_endPage_pink_title = TextStyle(
     fontSize: 18, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -183,6 +189,8 @@ final stepStudy_endPage_pink_congratsText = TextStyle(
     fontSize: 13, color: nuriPracticalApplication, fontWeight: FontWeight.bold);
 final stepStudy_endPage_pink_resultText = TextStyle(
     fontSize: 10, color: nuriPracticalApplication, fontWeight: FontWeight.normal);
+final stepStudy_endPage_pink_pointText = TextStyle(
+    fontSize: 20, color: nuriPracticalApplication, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_learnPage_quiz_question = TextStyle(
     fontSize: 18, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);

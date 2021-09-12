@@ -12,6 +12,7 @@ final purpleEight = Color(0xFF1B0D74);
 final purpleNine = Color(0xFFD2D1FF);
 final purpleTen = Color(0xFFEAEAFF);
 final purpleEleven = Color(0xFF6156CC);
+final purpleTwelve = Color(0xFFA9A7F5);
 final purpleShadow = Color(0xFFE4CBFF);
 final purpleShadow2 = Color(0xFFBEBBFF);
 final purpleShadow3 = Color(0x4D685DD6);

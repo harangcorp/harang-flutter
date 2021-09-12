@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:harang/controllers/nuristudyController.dart';
+import 'package:harang/screens/nuristudy/study_main.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +38,7 @@ class StudyEnd extends GetView<NuriStudyController> {
                 ),
               ),
               Container(
-                  height: _height * 0.45,
+                  height: _height * 0.475,
                   width: _width * 0.88,
                   decoration: BoxDecoration(
                     color: controller.colorMap[color]["endPage_boxColor"],
@@ -55,11 +57,14 @@ class StudyEnd extends GetView<NuriStudyController> {
                       Positioned(
                         top: _height * 0.022,
                         right: _height * 0.022,
-                        child: Icon(
-                          Icons.close_rounded,
-                          color: controller.colorMap[color]["endPage_closeIconColor"],
-                          size: _width * 0.07,
-                        ),
+                        child: GestureDetector(
+                          onTap: () => Get.off(StudyMain()),
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: controller.colorMap[color]["endPage_closeIconColor"],
+                            size: _width * 0.07,
+                          ),
+                        )
                       ),
                       Positioned(
                         top: _height * 0.308,
@@ -109,6 +114,36 @@ class StudyEnd extends GetView<NuriStudyController> {
                             color: controller.colorMap[color]["endPage_textDecorationColor"],
                             width: _width * 0.725,
                           ),
+                          SizedBox(height: _height * 0.025),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: _width * 0.12,
+                                height: _width * 0.12,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: controller.colorMap[color]["endPage_pointCircle"]
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/images/studyNuri/endPage_pointStar.svg",
+                                      fit: BoxFit.contain,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: _width * 0.025,
+                              ),
+                              Text(
+                                "+${controller.finalProvisionPoint}",
+                                style: controller.colorMap[color]["endPage_pointTextStyle"],
+                              )
+                            ],
+                          )
                         ],
                       )
                     ],
