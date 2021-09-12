@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:get/get.dart';
 import 'package:harang/models/lecture.dart';
 import 'package:harang/models/user.dart';
@@ -9,8 +10,9 @@ import 'package:harang/themes/text_theme.dart';
 
 
 class NuriStudyController extends GetxController {
-  int chapter = 1; //초기값 설정
-  int stageNum = 1; //초기값 설정
+  int chapter = 1;
+  int stageNum = 1;
+  int pageNum = 1;
   String stageName = "";
 
   Map chapterColor = {};
@@ -19,6 +21,14 @@ class NuriStudyController extends GetxController {
 
   late UserModel _user;
   Map stageProgress = {};
+
+  RxMap quizStage_chooseBoxType = {
+    0: "default",
+    1: "default",
+    2: "default",
+    3: "default",
+  }.obs;
+  RxInt quizStage_nowPlusPoint = 0.obs;
 
   @override
   onInit() async {
@@ -42,6 +52,33 @@ class NuriStudyController extends GetxController {
     return true;
   }
 
+  void pageRefresh() {
+    update();
+  }
+
+  Future<void> quizAnswer(bool guessAnswer, int index) async {
+    if (guessAnswer) {
+      quizStage_chooseBoxType[index] = "success";
+    } else {
+      quizStage_chooseBoxType[index] = "fail";
+
+      Vibrate.vibrate();
+
+      if (quizStage_nowPlusPoint.value != 0) {
+        quizStage_nowPlusPoint.value -= 5;
+      }
+    }
+
+    Future.delayed(
+        Duration(seconds: 1),
+        () {
+          for (int i=0; i<4; i++) {
+            quizStage_chooseBoxType[i] = "default";
+          }
+        }
+    );
+  }
+
   final Map colorMap = {
     "mint": {
       "teaserTop": mint,
@@ -59,6 +96,25 @@ class NuriStudyController extends GetxController {
       "stageBoxInList_border": mintThree,
       "stageBoxInList_shadow": mintThree_shadow,
       "stageBoxInList_stageNameStyle": stepStudy_startPage_mint_stageName,
+
+      "textStage_background": mint,
+      "textStage_bottomBackground": mintTwo,
+      "textStage_stageNumBox": mintThree,
+      "textStage_titleStyle": stepStudy_studyPage_textStage_mint_title,
+      "textStage_contentBox": mintTwo,
+      "textStage_contentBoxShadow": mintThree_shadow,
+      "textStage_contentTextStyle": stepStudy_studyPage_textStage_mint_contentDefault,
+      "textStage_nextBtnArrow": mintThree,
+      "textStage_nextBtnShadow": mintThree_shadow,
+
+      "quizStage_background": mintTwo,
+      "quizStage_topBackgroundGradient1": mint,
+      "quizStage_topBackgroundGradient2": Color(0x2CBCA3),
+      "quizStage_questionBoxShadow": mintThree_shadow,
+      "quizStage_pointIndicator": mintThree,
+      "quizStage_chooseBoxBorder": mintThree,
+      "quizStage_chooseBoxCircle": mintThree,
+      "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_mint_choiceText,
 
       "endPage_background": mintEight,
       "endPage_decoration": mint,
@@ -88,6 +144,16 @@ class NuriStudyController extends GetxController {
       "stageBoxInList_shadow": purpleShadow2,
       "stageBoxInList_stageNameStyle": stepStudy_startPage_purple_stageName,
 
+      "textStage_background": purpleThree,
+      "textStage_bottomBackground": purpleTen,
+      "textStage_stageNumBox": purpleSeven,
+      "textStage_titleStyle": stepStudy_studyPage_textStage_purple_title,
+      "textStage_contentBox": purpleTen,
+      "textStage_contentBoxShadow": purpleSeven_shadow,
+      "textStage_contentTextStyle": stepStudy_studyPage_textStage_purple_contentDefault,
+      "textStage_nextBtnArrow": purpleSeven,
+      "textStage_nextBtnShadow": purpleSeven_shadow,
+
       "endPage_background": purpleNine,
       "endPage_decoration": purpleThree,
       "endPage_boxColor": purpleTen,
@@ -115,6 +181,16 @@ class NuriStudyController extends GetxController {
       "stageBoxInList_border": nuriPracticalApplication,
       "stageBoxInList_shadow": purpleTwo,
       "stageBoxInList_stageNameStyle": stepStudy_startPage_pink_stageName,
+
+      "textStage_background": purpleOne,
+      "textStage_bottomBackground": pinkOne,
+      "textStage_stageNumBox": nuriPracticalApplication,
+      "textStage_titleStyle": stepStudy_studyPage_textStage_pink_title,
+      "textStage_contentBox": pinkOne,
+      "textStage_contentBoxShadow": pinkShadowThree,
+      "textStage_contentTextStyle": stepStudy_studyPage_textStage_pink_contentDefault,
+      "textStage_nextBtnArrow": nuriPracticalApplication,
+      "textStage_nextBtnShadow": pinkShadowTwo,
 
       "endPage_background": pinkThree,
       "endPage_decoration": purpleOne,

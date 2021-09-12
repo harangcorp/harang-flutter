@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:harang/controllers/nuristudyController.dart';
-import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:get/get.dart';
 

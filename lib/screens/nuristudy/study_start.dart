@@ -27,7 +27,7 @@ class StudyStart extends GetView<NuriStudyController> {
             ),
             Positioned(
               top: 0,
-              child: TeaserTopImage(height: _height, width: _width, imageName: "stage_${chapterNum}_$stageNum.png", backgroundColor: controller.colorMap[color]["teaserTop"]),
+              child: TeaserTopImage(height: _height, width: _width, imageName: "stage_$chapterNum.png", backgroundColor: controller.colorMap[color]["teaserTop"]),
             ),
             Positioned(
               top: _height * 0.455,
@@ -168,6 +168,18 @@ class TeaserTopImage extends StatelessWidget {
                       width: _width * 0.45,
                     )
                 ),
+                Positioned(
+                  top: _height * 0.06,
+                  left: _width * 0.025,
+                  child: GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Icon(
+                      Icons.chevron_left,
+                      color: Colors.white,
+                      size: _width * 0.12,
+                    ),
+                  )
+                )
               ],
             ),
           ),

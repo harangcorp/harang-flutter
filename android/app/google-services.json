@@ -30,11 +30,27 @@
           }
         },
         {
+          "client_id": "164348675411-i3tq7pcn7i1o15dtrdoopqfnlu4tf4nc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceluna.harang",
+            "certificate_hash": "fa929e659bd73401adbef38886e947eb78ce80c3"
+          }
+        },
+        {
           "client_id": "164348675411-jbo1uaa8mmh48lv83mkojrgtasu8ik2j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.iceluna.harang",
             "certificate_hash": "800f6dc8ac5e2122ad64153047ea4849d2954926"
+          }
+        },
+        {
+          "client_id": "164348675411-t647pob12olqaesgaa18isnvshk6ups3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceluna.harang",
+            "certificate_hash": "4b5c92ac52125a16c41a315cf5eadc1610d31849"
           }
         },
         {
