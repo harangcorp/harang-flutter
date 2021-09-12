@@ -47,13 +47,13 @@ class LeaderBoardController extends GetxController {
     score.value = _user.score ?? 0;
     name.value = _user.name ?? "이름 없음";
     usage_time =(await UsageApp().getUsageStats());
-    print(usage_time);
     // 랭킹 데이터
     rankingData(await Database().getRanking(6));
-    print(rankingData.value);
+    rankingData.forEach((e) {
+      if(e.name!.length > 6){
+        e.name = e.name!.substring(0,7) + '..';
+      }
+    });
 
-
-    print(name.value);
-    print(FirebaseAuth.instance.currentUser?.email);
   }
 }

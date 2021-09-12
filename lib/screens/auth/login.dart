@@ -111,6 +111,8 @@ class Login extends GetView<AuthController> {
             Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
+                  
+
                     onTap: () => controller.login(
                         emailController.text, passwordController.text),
                     child: Container(

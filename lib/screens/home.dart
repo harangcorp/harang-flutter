@@ -194,7 +194,7 @@ class Home extends GetWidget<AuthController> {
                             ]),
                       ),
                       Text(
-                        "명예의 전당",
+                        "나의 학습방",
                         style: TextStyle(
                             color: Color(0xFF69149A),
                             fontSize: 22,

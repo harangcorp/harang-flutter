@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/leaderboardController.dart';
-import 'package:harang/screens/leaderboard/ranking.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:harang/widgets/weekly_chart.dart';
