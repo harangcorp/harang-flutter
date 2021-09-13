@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/screens/nuristudy/study_learn.dart';
+import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
+
+import 'package:harang/screens/circleinnershadow.dart';
 
 class StudyStart extends GetView<NuriStudyController> {
 
@@ -14,6 +19,53 @@ class StudyStart extends GetView<NuriStudyController> {
     int chapterNum = controller.chapter;
     int stageNum = controller.stageNum;
     String color = controller.chapterColor[chapterNum];
+
+    Map studyStartBtn = {
+      "default": {
+        "dropShadow": [
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-12, -12),
+            blurRadius: 24,
+          ),
+          BoxShadow(
+            color: controller.colorMap[color]["startBtnShadow"],
+            offset: Offset(12, 12),
+            blurRadius: 24,
+          )
+        ],
+        "innerShadow": Stack()
+      },
+      "onClick": {
+        "dropShadow": [
+          BoxShadow(
+            color: emptyColor,
+          )
+        ],
+        "innerShadow": Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipPath(
+              clipper: ShadowClipper(),
+              child: CircleInnerShadow(
+                shadowColor: controller.colorMap[color]["startBtnShadow"],
+                backgroundColor: controller.colorMap[color]["startBtn_onClick"],
+              ),
+            ),
+            Transform.rotate(
+              angle: 1 * pi,
+              child: ClipPath(
+                clipper: ShadowClipper(),
+                child: CircleInnerShadow(
+                  shadowColor: Colors.white,
+                  backgroundColor: controller.colorMap[color]["startBtn_onClick"],
+                ),
+              ),
+            )
+          ],
+        )
+      }
+    };
 
     return Scaffold(
       body: Center(
@@ -71,46 +123,46 @@ class StudyStart extends GetView<NuriStudyController> {
                   SizedBox(
                     height: _height * 0.0225,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      controller.pageNum = 1;
-                      controller.finalProvisionPoint = controller.chapterContent[chapterNum][stageNum]["point"];
-                      Get.to(StudyLearn(), transition: Transition.rightToLeft);
-                    },
-                    child: Container(
-                      height: _height * 0.3,
-                      width: _width * 0.45,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: controller.colorMap[color]["startBtn"],
-                        border: Border.all(color: controller.colorMap[color]["startBtnBorder"], width: 1),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-12, -12),
-                            blurRadius: 24,
+                  Obx(
+                      () => GestureDetector(
+                        onTap: () {
+                          controller.pageNum = 1;
+                          controller.finalProvisionPoint = controller.chapterContent[chapterNum][stageNum]["point"];
+                          Get.to(StudyLearn(), transition: Transition.rightToLeft);
+                        },
+                        onTapDown: (TapDownDetails tapDownDetails) => controller.startPage_startBtnType.value = "onClick",
+                        onTapUp: (TapUpDetails tapUpDetails) => controller.startPage_startBtnType.value = "default",
+                        onTapCancel: () => controller.startPage_startBtnType.value = "default",
+                        child: Container(
+                          height: _height * 0.3,
+                          width: _width * 0.45,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: controller.colorMap[color]["startBtn_default"],
+                            border: Border.all(color: controller.colorMap[color]["startBtnBorder"], width: 1),
+                            boxShadow: studyStartBtn[controller.startPage_startBtnType.value]["dropShadow"],
                           ),
-                          BoxShadow(
-                            color: controller.colorMap[color]["startBtnShadow"],
-                            offset: Offset(12, 12),
-                            blurRadius: 24,
-                          )
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            controller.colorMap[color]["startBtnImg"],
-                            width: _width * 0.18,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              studyStartBtn[controller.startPage_startBtnType.value]["innerShadow"],
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    controller.colorMap[color]["startBtnImg"],
+                                    width: _width * 0.18,
+                                  ),
+                                  Text(
+                                    "시작하기",
+                                    style: controller.colorMap[color]["startBtnStyle"],
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          Text(
-                            "시작하기",
-                            style: controller.colorMap[color]["startBtnStyle"],
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      )
                   )
                 ],
               ),

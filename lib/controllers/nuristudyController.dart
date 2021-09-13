@@ -25,6 +25,8 @@ class NuriStudyController extends GetxController {
   late UserModel _user;
   Map stageProgress = {};
 
+  RxString startPage_startBtnType = "default".obs;
+
   RxMap quizStage_chooseBoxType = {
     0: "default",
     1: "default",
@@ -97,7 +99,8 @@ class NuriStudyController extends GetxController {
       "teaserTop": mint,
       "background": mintTwo,
       "stageBox": mintThree,
-      "startBtn": mintFive,
+      "startBtn_default": mintFive,
+      "startBtn_onClick": mintFive,
       "startBtnShadow": mintSix,
       "startBtnBorder": Color(0x80F3FFFD),
       "titleStyle": stepStudy_startPage_mint_title,
@@ -146,7 +149,8 @@ class NuriStudyController extends GetxController {
       "teaserTop": purpleThree,
       "background": purpleFive,
       "stageBox": purpleSeven,
-      "startBtn": purpleSix,
+      "startBtn_default": purpleTen,
+      "startBtn_onClick": purpleSix,
       "startBtnShadow": purpleShadow2,
       "startBtnBorder": Color(0xFFF3FFFD),
       "titleStyle": stepStudy_startPage_purple_title,
@@ -195,7 +199,8 @@ class NuriStudyController extends GetxController {
       "teaserTop": purpleOne,
       "background": pinkOne,
       "stageBox": nuriPracticalApplication,
-      "startBtn": pinkOne,
+      "startBtn_default": pinkOne,
+      "startBtn_onClick": pinkOne,
       "startBtnShadow": purpleOne,
       "startBtnBorder": Color(0xFFF3FFFD),
       "titleStyle": stepStudy_startPage_pink_title,
