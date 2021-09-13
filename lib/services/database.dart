@@ -13,6 +13,7 @@ class Database {
         "name": user.name,
         "email": user.email,
         "score": user.score,
+        "stageProgress": user.stageProgress,
       });
       return true;
     } catch (e) {
@@ -46,9 +47,6 @@ class Database {
   Future<bool> unlockNextStage(Map stageProgress) async {
     try {
       String? uid = FirebaseAuth.instance.currentUser?.uid;
-      UserModel _user = await Database().getUser(uid);
-
-      late String nextStage;
 
       await _firestore.collection("users").doc(uid).update({
         "stageProgress": stageProgress,
