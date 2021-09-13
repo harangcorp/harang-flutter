@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:harang/models/lecture.dart';
 import 'package:harang/models/ranking.dart';
 import 'package:harang/models/user.dart';
@@ -39,6 +40,38 @@ class Database {
     } catch (e) {
       print(e);
       rethrow;
+    }
+  }
+
+  Future<bool> unlockNextStage(Map stageProgress) async {
+    try {
+      String? uid = FirebaseAuth.instance.currentUser?.uid;
+      UserModel _user = await Database().getUser(uid);
+
+      late String nextStage;
+
+      await _firestore.collection("users").doc(uid).update({
+        "stageProgress": stageProgress,
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> plusUserPoint(int plusPoint) async {
+    try {
+      String? uid = FirebaseAuth.instance.currentUser?.uid;
+      UserModel _user = await Database().getUser(uid);
+
+      await _firestore.collection("users").doc(uid).update({
+        "score": _user.score! + plusPoint,
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 

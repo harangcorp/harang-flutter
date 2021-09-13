@@ -57,16 +57,33 @@ class NuriStudyController extends GetxController {
     return true;
   }
 
-  void goNextPage(int pageAmount) {
+  goNextPage(int pageAmount) async {
     pageNum++;
 
     if (pageNum <= pageAmount) { //다음 페이지가 있을 경우
       Get.back();
       Get.to(StudyLearn(), transition: Transition.rightToLeft);
     } else { //마지막 페이지일 경우
+      await Database().plusUserPoint(finalProvisionPoint);
+      await unlockNextStage();
+
       pageNum = 1;
       Get.to(StudyEnd(), transition: Transition.rightToLeft);
     }
+  }
+
+  unlockNextStage() async {
+    if (chapterStageAmount[chapter] != stageNum) { //챕터의 마지막 스테이지가 아닐경우
+      stageProgress["requiredStage"] = "$chapter-${stageNum+1}";
+      stageProgress[chapter.toString()][(stageNum+1).toString()] = true;
+    } else { //챕터의 마지막 스테이지일 경우
+      if (chapter != 3) {
+        stageProgress["requiredStage"] = "${chapter+1}-1";
+        stageProgress[(chapter+1).toString()]["1"] = true;
+      }
+    }
+
+    await Database().unlockNextStage(stageProgress);
   }
 
   Future<void> quizAnswer(bool guessAnswer, int index, int pageAmount) async {
@@ -89,7 +106,11 @@ class NuriStudyController extends GetxController {
             quizStage_chooseBoxType[i] = "default";
           }
 
-          if (guessAnswer) { goNextPage(pageAmount); }
+          if (guessAnswer) {
+            finalProvisionPoint += quizStage_nowPlusPoint.value;
+
+            goNextPage(pageAmount);
+          }
         }
     );
   }

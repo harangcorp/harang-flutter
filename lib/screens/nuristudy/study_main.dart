@@ -77,7 +77,7 @@ class StudyMain extends GetView<NuriStudyController> {
                                   children: [
                                     SizedBox(
                                       width: _width,
-                                      height: ((_height * 0.05) * controller.chapterStageAmount[chapterIndex+1]) + _height * 0.01,
+                                      height: ((_height * 0.05) * controller.chapterStageAmount[chapterIndex+1]) + _height * 0.02,
                                       child: ListView.builder(
                                           physics: NeverScrollableScrollPhysics(),
                                           padding: const EdgeInsets.all(8),
