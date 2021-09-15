@@ -232,7 +232,6 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       Text("${index+1}위", style: ranking_large_number,),
-                                                      CircleAvatar(backgroundColor: Colors.pinkAccent,),
                                                       Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
                                                       Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
                                                     ],
