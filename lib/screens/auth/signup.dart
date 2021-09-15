@@ -33,7 +33,7 @@ class Signup extends GetView<AuthController> {
                   fit: BoxFit.fitHeight,
                 ))),
             textFormBox(nameController, "이름"),
-            textFormBox(emailController, "아이디"),
+            textFormBox(emailController, "이메일"),
             textFormBox(passwordController, "비밀번호", true),
             textFormBox(passwordCheckController, "비밀번호 확인",true),
             Align(

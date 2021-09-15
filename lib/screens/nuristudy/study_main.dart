@@ -106,7 +106,7 @@ class StudyMain extends GetView<NuriStudyController> {
                                                         Get.to(StudyStart(), transition: Transition.rightToLeft);
                                                       } else {
                                                         Fluttertoast.showToast(
-                                                            msg: "스테이지가 잠겨있습니다. 열려있는 스테이지를 클릭해주세요.",
+                                                            msg: "스테이지가 잠겨있습니다.",
                                                             toastLength: Toast.LENGTH_SHORT,
                                                             gravity: ToastGravity.BOTTOM,
                                                             timeInSecForIosWeb: 1,
@@ -178,20 +178,7 @@ class StudyMain extends GetView<NuriStudyController> {
                               ],
                             ),
                           ),
-                          Positioned(
-                            top: _height * 0.55,
-                            child: Column(
-                              children: [
-                                CircularProgressIndicator(),
-                                SizedBox(
-                                  height: _height * 0.01,
-                                ),
-                                Text(
-                                  "학습 데이터를 로딩중입니다.."
-                                )
-                              ],
-                            ),
-                          ),
+                          Center(child: CircularProgressIndicator()),
                         ],
                       );
                     }
@@ -219,11 +206,11 @@ class StudyMain extends GetView<NuriStudyController> {
             boxShadow: [
               BoxShadow(
                 color: articles[articleIndex]["color"],
-                blurRadius: 7,
+                blurRadius: 8,
               )
             ],
             color: articles[articleIndex]["color"],
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Stack(
             children: [

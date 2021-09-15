@@ -74,7 +74,7 @@ class Login extends GetView<AuthController> {
                 maxLines: 1,
                 controller: emailController,
                 decoration: InputDecoration(
-                  hintText: "아이디",
+                  hintText: "이메일",
                   hintStyle: hintStyle,
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,

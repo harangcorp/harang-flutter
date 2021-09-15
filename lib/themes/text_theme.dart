@@ -248,3 +248,45 @@ final  ranking_large_title = TextStyle(
     fontWeight: FontWeight.bold
 
 );
+final ranking_first_name = TextStyle(
+  color: Color(0xffFFAC3E),
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  fontFamily:'NotoSansKR',
+);
+final ranking_first_score = TextStyle(
+  color: Color(0xffFFAC3E),
+
+    fontFamily: 'GmarketSans',
+    fontSize: 17,
+    fontWeight: FontWeight.bold
+
+);
+
+final ranking_second_name = TextStyle(
+  color: Color(0xff898989),fontSize: 15,
+  fontWeight: FontWeight.bold,
+  fontFamily:'NotoSansKR',
+
+);
+final ranking_second_score = TextStyle(
+  color: Color(0xff898989),
+    fontFamily: 'GmarketSans',
+    fontSize: 17,
+    fontWeight: FontWeight.bold
+
+);
+
+final ranking_third_name = TextStyle(
+  color: Color(0xffCE7430),fontSize: 15,
+  fontWeight: FontWeight.bold,
+  fontFamily:'NotoSansKR',
+
+);
+final ranking_third_score = TextStyle(
+  color: Color(0xffCE7430),
+
+    fontFamily: 'GmarketSans',
+    fontSize: 17,
+    fontWeight: FontWeight.bold
+);

@@ -226,17 +226,23 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                   child: ListView.builder(
 
                                                       itemCount: controller.rankingData.length,
-                                        itemBuilder: (context, index) => Padding(
+                                                  itemBuilder: (context, index) => Padding(
                                                   padding: EdgeInsets.only(right: 24, left: 24,bottom: 32),
-                                                  child: Row(
+                                                  child: index >= 3 ? Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       Text("${index+1}위", style: ranking_large_number,),
                                                       Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
                                                       Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
                                                     ],
-                                                  ),
-                                        )),
+                                                  ) : Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Image.asset('assets/images/${_rankerImage[index]}', height:30,width: 30,),
+                                                      Text("${controller.rankingData.value[index].name}", style: _rankingStyle[index],),
+                                                      Text("${controller.rankingData.value[index].score}", style: _rankingScoreStyle[index]),
+                                                    ],
+                                                  ))),
                                                 ),
                                               ],
                                             ),
@@ -287,6 +293,12 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
           ),
         ));
   }
+
+  List _rankerImage = ['goldMedal.png', 'silverMedal.png','bronzeMedal.png'];
+  List<TextStyle> _rankingStyle = [ranking_first_name, ranking_second_name, ranking_third_name];
+  List<TextStyle> _rankingScoreStyle = [ranking_first_score, ranking_second_score, ranking_third_score];
+
+
 
   BoxDecoration buildBoxDecoration() {
     return BoxDecoration(

@@ -71,8 +71,8 @@ class Home extends GetWidget<AuthController> {
                     binding: NuriStudyBinding(),
                     transition: Transition.rightToLeft),
                 child: Container(
-                  width: _width * 0.8,
-                  height: _height * 0.2,
+                  width: _width * 0.86,
+                  height: _height * 0.22,
                   decoration: BoxDecoration(
                     color: mint,
                     borderRadius: BorderRadius.circular(20),
@@ -117,8 +117,8 @@ class Home extends GetWidget<AuthController> {
               GestureDetector(
                 onTap: () => Get.to(NuriPlayGround(), binding: NuripgBinding(),  transition: Transition.rightToLeft),
                 child: Container(
-                  width: _width * 0.8,
-                  height: _height * 0.2,
+                  width: _width * 0.86,
+                  height: _height * 0.22,
                   decoration: BoxDecoration(
                     color: purpleThree,
                     borderRadius: BorderRadius.circular(20),
@@ -166,8 +166,8 @@ class Home extends GetWidget<AuthController> {
                 onTap: () =>
                     Get.to(() => LeaderBoard(),transition: Transition.rightToLeft, binding: LeaderboardBinding()),
                 child: Container(
-                  width: _width * 0.8,
-                  height: _height * 0.2,
+                  width: _width * 0.86,
+                  height: _height * 0.22,
                   decoration: BoxDecoration(
                     color: purpleTwo,
                     borderRadius: BorderRadius.circular(20),
