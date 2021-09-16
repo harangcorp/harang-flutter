@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
@@ -262,6 +260,8 @@ class NuriStudyController extends GetxController {
       "quizStage_chooseBoxBorder": mintThree,
       "quizStage_chooseBoxCircle": mintThree,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_mint_choiceText,
+      "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_mint_point,
+      "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_mint_circleText,
 
       "endPage_background": mintEight,
       "endPage_decoration": mint,
@@ -312,6 +312,8 @@ class NuriStudyController extends GetxController {
       "quizStage_chooseBoxBorder": purpleEight,
       "quizStage_chooseBoxCircle": purpleEight,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_purple_choiceText,
+      "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_purple_point,
+      "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_purple_circleText,
 
       "endPage_background": purpleNine,
       "endPage_decoration": purpleThree,
@@ -358,7 +360,7 @@ class NuriStudyController extends GetxController {
       "endPage_decoration": purpleOne,
       "endPage_boxColor": pinkOne,
       "endPage_boxShadow": pinkShadow,
-      "endPage_closeIconColor": purpleEleven,
+      "endPage_closeIconColor": pinkTwo,
       "endPage_titleStyle": stepStudy_endPage_pink_title,
       "endPage_congratsTextStyle": stepStudy_endPage_pink_congratsText,
       "endPage_resultTextStyle": stepStudy_endPage_pink_resultText,

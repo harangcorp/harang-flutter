@@ -69,7 +69,6 @@ class StudyLearn extends GetView<NuriStudyController> {
       );
     }
 
-    print(result.value);
     return Scaffold(
       body: Center(
           child: Obx(() => result.value)
@@ -285,14 +284,14 @@ class StudyLearn extends GetView<NuriStudyController> {
                     left: _width * 0.05,
                     child: Text(
                       "${quizStagePlusPoint} 포인트",
-                      style: stepStudy_learnPage_quiz_point,
+                      style: colorMap[color]["quizStage_pointTextStyle"],
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Positioned(
                     child: Text(
                       question,
-                      style: stepStudy_learnPage_quiz_question,
+                      style: stepStudy_studyPage_quizStage_question,
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -323,7 +322,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                       ),
                       Text(
                         "${controller.quizStage_nowPlusPoint.value}",
-                        style: stepStudy_learnPage_quiz_circleText,
+                        style: colorMap[color]["quizStage_circlePointTextStyle"],
                       )
                     ],
                   )
