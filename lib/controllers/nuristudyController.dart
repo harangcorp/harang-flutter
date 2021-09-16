@@ -59,7 +59,6 @@ class NuriStudyController extends GetxController {
 
   goNextPage(int pageAmount) async {
     pageNum++;
-
     if (pageNum <= pageAmount) { //다음 페이지가 있을 경우
       Get.back();
       Get.to(StudyLearn(), transition: Transition.rightToLeft);

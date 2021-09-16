@@ -264,6 +264,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                 ],
                               ),
                             ),
+                            if(controller.isSelected.value)SizedBox() // 정렬을 위한 요소
                           ]),
                     ),
                   ),
