@@ -37,11 +37,19 @@ final np_title = TextStyle(
 final np_content = TextStyle(
     fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
 
-final np_subtitle = TextStyle(
-    fontSize: 22, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_mint = TextStyle(
+    fontSize: 22, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_purple = TextStyle(
+    fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_pink = TextStyle(
+    fontSize: 18, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
-final np_btn = TextStyle(
-    fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_mint = TextStyle(
+    fontSize: 14, color: Color(0xFF2C2C2C), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_purple = TextStyle(
+    fontSize: 14, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_pink = TextStyle(
+    fontSize: 14, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final codetext = TextStyle(
     fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
@@ -149,6 +157,10 @@ final stepStudy_studyPage_textStage_mint_contentExtraBold = TextStyle(
     fontSize: 16, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700, height: 1.6);
 final stepStudy_studyPage_quizStage_mint_choiceText = TextStyle(
     fontSize: 18, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+final stepStudy_studyPage_quizStage_mint_point = TextStyle(
+    fontSize: 12, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+final stepStudy_studyPage_quizStage_mint_circleText = TextStyle(
+    fontSize: 25, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_studyPage_textStage_purple_title = TextStyle(
     fontSize: 21, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -156,6 +168,10 @@ final stepStudy_studyPage_textStage_purple_contentDefault = TextStyle(
     fontSize: 15, color: nuriGrammar, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
 final stepStudy_studyPage_quizStage_purple_choiceText = TextStyle(
     fontSize: 18, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+final stepStudy_studyPage_quizStage_purple_point = TextStyle(
+    fontSize: 12, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+final stepStudy_studyPage_quizStage_purple_circleText = TextStyle(
+    fontSize: 25, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 final stepStudy_studyPage_textStage_pink_title = TextStyle(
     fontSize: 21, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -164,6 +180,11 @@ final stepStudy_studyPage_textStage_pink_contentDefault = TextStyle(
 
 final stepStudy_studyPage_quizStage_successFail_choiceText = TextStyle(
     fontSize: 18, color: Colors.white, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+final stepStudy_studyPage_quizStage_question = TextStyle(
+    fontSize: 18, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
+final stepStudy_studyPage_codeStage_toastText = TextStyle(
+    fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);
 
 final stepStudy_endPage_mint_title = TextStyle(
     fontSize: 18, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -191,13 +212,6 @@ final stepStudy_endPage_pink_resultText = TextStyle(
     fontSize: 10, color: nuriPracticalApplication, fontWeight: FontWeight.normal);
 final stepStudy_endPage_pink_pointText = TextStyle(
     fontSize: 20, color: nuriPracticalApplication, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
-
-final stepStudy_learnPage_quiz_question = TextStyle(
-    fontSize: 18, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
-final stepStudy_learnPage_quiz_point = TextStyle(
-    fontSize: 12, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
-final stepStudy_learnPage_quiz_circleText = TextStyle(
-    fontSize: 25, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
 
 
 final leaderBoard_subtitle = TextStyle(

@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/models/lecture.dart';
+import 'package:harang/models/nuri.dart';
 import 'package:harang/models/user.dart';
 import 'package:harang/screens/nuristudy/study_end.dart';
 import 'package:harang/screens/nuristudy/study_learn.dart';
@@ -34,6 +37,8 @@ class NuriStudyController extends GetxController {
     3: "default",
   }.obs;
   RxInt quizStage_nowPlusPoint = 0.obs;
+
+  late FToast fToast;
 
   @override
   onInit() async {
@@ -85,7 +90,9 @@ class NuriStudyController extends GetxController {
     await Database().unlockNextStage(stageProgress);
   }
 
-  Future<void> quizAnswer(bool guessAnswer, int index, int pageAmount) async {
+  Future<void> quizAnswer(bool guessAnswer, int index) async {
+    int pageAmount = chapterContent[chapter][stageNum]["contents"]["pageAmount"];
+
     if (guessAnswer) {
       quizStage_chooseBoxType[index] = "success";
     } else {
@@ -112,6 +119,107 @@ class NuriStudyController extends GetxController {
           }
         }
     );
+  }
+
+  checkCorrectCode(BuildContext context, NuripgController nuriPgController) async {
+    fToast = FToast();
+    fToast.init(context);
+
+    int pageAmount = chapterContent[chapter][stageNum]["contents"]["pageAmount"];
+    String testCaseInput = chapterContent[chapter][stageNum]["contents"][pageNum.toString()]["testCase"]["input"];
+    String testCaseOutput = chapterContent[chapter][stageNum]["contents"][pageNum.toString()]["testCase"]["output"];
+
+    nuriPgController.compile();
+    Nuri testCaseResult = await nuriPgController.nuriAPI.postReq(nuriPgController.codeCtl.text, input: testCaseInput);
+
+    String compareOutputText = testCaseResult.output;
+    if (compareOutputText.length != 0) {
+      compareOutputText = testCaseResult.output.substring(0, (testCaseResult.output.length-1));
+    }
+
+    if (compareOutputText == testCaseOutput) { //맞을시
+      fToast.showToast(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            color: mintThree,
+            boxShadow: [
+              BoxShadow(
+                color: mintThree_shadowFour,
+                offset: Offset(0, 7),
+                blurRadius: 7,
+              ),
+            ]
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.check_circle_outline_rounded,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 12.0,
+              ),
+              Text(
+                "정답입니다!",
+                style: stepStudy_studyPage_codeStage_toastText,
+
+              ),
+            ],
+          ),
+        ),
+        gravity: ToastGravity.BOTTOM,
+        toastDuration: Duration(seconds: 2),
+      );
+
+      Future.delayed(
+          Duration(seconds: 2),
+              () {
+            goNextPage(pageAmount);
+          }
+      );
+    } else {
+      fToast.showToast(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            color: redOne,
+            boxShadow: [
+              BoxShadow(
+                color: redOne_shadowTwo,
+                offset: Offset(0, 7),
+                blurRadius: 7,
+              ),
+            ]
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RotationTransition(
+                turns: AlwaysStoppedAnimation(45 / 360),
+                child: Icon(
+                  Icons.add_circle_outline_rounded,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: 12.0,
+              ),
+              Text(
+                "다시 도전해봐요!",
+                style: stepStudy_studyPage_codeStage_toastText,
+              ),
+            ],
+          ),
+        ),
+        gravity: ToastGravity.BOTTOM,
+        toastDuration: Duration(seconds: 2),
+      );
+
+    }
   }
 
   final Map colorMap = {
@@ -151,6 +259,8 @@ class NuriStudyController extends GetxController {
       "quizStage_chooseBoxBorder": mintThree,
       "quizStage_chooseBoxCircle": mintThree,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_mint_choiceText,
+      "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_mint_point,
+      "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_mint_circleText,
 
       "endPage_background": mintEight,
       "endPage_decoration": mint,
@@ -201,6 +311,8 @@ class NuriStudyController extends GetxController {
       "quizStage_chooseBoxBorder": purpleEight,
       "quizStage_chooseBoxCircle": purpleEight,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_purple_choiceText,
+      "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_purple_point,
+      "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_purple_circleText,
 
       "endPage_background": purpleNine,
       "endPage_decoration": purpleThree,
@@ -247,7 +359,7 @@ class NuriStudyController extends GetxController {
       "endPage_decoration": purpleOne,
       "endPage_boxColor": pinkOne,
       "endPage_boxShadow": pinkShadow,
-      "endPage_closeIconColor": purpleEleven,
+      "endPage_closeIconColor": pinkTwo,
       "endPage_titleStyle": stepStudy_endPage_pink_title,
       "endPage_congratsTextStyle": stepStudy_endPage_pink_congratsText,
       "endPage_resultTextStyle": stepStudy_endPage_pink_resultText,

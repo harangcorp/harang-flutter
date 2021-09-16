@@ -396,7 +396,7 @@ final List<Map> articles = [
   {
     "title": "코딩의 세계",
     "title_textStyle": stepStudyTitleStyle_worldOfCoding,
-    "description": "코딩의 세계 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
+    "description": "코딩의 세계를 알아보자!\n컴퓨터의 언어를 알아볼거예요",
     "description_textStyle": stepStudyDescriptionStyle_worldOfCoding,
     "level": 1,
     "levelBox_color": worldOfCoding,
@@ -406,7 +406,7 @@ final List<Map> articles = [
   {
     "title": "누리의 문법",
     "title_textStyle": stepStudyTitleStyle_nuriGrammar,
-    "description": "누리의 문법 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
+    "description": "누리는 뭘까?\n누리의 문법에 대해 알아볼꺼예요!",
     "description_textStyle": stepStudyDescriptionStyle_nuriGrammar,
     "level": 2,
     "levelBox_color": nuriGrammar,
@@ -416,7 +416,7 @@ final List<Map> articles = [
   {
     "title": "누리 실전 응용",
     "title_textStyle": stepStudyTitleStyle_nuriPracticalApplication,
-    "description": "누리 실전 응용 설명 아주 간략하게 한두 줄 정도로만\n바로 여기에 적어주세요",
+    "description": "지금까지 배운 누리 문법을 바탕으로\n실제로 핸드폰을 조작해볼거예요!",
     "description_textStyle": stepStudyDescriptionStyle_nuriPracticalApplication,
     "level": 3,
     "levelBox_color": nuriPracticalApplication,
