@@ -18,6 +18,7 @@ class StudyStart extends GetView<NuriStudyController> {
 
     int chapterNum = controller.chapter;
     int stageNum = controller.stageNum;
+    int stageAmount = controller.chapterStageAmount[chapterNum];
     String color = controller.chapterColor[chapterNum];
 
     Map studyStartBtn = {
@@ -98,7 +99,7 @@ class StudyStart extends GetView<NuriStudyController> {
                       ),
                       child: Center(
                         child: Text(
-                          "$stageNum/4",
+                          "$stageNum/$stageAmount",
                           style: stepStudy_startPage_stageNum,
                           textAlign: TextAlign.center,
                         ),

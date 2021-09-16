@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/controllers/nuristudyController.dart';
-import 'package:harang/screens/nuristudy/study_end.dart';
+import 'package:harang/screens/nuriplayground/nuriplayground.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -10,6 +11,7 @@ class StudyLearn extends GetView<NuriStudyController> {
   late int chapterNum;
   late int stageNum;
   late String stageName;
+  late int stageAmount;
   late String color;
   late Map colorMap;
   late int pageNum;
@@ -30,6 +32,7 @@ class StudyLearn extends GetView<NuriStudyController> {
     chapterNum = controller.chapter;
     stageNum = controller.stageNum;
     stageName = controller.stageName;
+    stageAmount = controller.chapterStageAmount[chapterNum];
     color = controller.chapterColor[chapterNum];
     colorMap = controller.colorMap;
     pageNum = controller.pageNum;
@@ -60,6 +63,10 @@ class StudyLearn extends GetView<NuriStudyController> {
           controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["choiceList"],
           point
       );
+    } else if (pageKind == "code") {
+      result.value = codeStageTemplate(
+          context
+      );
     }
 
     print(result.value);
@@ -82,7 +89,7 @@ class StudyLearn extends GetView<NuriStudyController> {
         Positioned(
           top: 0,
           child: ClipPath(
-            clipper: textStageBottomDesignPainter(),
+            clipper: textAndCodeStageBottomDesignPainter(),
             child: Container(
               height: _height * 0.92,
               width: _width,
@@ -115,7 +122,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                             ),
                             child: Center(
                               child: Text(
-                                "$stageNum/4",
+                                "$stageNum/$stageAmount",
                                 style: stepStudy_startPage_stageNum,
                                 textAlign: TextAlign.center,
                               ),
@@ -335,7 +342,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Obx(() => GestureDetector(
-                              onTap: () => controller.quizAnswer((quizStageAnswer == (index+1)), index, pageAmount),
+                              onTap: () => controller.quizAnswer((quizStageAnswer == (index+1)), index),
                               child: Container(
                                 width: _width * 0.73,
                                 height: _height * 0.0775,
@@ -411,9 +418,77 @@ class StudyLearn extends GetView<NuriStudyController> {
       ],
     );
   }
+
+  codeStageTemplate(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          color: colorMap[color]["textStage_bottomBackground"],
+          width: _width,
+          height: _height,
+        ),
+        Positioned(
+          top: 0,
+          child: ClipPath(
+            clipper: textAndCodeStageBottomDesignPainter(),
+            child: Container(
+              height: _height * 0.92,
+              width: _width,
+              decoration: BoxDecoration(color: colorMap[color]["textStage_background"]),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    top: _height * 0.09,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: _width * 0.14,
+                            height: _height * 0.0325,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: colorMap[color]["textStage_stageNumBox"],
+                            ),
+                            child: Center(
+                              child: Text(
+                                "$stageNum/$stageAmount",
+                                style: stepStudy_startPage_stageNum,
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                        ),
+                        SizedBox(
+                          height: _height * 0.0225,
+                        ),
+                        Text(
+                          stageName,
+                          style: colorMap[color]["textStage_titleStyle"],
+                        )
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: _height * 0.2,
+                    child: SizedBox(
+                      width: _width * 0.875,
+                      child: GetBuilder<NuripgController> (
+                        builder: (nuriPgController) => NuriPlayGround().codeWriteUI(context, nuriPgController, controller, color, "stepStudy"),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-class textStageBottomDesignPainter extends CustomClipper<Path> {
+class textAndCodeStageBottomDesignPainter extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();

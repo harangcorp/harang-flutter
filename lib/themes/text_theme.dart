@@ -37,11 +37,19 @@ final np_title = TextStyle(
 final np_content = TextStyle(
     fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
 
-final np_subtitle = TextStyle(
-    fontSize: 22, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_mint = TextStyle(
+    fontSize: 22, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_purple = TextStyle(
+    fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_subtitle_pink = TextStyle(
+    fontSize: 18, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
-final np_btn = TextStyle(
-    fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_mint = TextStyle(
+    fontSize: 14, color: Color(0xFF2C2C2C), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_purple = TextStyle(
+    fontSize: 14, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final np_btn_pink = TextStyle(
+    fontSize: 14, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final codetext = TextStyle(
     fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
@@ -164,6 +172,9 @@ final stepStudy_studyPage_textStage_pink_contentDefault = TextStyle(
 
 final stepStudy_studyPage_quizStage_successFail_choiceText = TextStyle(
     fontSize: 18, color: Colors.white, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+
+final stepStudy_studyPage_codeStage_toastText = TextStyle(
+    fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);
 
 final stepStudy_endPage_mint_title = TextStyle(
     fontSize: 18, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
