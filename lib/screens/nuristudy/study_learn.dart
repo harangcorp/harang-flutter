@@ -41,9 +41,9 @@ class StudyLearn extends GetView<NuriStudyController> {
     point = controller.chapterContent[chapterNum][stageNum]["point"];
 
 
-    var result = Stack().obs;
+    var result = Stack();
     if (pageKind == "text") {
-      result.value = textStageTemplate(
+      result = textStageTemplate(
         Column(
           children: [
             Text(
@@ -58,20 +58,20 @@ class StudyLearn extends GetView<NuriStudyController> {
       quizStageAnswer = controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["answer"];
       controller.quizStage_nowPlusPoint.value = quizStagePlusPoint;
 
-      result.value = quizStageTemplate(
+      result = quizStageTemplate(
           (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["question"] as String).replaceAll("\\n", "\n"),
           controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["choiceList"],
           point
       );
     } else if (pageKind == "code") {
-      result.value = codeStageTemplate(
+      result = codeStageTemplate(
           context
       );
     }
 
     return Scaffold(
       body: Center(
-          child: Obx(() => result.value)
+          child: result
       ),
     );
   }
@@ -473,6 +473,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                     child: SizedBox(
                       width: _width * 0.875,
                       child: GetBuilder<NuripgController> (
+                        init: NuripgController(),
                         builder: (nuriPgController) => NuriPlayGround().codeWriteUI(context, nuriPgController, controller, color, "stepStudy"),
                       ),
                     ),

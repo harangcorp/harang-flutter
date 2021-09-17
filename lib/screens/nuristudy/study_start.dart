@@ -7,7 +7,7 @@ import 'package:harang/screens/nuristudy/study_learn.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 
-import 'package:harang/screens/circleinnershadow.dart';
+import 'package:harang/widgets/circleinnershadow.dart';
 
 class StudyStart extends GetView<NuriStudyController> {
 
