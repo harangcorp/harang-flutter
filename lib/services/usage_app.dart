@@ -17,7 +17,6 @@ class UsageApp {
         for (var info in infoList) {
           if (info.packageName == 'com.iceluna.harang'){
             _info[DateTime.now().weekday - i - 1] = info.usage.inMinutes;
-            print(info);
           }
         }
       }

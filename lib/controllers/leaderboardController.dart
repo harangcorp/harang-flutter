@@ -15,6 +15,8 @@ class LeaderBoardController extends GetxController {
   Rx<String> name = ''.obs;
   RxList<RankingModel> rankingData = RxList.empty(growable: true);
   Rx<int> progess_percent = 0.obs;
+  Rx<int> rankingListCountNum = 0.obs;
+  Rx<int> playerRank = 0.obs;
 
   String profile_image = 'assets/images/login_man.png';
   List<int> usage_time = [0, 0, 0, 0, 0, 0, 0].obs;
@@ -34,6 +36,14 @@ class LeaderBoardController extends GetxController {
         e.name = e.name!.substring(0, 7) + '..';
       }
     });
+
+    if (rankingData.length >= 15) {
+      rankingListCountNum.value = 15;
+    } else {
+      rankingListCountNum.value = rankingData.length;
+    }
+
+    playerRank.value = getPlayerRank();
   }
 
   int getPlayerRank() {

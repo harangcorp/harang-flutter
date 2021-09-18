@@ -17,15 +17,6 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    int rankingListCountNum;
-    if (controller.rankingData.length >= 15) {
-      rankingListCountNum = 14;
-    } else {
-      rankingListCountNum = controller.rankingData.length;
-    }
-
-    int playerRank = controller.getPlayerRank();
-
     return Scaffold(
         backgroundColor: Color(0xffFAEEFD),
         body: Obx(
@@ -75,7 +66,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "$playerRank위",
+                            "${controller.playerRank.value}위",
                             style: TextStyle(
                                 color: Color(0xffCF50D8),
                                 fontWeight: FontWeight.bold,
@@ -231,7 +222,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                 ),),
                                                 Expanded(
                                                   child: ListView.builder(
-                                                      itemCount: rankingListCountNum,
+                                                      itemCount: controller.rankingListCountNum.value,
                                                       itemBuilder: (context, index) => Padding(
                                                           padding: EdgeInsets.only(right: 24, left: 24,bottom: 32),
                                                           child: index >= 3 ? Row(

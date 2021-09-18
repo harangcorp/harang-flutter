@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
 import 'package:harang/controllers/authController.dart';
-import 'package:harang/screens/auth/signup.dart';
 
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
