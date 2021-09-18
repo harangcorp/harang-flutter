@@ -73,6 +73,7 @@ class Login extends GetView<AuthController> {
                 cursorColor: purpleOne,
                 maxLines: 1,
                 controller: emailController,
+                style: TextStyle(color: pinkFour),
                 decoration: InputDecoration(
                   hintText: "이메일",
                   hintStyle: hintStyle,
@@ -96,7 +97,7 @@ class Login extends GetView<AuthController> {
                 maxLines: 1,
                 controller: passwordController,
                 obscureText: true,
-
+                style: TextStyle(color: pinkFour),
                 decoration: InputDecoration(
                   hintText: "비밀번호",
                   hintStyle: hintStyle,

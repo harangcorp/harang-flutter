@@ -43,6 +43,7 @@ final mint_shadow = Color(0xB38EF6E4);
 final pinkOne = Color(0xFFF6E7FF);
 final pinkTwo = Color(0xFF69149A);
 final pinkThree = Color(0xFFEDCCFF);
+final pinkFour = Color(0xFFC866FF);
 final pinkShadow = Color(0x669F5BC6);
 final pinkShadowTwo = Color(0x4D9F5BC6);
 final pinkShadowThree = Color(0x80B671DD);
