@@ -1,14 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:harang/models/lectrue_info.dart';
 import 'package:harang/models/ranking.dart';
 import 'package:harang/models/user.dart';
 import 'package:harang/services/database.dart';
-import 'package:app_usage/app_usage.dart';
 import 'package:harang/services/usage_app.dart';
-import 'userController.dart';
+
 
 class LeaderBoardController extends GetxController {
 
@@ -22,6 +18,7 @@ class LeaderBoardController extends GetxController {
 
   String profile_image = 'assets/images/login_man.png';
   List<int> usage_time = [0, 0, 0, 0, 0, 0, 0].obs;
+
   @override
   onInit() async {
     //TODO 데이터 가져오기
@@ -31,12 +28,22 @@ class LeaderBoardController extends GetxController {
     usage_time = (await UsageApp().getUsageStats());
     progess_percent.value = getProgressPercent(_user.stageProgress);
     // 랭킹 데이터
-    rankingData(await Database().getRanking(15));
+    rankingData(await Database().getRanking());
     rankingData.forEach((e) {
       if (e.name!.length > 6) {
         e.name = e.name!.substring(0, 7) + '..';
       }
     });
+  }
+
+  int getPlayerRank() {
+    for (int i=0; i<rankingData.length; i++) {
+      if (rankingData.value[i].id == FirebaseAuth.instance.currentUser?.uid) {
+        return (i+1);
+      }
+    }
+
+    return 0;
   }
 
   getProgressPercent(Map? stageProgress) {

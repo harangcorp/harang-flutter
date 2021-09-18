@@ -1,5 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -18,6 +16,15 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    int rankingListCountNum;
+    if (controller.rankingData.length >= 15) {
+      rankingListCountNum = 14;
+    } else {
+      rankingListCountNum = controller.rankingData.length;
+    }
+
+    int playerRank = controller.getPlayerRank();
 
     return Scaffold(
         backgroundColor: Color(0xffFAEEFD),
@@ -68,7 +75,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "916위",
+                            "$playerRank위",
                             style: TextStyle(
                                 color: Color(0xffCF50D8),
                                 fontWeight: FontWeight.bold,
@@ -224,25 +231,24 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                 ),),
                                                 Expanded(
                                                   child: ListView.builder(
-
-                                                      itemCount: controller.rankingData.length,
-                                                  itemBuilder: (context, index) => Padding(
-                                                  padding: EdgeInsets.only(right: 24, left: 24,bottom: 32),
-                                                  child: index >= 3 ? Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Text("${index+1}위", style: ranking_large_number,),
-                                                      Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
-                                                      Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
-                                                    ],
-                                                  ) : Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Image.asset('assets/images/${_rankerImage[index]}', height:30,width: 30,),
-                                                      Text("${controller.rankingData.value[index].name}", style: _rankingStyle[index],),
-                                                      Text("${controller.rankingData.value[index].score}", style: _rankingScoreStyle[index]),
-                                                    ],
-                                                  ))),
+                                                      itemCount: rankingListCountNum,
+                                                      itemBuilder: (context, index) => Padding(
+                                                          padding: EdgeInsets.only(right: 24, left: 24,bottom: 32),
+                                                          child: index >= 3 ? Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text("${index+1}위", style: ranking_large_number,),
+                                                              Text("${controller.rankingData.value[index].name}", style: ranking_large_name,),
+                                                              Text("${controller.rankingData.value[index].score}", style: ranking_large_score,),
+                                                            ],
+                                                          ) : Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Image.asset('assets/images/${_rankerImage[index]}', height:30,width: 30,),
+                                                              Text("${controller.rankingData.value[index].name}", style: _rankingStyle[index],),
+                                                              Text("${controller.rankingData.value[index].score}", style: _rankingScoreStyle[index]),
+                                                            ],
+                                                          ))),
                                                 ),
                                               ],
                                             ),
