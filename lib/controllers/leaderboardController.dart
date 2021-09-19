@@ -61,7 +61,7 @@ class LeaderBoardController extends GetxController {
 
     int _chapterStageAmount = 0;
     for(var i=1; i<=3; i++){
-      LectureContent lectureContent =  await Database().getLectureContent(1);
+      LectureContent lectureContent =  await Database().getLectureContent(i);
       _chapterStageAmount += lectureContent.chapterStageAmount!;
     }
 
