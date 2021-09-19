@@ -92,7 +92,8 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                     backgroundColor: Colors.white,
                                     radius: 15,
                                     backgroundImage: ExactAssetImage(
-                                        controller.profile_image),
+                                        controller.profile_image
+                                    ),
                                   ),
                                 ),
                                 Text(
@@ -291,38 +292,54 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                                                             32),
                                                                     child: index >=
                                                                             3
-                                                                        ? Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
+                                                                        ? Stack(
+                                                                      alignment: Alignment.center,
+                                                                      children: [
+                                                                        Positioned(
+                                                                          left: 0,
+                                                                          child: Text(
+                                                                            "${index + 1}위",
+                                                                            style: ranking_large_number,
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          "${controller.rankingData.value[index].name}",
+                                                                          style: ranking_large_name,
+                                                                          textAlign: TextAlign.center,
+                                                                        ),
+                                                                        Positioned(
+                                                                          right: 0,
+                                                                          child: Text(
+                                                                            "${controller.rankingData.value[index].score}",
+                                                                            style: ranking_large_score,
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    )
+                                                                        : Stack(
+                                                                            alignment: Alignment.center,
                                                                             children: [
-                                                                              Text(
-                                                                                "${index + 1}위",
-                                                                                style: ranking_large_number,
-                                                                              ),
-                                                                              Text(
-                                                                                "${controller.rankingData.value[index].name}",
-                                                                                style: ranking_large_name,
-                                                                              ),
-                                                                              Text(
-                                                                                "${controller.rankingData.value[index].score}",
-                                                                                style: ranking_large_score,
-                                                                              ),
-                                                                            ],
-                                                                          )
-                                                                        : Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
-                                                                            children: [
-                                                                              Image.asset(
-                                                                                'assets/images/${_rankerImage[index]}',
-                                                                                height: 30,
-                                                                                width: 30,
+                                                                              SizedBox(height: height * 0.055),
+                                                                              Positioned(
+                                                                                left: -5,
+                                                                                child: Image.asset(
+                                                                                  'assets/images/${_rankerImage[index]}',
+                                                                                  height: 35,
+                                                                                  width: 35,
+                                                                                ),
                                                                               ),
                                                                               Text(
                                                                                 "${controller.rankingData.value[index].name}",
                                                                                 style: _rankingStyle[index],
+                                                                                textAlign: TextAlign.center,
                                                                               ),
-                                                                              Text("${controller.rankingData.value[index].score}", style: _rankingScoreStyle[index]),
+                                                                              Positioned(
+                                                                                right: 0,
+                                                                                child: Text(
+                                                                                    "${controller.rankingData.value[index].score}",
+                                                                                    style: _rankingScoreStyle[index]
+                                                                                ),
+                                                                              )
                                                                             ],
                                                                           ))),
                                                       ),
