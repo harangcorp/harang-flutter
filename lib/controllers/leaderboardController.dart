@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:harang/models/lecture.dart';
 import 'package:harang/models/ranking.dart';
 import 'package:harang/models/user.dart';
 import 'package:harang/services/database.dart';
@@ -28,7 +29,7 @@ class LeaderBoardController extends GetxController {
     score.value = _user.score ?? 0;
     name.value = _user.name ?? "이름 없음";
     usage_time = (await UsageApp().getUsageStats());
-    progess_percent.value = getProgressPercent(_user.stageProgress);
+    progess_percent.value = await getProgressPercent(_user.stageProgress);
     // 랭킹 데이터
     rankingData(await Database().getRanking());
     rankingData.forEach((e) {
@@ -56,23 +57,28 @@ class LeaderBoardController extends GetxController {
     return 0;
   }
 
-  getProgressPercent(Map? stageProgress) {
+  getProgressPercent(Map? stageProgress) async {
+
+    int _chapterStageAmount = 0;
+    for(var i=1; i<=3; i++){
+      LectureContent lectureContent =  await Database().getLectureContent(1);
+      _chapterStageAmount += lectureContent.chapterStageAmount!;
+    }
+
     int true_cnt = 0;
-    int false_cnt = 0;
     stageProgress!.forEach((key, value) {
       if (key != 'requiredStage') {
         List tmp = value.values.toList();
         for (var i = 0; i < tmp.length; i++) {
           if (tmp[i]) {
             true_cnt++;
-          } else {
-            false_cnt++;
           }
         }
       }
-
     });
-    print((true_cnt / (true_cnt + false_cnt) * 100 ).toInt());
-    return (true_cnt / (true_cnt + false_cnt) * 100 ).toInt();
+    print("count ${(true_cnt / _chapterStageAmount  * 100 ).toInt()}");
+    print(true_cnt);
+    print(_chapterStageAmount);
+    return (true_cnt / _chapterStageAmount * 100 ).toInt();
   }
 }
