@@ -19,7 +19,7 @@ class LeaderBoardController extends GetxController {
   Rx<int> rankingListCountNum = 0.obs;
   Rx<int> playerRank = 0.obs;
 
-  String profile_image = 'assets/images/login_man.png';
+  String profile_image = 'assets/images/profile_image.png';
   List<int> usage_time = [0, 0, 0, 0, 0, 0, 0].obs;
 
   @override
@@ -76,9 +76,6 @@ class LeaderBoardController extends GetxController {
         }
       }
     });
-    print("count ${(true_cnt / _chapterStageAmount  * 100 ).toInt()}");
-    print(true_cnt);
-    print(_chapterStageAmount);
     return (true_cnt / _chapterStageAmount * 100 ).toInt();
   }
 }

@@ -52,7 +52,7 @@ final np_btn_pink = TextStyle(
     fontSize: 14, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
 final codetext = TextStyle(
-    fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+    fontSize: 13, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
 
 final homeTitleStyle = TextStyle(
     fontSize: 28,
