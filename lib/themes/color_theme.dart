@@ -27,6 +27,8 @@ final nuriGrammar = Color(0xb36260be);
 final nuriPracticalApplication = Color(0xff9F5BC6);
 
 final mint = Color(0xff8EF6E4);
+final mint_shadow = Color(0xB38EF6E4);
+final mint_shadowTwo = Color(0x4d8ef6e4);
 final mintTwo = Color(0xFFECFAF7);
 final mintThree = Color(0xFF2CBCA3);
 final mintThree_shadow = Color(0x4D2CBCA3);
@@ -38,7 +40,6 @@ final mintFive = Color(0xFFEDFCF9);
 final mintSix = Color(0xFFADDBD3);
 final mintSeven = Color(0xFF3DA493);
 final mintEight = Color(0xFFB9FFF3);
-final mint_shadow = Color(0xB38EF6E4);
 
 final pinkOne = Color(0xFFF6E7FF);
 final pinkTwo = Color(0xFF69149A);

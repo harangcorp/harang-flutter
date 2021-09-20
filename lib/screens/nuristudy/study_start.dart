@@ -129,6 +129,7 @@ class StudyStart extends GetView<NuriStudyController> {
                         onTap: () {
                           controller.pageNum = 1;
                           controller.finalProvisionPoint = controller.chapterContent[chapterNum][stageNum]["point"];
+                          controller.pageKind = controller.chapterContent[chapterNum][stageNum]["contents"]["1"]["type"];
                           Get.to(StudyLearn(), transition: Transition.rightToLeft);
                         },
                         onTapDown: (TapDownDetails tapDownDetails) => controller.startPage_startBtnType.value = "onClick",

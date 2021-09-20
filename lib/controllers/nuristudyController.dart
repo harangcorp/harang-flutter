@@ -18,6 +18,7 @@ class NuriStudyController extends GetxController {
   int chapter = 1;
   int stageNum = 1;
   int pageNum = 1;
+  String pageKind = "text";
   String stageName = "";
   int finalProvisionPoint = 0;
 
@@ -65,6 +66,18 @@ class NuriStudyController extends GetxController {
   goNextPage(int pageAmount) async {
     pageNum++;
     if (pageNum <= pageAmount) { //다음 페이지가 있을 경우
+      pageKindLoop: for (int i=1; i<=pageAmount; i++) {
+        String pageKind = chapterContent[chapter][stageNum]["contents"][i.toString()]["type"];
+        if (i == pageNum && pageKind == "quiz" && this.pageKind != "quizStart") { //스테이지의 첫 퀴즈 스테이지 일 경우
+          this.pageKind = "quizStart";
+          pageNum--;
+          break pageKindLoop;
+        } else if (i == pageNum) {
+          this.pageKind = chapterContent[chapter][stageNum]["contents"][pageNum.toString()]["type"];
+          break pageKindLoop;
+        }
+      }
+
       Get.back();
       Get.to(StudyLearn(), transition: Transition.rightToLeft);
     } else { //마지막 페이지일 경우
@@ -258,9 +271,12 @@ class NuriStudyController extends GetxController {
       "quizStage_pointIndicator": mintThree,
       "quizStage_chooseBoxBorder": mintThree,
       "quizStage_chooseBoxCircle": mintThree,
+      "quizStage_startPageBoxColor": mintThree,
+      "quizStage_startPageBoxShadow": mint_shadowTwo,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_mint_choiceText,
       "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_mint_point,
       "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_mint_circleText,
+      "quizStage_startPageTextStyle": stepStudy_studyPage_quizStage_startPage_mint_pageText,
 
       "endPage_background": mintEight,
       "endPage_decoration": mint,
@@ -310,9 +326,12 @@ class NuriStudyController extends GetxController {
       "quizStage_pointIndicator": purpleEight,
       "quizStage_chooseBoxBorder": purpleEight,
       "quizStage_chooseBoxCircle": purpleEight,
+      "quizStage_startPageBoxColor": purpleEight,
+      "quizStage_startPageBoxShadow": purpleShadow3,
       "quizStage_chooseBoxTextStyle": stepStudy_studyPage_quizStage_purple_choiceText,
       "quizStage_pointTextStyle": stepStudy_studyPage_quizStage_purple_point,
       "quizStage_circlePointTextStyle": stepStudy_studyPage_quizStage_purple_circleText,
+      "quizStage_startPageTextStyle": stepStudy_studyPage_quizStage_startPage_purple_pageText,
 
       "endPage_background": purpleNine,
       "endPage_decoration": purpleThree,

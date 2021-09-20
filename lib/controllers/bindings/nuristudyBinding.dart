@@ -6,9 +6,9 @@ import 'package:harang/controllers/nuristudyController.dart';
 class NuriStudyBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<NuriStudyController>(NuriStudyController(), permanent: true);
-
     Get.lazyPut<NuripgController>(() => NuripgController());
     Get.lazyPut(() => Dio());
+
+    Get.put<NuriStudyController>(NuriStudyController(), permanent: true);
   }
 }

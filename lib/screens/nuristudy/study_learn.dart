@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
+import 'package:harang/screens/nuristudy/study_main.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -37,7 +40,7 @@ class StudyLearn extends GetView<NuriStudyController> {
     colorMap = controller.colorMap;
     pageNum = controller.pageNum;
     pageAmount = controller.chapterContent[chapterNum][stageNum]["contents"]["pageAmount"];
-    pageKind = controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["type"];
+    pageKind = controller.pageKind;
     point = controller.chapterContent[chapterNum][stageNum]["point"];
 
 
@@ -76,6 +79,9 @@ class StudyLearn extends GetView<NuriStudyController> {
           controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["choiceList"],
           point
       );
+    } else if (pageKind == "quizStart") {
+      quizStagePlusPoint = controller.chapterContent[chapterNum][stageNum]["contents"][(pageNum+1).toString()]["plusPoint"];
+      result = quizStageStartPage();
     } else if (pageKind == "code") {
       result = codeStageTemplate(
           context
@@ -220,6 +226,169 @@ class StudyLearn extends GetView<NuriStudyController> {
     );
   }
 
+  quizStageStartPage() {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    colorMap[color]["quizStage_topBackgroundGradient1"],
+                    colorMap[color]["quizStage_topBackgroundGradient2"],
+                  ]
+              )
+          ),
+          width: _width,
+          height: _height,
+        ),
+        Positioned(
+          top: _height * 0.25,
+          child: ClipPath(
+            clipper: quizStageBottomDesignPainter(),
+            child: Container(
+              height: _height,
+              width: _width,
+              decoration: BoxDecoration(color: colorMap[color]["quizStage_background"]),
+            ),
+          ),
+        ),
+        Container(
+            height: _height * 0.475,
+            width: _width * 0.88,
+            decoration: BoxDecoration(
+              color: controller.colorMap[color]["endPage_boxColor"],
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: controller.colorMap[color]["quizStage_startPageBoxShadow"],
+                  offset: Offset(-8, 20),
+                  blurRadius: 30,
+                )
+              ],
+            ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(height: _height * 0.03),
+                    Container(
+                        width: _width * 0.14,
+                        height: _height * 0.0325,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: controller.colorMap[color]["stageBox"],
+                        ),
+                        child: Center(
+                          child: Text(
+                            "$stageNum/$stageAmount",
+                            style: stepStudy_startPage_stageNum,
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                    ),
+                    SizedBox(height: _height * 0.015),
+                    Text(
+                      controller.stageName,
+                      style: controller.colorMap[color]["endPage_titleStyle"],
+                    ),
+                    SizedBox(height: _height * 0.05),
+                    Image.asset(
+                      'assets/images/studyNuri/gameIcon_$color.png',
+                      width: _width * 0.3,
+                    ),
+                    Text(
+                      "오늘 배운 내용을\n퀴즈로 재밌게 복습해봐요!",
+                      textAlign: TextAlign.center,
+                      style: controller.colorMap[color]["quizStage_startPageTextStyle"],
+                    )
+                  ],
+                ),
+                Positioned(
+                  top: _height * 0.1425,
+                  left: _width * 0.64,
+                  child: Container(
+                      width: _width * 0.18,
+                      height: _height * 0.04,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: controller.colorMap[color]["quizStage_startPageBoxColor"],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: _width * 0.055,
+                            height: _width * 0.055,
+                            margin: EdgeInsets.only(left: _width * 0.015, right: _width * 0.0175),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/images/studyNuri/endPage_pointStar.svg",
+                                  color: controller.colorMap[color]["endPage_pointCircle"],
+                                  fit: BoxFit.contain,
+                                  width: _width * 0.035,
+                                )
+                              ],
+                            ),
+                          ),
+                          Text(
+                            "+$quizStagePlusPoint",
+                            style: stepStudy_studyPage_quizStage_startPage_pointText
+                          )
+                        ],
+                      )
+                  ),
+                ),
+                Positioned(
+                    top: _height * 0.36,
+                    left: _width * 0.68,
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.goNextPage(pageAmount);
+                      },
+                      child: Container(
+                        width: _width * 0.16,
+                        height: _width * 0.16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: colorMap[color]["textStage_nextBtnShadow"],
+                              offset: Offset(-4, 8),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/studyNuri/nextPageBtnArrow.png',
+                              color: colorMap[color]["textStage_nextBtnArrow"],
+                              width: _width * 0.09,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                )
+              ],
+            )
+        ),
+      ],
+    );
+  }
+
   quizStageTemplate(String question, Map choiceList, int point) {
     Map quizStageChooseBox = {
       "default": {
@@ -296,7 +465,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                     top: _height * 0.02,
                     left: _width * 0.05,
                     child: Text(
-                      "${quizStagePlusPoint} 포인트",
+                      "$quizStagePlusPoint 포인트",
                       style: colorMap[color]["quizStage_pointTextStyle"],
                       textAlign: TextAlign.center,
                     ),
@@ -432,6 +601,8 @@ class StudyLearn extends GetView<NuriStudyController> {
   }
 
   codeStageTemplate(BuildContext context) {
+    Get.lazyPut(() => Dio());
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -487,7 +658,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                       width: _width * 0.875,
                       child: GetBuilder<NuripgController> (
                         init: NuripgController(),
-                        builder: (nuriPgController) => NuriPlayGround().codeWriteUI(context, nuriPgController, controller, color, "stepStudy"),
+                        builder: (nuriPgController) =>  NuriPlayGround().codeWriteUI(context, nuriPgController, controller, color, "stepStudy"),
                       ),
                     ),
                   )
