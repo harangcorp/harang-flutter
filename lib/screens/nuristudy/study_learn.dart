@@ -43,15 +43,28 @@ class StudyLearn extends GetView<NuriStudyController> {
 
     var result = Stack();
     if (pageKind == "text") {
+      TextStyle contentTextStyle = TextStyle(
+          fontSize: (_width * 0.0215) + (_height * 0.01), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
+
       result = textStageTemplate(
-        Column(
-          children: [
-            Text(
-              (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
-              style: colorMap[color]["textStage_contentTextStyle"],
-            ),
-          ],
-        ),
+          Container(
+              width: _width,
+              height: _height * 0.42,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
+                        style: contentTextStyle,
+                      ),
+                    ),
+                  )
+                ],
+              )
+          )
       );
     } else if (pageKind == "quiz") {
       quizStagePlusPoint = controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["plusPoint"];
@@ -76,7 +89,7 @@ class StudyLearn extends GetView<NuriStudyController> {
     );
   }
 
-  textStageTemplate(Column educationContent) {
+  textStageTemplate(Container educationContent) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -157,7 +170,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                           alignment: Alignment.topCenter,
                           children: [
                             Positioned(
-                              top: _height * 0.05,
+                              top: _height * 0.03,
                               child: educationContent,
                             ),
                             Positioned(

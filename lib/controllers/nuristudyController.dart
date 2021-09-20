@@ -247,7 +247,7 @@ class NuriStudyController extends GetxController {
       "textStage_titleStyle": stepStudy_studyPage_textStage_mint_title,
       "textStage_contentBox": mintTwo,
       "textStage_contentBoxShadow": mintThree_shadow,
-      "textStage_contentTextStyle": stepStudy_studyPage_textStage_mint_contentDefault,
+      "textStage_contentTextColor": mintFour,
       "textStage_nextBtnArrow": mintThree,
       "textStage_nextBtnShadow": mintThree_shadow,
 
@@ -299,7 +299,7 @@ class NuriStudyController extends GetxController {
       "textStage_titleStyle": stepStudy_studyPage_textStage_purple_title,
       "textStage_contentBox": purpleTen,
       "textStage_contentBoxShadow": purpleSeven_shadow,
-      "textStage_contentTextStyle": stepStudy_studyPage_textStage_purple_contentDefault,
+      "textStage_contentTextColor": nuriGrammar,
       "textStage_nextBtnArrow": purpleSeven,
       "textStage_nextBtnShadow": purpleSeven_shadow,
 
@@ -351,7 +351,7 @@ class NuriStudyController extends GetxController {
       "textStage_titleStyle": stepStudy_studyPage_textStage_pink_title,
       "textStage_contentBox": pinkOne,
       "textStage_contentBoxShadow": pinkShadowThree,
-      "textStage_contentTextStyle": stepStudy_studyPage_textStage_pink_contentDefault,
+      "textStage_contentTextColor": nuriPracticalApplication,
       "textStage_nextBtnArrow": nuriPracticalApplication,
       "textStage_nextBtnShadow": pinkShadowTwo,
 

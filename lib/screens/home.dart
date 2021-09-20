@@ -225,7 +225,17 @@ class Home extends GetWidget<AuthController> {
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: IconButton(
-                    onPressed: () => controller.signOut(),
+                    onPressed: () {
+                      Get.defaultDialog(
+                          title: '로그아웃 하시겠어요?',
+                          middleText: "현재 로그인된 계정은 ${controller.user!.email} 입니다.",
+                          textConfirm: "네",
+                          textCancel: "아니요",
+                          confirmTextColor: Colors.white,
+                          onConfirm: () => controller.signOut(),
+                          onCancel: () => Get.back()
+                      );
+                    },
                     icon: Icon(
                       Icons.logout_outlined,
                       size: 30,
