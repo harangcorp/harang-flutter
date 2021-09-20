@@ -47,7 +47,7 @@ class StudyLearn extends GetView<NuriStudyController> {
     var result = Stack();
     if (pageKind == "text") {
       TextStyle contentTextStyle = TextStyle(
-          fontSize: (_width * 0.0215) + (_height * 0.01), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
+          fontSize: (_width * 0.036), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
 
       result = textStageTemplate(
           Container(
