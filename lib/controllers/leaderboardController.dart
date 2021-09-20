@@ -16,6 +16,7 @@ class LeaderBoardController extends GetxController {
   Rx<String> name = ''.obs;
   RxList<RankingModel> rankingData = RxList.empty(growable: true);
   Rx<int> progess_percent = 0.obs;
+  Rx<String> progress_stage = ''.obs;
   Rx<int> rankingListCountNum = 0.obs;
   Rx<int> playerRank = 0.obs;
 
@@ -29,7 +30,7 @@ class LeaderBoardController extends GetxController {
     score.value = _user.score ?? 0;
     name.value = _user.name ?? "이름 없음";
     usage_time = (await UsageApp().getUsageStats());
-    progess_percent.value = await getProgressPercent(_user.stageProgress);
+    progress_stage.value = _user.stageProgress!["requiredStage"];
     // 랭킹 데이터
     rankingData(await Database().getRanking());
     rankingData.forEach((e) {
@@ -45,6 +46,7 @@ class LeaderBoardController extends GetxController {
     }
 
     playerRank.value = getPlayerRank();
+    progess_percent.value = await getProgressPercent(_user.stageProgress);
   }
 
   int getPlayerRank() {

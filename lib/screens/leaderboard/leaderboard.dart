@@ -23,11 +23,11 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color(0x3dF8C0FC),
+            Color(0xffF8C0FC),
             Color(0xffF6E1FA),
             Color(0xffF4EBFD),
             Color(0xffEFDEFB),
-            Color(0x3dEDB1F1)
+            Color(0xffEDB1F1)
           ])),
       child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -185,16 +185,32 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                           CircularChartAnnotation>[
                                         CircularChartAnnotation(
                                             widget: Container(
-                                                child: Text(
-                                                    "${controller.progess_percent}%",
-                                                    style: TextStyle(
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      '${controller.progress_stage} 단계', style: TextStyle(
                                                         color:
-                                                            Color(0xffCF50D8),
-                                                        fontSize: 18,
+                                                        Color(0xffCF50D8),
+                                                        fontSize: 9,
                                                         fontFamily:
-                                                            'GmarketSans',
+                                                        'GmarketSans',
                                                         fontWeight:
-                                                            FontWeight.bold))))
+                                                        FontWeight.bold, ),textAlign: TextAlign.center,
+                                                    ),SizedBox(height: 3,),
+                                                    Text(
+                                                        "${controller.progess_percent}%",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color(0xffCF50D8),
+                                                            fontSize: 20,
+                                                            fontFamily:
+                                                                'GmarketSans',
+                                                            fontWeight:
+                                                                FontWeight.bold),textAlign: TextAlign.center),SizedBox(height: 3,),
+                                                  ],
+                                                )))
                                       ], series: <CircularSeries>[
                                         RadialBarSeries<ChartData, String>(
                                           dataSource: [
@@ -391,7 +407,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (!controller.isSelected.value)
-                          Text("이번주 학습량", style: leaderBoard_subtitle),
+                          Text("이번주 학습 ", style: leaderBoard_subtitle),
                         if (!controller.isSelected.value)
                           SizedBox(
                             height: 10,
@@ -431,7 +447,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
 
   BoxDecoration buildBoxDecoration() {
     return BoxDecoration(
-        color: Colors.white.withOpacity(0.4),
+        color: Colors.white.withOpacity(0.6),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: Colors.white.withOpacity(0.4),
