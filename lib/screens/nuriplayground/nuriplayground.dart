@@ -79,7 +79,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "코드",
+                  "코드 입력",
                   style: colorMap[color]["codeBox_subTitleStyle"],
                 ),
 
@@ -178,7 +178,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                       BoxShadow(color: colorMap[color]["codeBox_shadow"], blurRadius: 8)
                     ]),
                 child: Obx(() => SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   child: Text(
                     "${nuriPgController.output}",
                     style: codetext,
@@ -214,7 +214,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
     final width = MediaQuery.of(context).size.width;
 
     TextStyle btnTextStyle = TextStyle(
-        fontSize: width * 0.0425, color: btnTextColor, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+        fontSize: width * 0.04, color: btnTextColor, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
     return GestureDetector(
       onTap: () {

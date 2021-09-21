@@ -247,7 +247,7 @@ class Home extends GetWidget<AuthController> {
                             ),
                             title: Text('로그아웃 하시겠어요?'),
                             titleTextStyle: TextStyle(
-                                fontSize: _width * 0.06, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700),
+                                fontSize: _width * 0.05, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700),
                             content: Text(
                               "현재 로그인된 계정은 \n${controller.user!.email} 입니다.",
                               style: TextStyle(

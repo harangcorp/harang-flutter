@@ -128,7 +128,7 @@ class StudyStart extends GetView<NuriStudyController> {
                       () => GestureDetector(
                         onTap: () {
                           controller.pageNum = 1;
-                          controller.finalProvisionPoint = controller.chapterContent[chapterNum][stageNum]["point"];
+                          controller.finalProvisionPoint.value = (controller.chapterContent[chapterNum][stageNum]["point"]).toInt();
                           controller.pageKind = controller.chapterContent[chapterNum][stageNum]["contents"]["1"]["type"];
                           Get.to(StudyLearn(), transition: Transition.rightToLeft);
                         },

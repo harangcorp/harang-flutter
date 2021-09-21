@@ -141,9 +141,11 @@ class StudyEnd extends GetView<NuriStudyController> {
                               SizedBox(
                                 width: _width * 0.025,
                               ),
-                              Text(
-                                "+${controller.finalProvisionPoint}",
-                                style: controller.colorMap[color]["endPage_pointTextStyle"],
+                              Obx(
+                                  () => Text(
+                                    "+${controller.finalProvisionPoint.value}",
+                                    style: controller.colorMap[color]["endPage_pointTextStyle"],
+                                  )
                               )
                             ],
                           )

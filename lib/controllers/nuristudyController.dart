@@ -20,7 +20,7 @@ class NuriStudyController extends GetxController {
   int pageNum = 1;
   String pageKind = "text";
   String stageName = "";
-  int finalProvisionPoint = 0;
+  RxInt finalProvisionPoint = 0.obs;
 
   Map chapterColor = {};
   Map chapterContent = {};
@@ -38,6 +38,7 @@ class NuriStudyController extends GetxController {
     3: "default",
   }.obs;
   RxInt quizStage_nowPlusPoint = 0.obs;
+  RxBool quizStage_nowGrade = false.obs;
 
   late FToast fToast;
 
@@ -81,12 +82,29 @@ class NuriStudyController extends GetxController {
       Get.back();
       Get.to(StudyLearn(), transition: Transition.rightToLeft);
     } else { //마지막 페이지일 경우
-      await Database().plusUserPoint(finalProvisionPoint);
+      await addPointToPlayer();
       await unlockNextStage();
 
       pageNum = 1;
       Get.to(StudyEnd(), transition: Transition.rightToLeft);
     }
+  }
+
+  addPointToPlayer() async {
+    bool isNotFirstClearStage = false;
+    if (chapterStageAmount[chapter] != stageNum) { //챕터의 마지막 스테이지가 아닐경우
+      isNotFirstClearStage = stageProgress[chapter.toString()][(stageNum+1).toString()] ?? false;
+    } else { //챕터의 마지막 스테이지일 경우
+      if (chapter != 3) {
+        isNotFirstClearStage = stageProgress[(chapter+1).toString()]["1"] ?? false;
+      }
+    }
+
+    if (isNotFirstClearStage) {
+      finalProvisionPoint.value = (finalProvisionPoint - chapterContent[chapter][stageNum]["point"]).toInt();
+    }
+
+    await Database().plusUserPoint(finalProvisionPoint.value);
   }
 
   unlockNextStage() async {
@@ -104,6 +122,8 @@ class NuriStudyController extends GetxController {
   }
 
   Future<void> quizAnswer(bool guessAnswer, int index) async {
+    quizStage_nowGrade.value = true;
+
     int pageAmount = chapterContent[chapter][stageNum]["contents"]["pageAmount"];
 
     if (guessAnswer) {
@@ -130,6 +150,7 @@ class NuriStudyController extends GetxController {
 
             goNextPage(pageAmount);
           }
+          quizStage_nowGrade.value = false;
         }
     );
   }

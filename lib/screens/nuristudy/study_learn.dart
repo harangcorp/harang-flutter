@@ -523,7 +523,9 @@ class StudyLearn extends GetView<NuriStudyController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Obx(() => GestureDetector(
-                              onTap: () => controller.quizAnswer((quizStageAnswer == (index+1)), index),
+                              onTap: () {
+                                if (!controller.quizStage_nowGrade.value) { controller.quizAnswer((quizStageAnswer == (index+1)), index); }
+                              },
                               child: Container(
                                 width: _width * 0.73,
                                 height: _height * 0.0775,
@@ -567,7 +569,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                                       ),
                                     ),
                                     Text(
-                                      choiceList[(index+1).toString()],
+                                      (choiceList[(index+1).toString()] as String).replaceAll("\\n", "\n"),
                                       style: quizStageChooseBox[controller.quizStage_chooseBoxType[index]]["textStyle"],
                                     )
                                   ],
