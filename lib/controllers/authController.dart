@@ -8,6 +8,7 @@ import 'package:harang/models/user.dart';
 import 'package:harang/screens/require_permission.dart';
 import 'package:harang/services/database.dart';
 import 'package:harang/utils/root.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -15,9 +16,14 @@ class AuthController extends GetxController {
 
   User? get user => _firebaseUser.value;
 
+  late bool isFirstOpen;
+  late SharedPreferences sharedPreferences;
+
   @override
   onInit() {
     _firebaseUser.bindStream(_auth.authStateChanges());
+
+    checkFirstOpenPermissionPage();
   }
 
   void createUser(
@@ -28,7 +34,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
 
       writeAccountInfo(_authResult.user?.uid, _authResult.user?.email, name, true);
-      Get.to(RequirePermission());
+      openPermissionPage();
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "회원가입 오류",
@@ -45,7 +51,7 @@ class AuthController extends GetxController {
       Get.find<UserController>().user =
           await Database().getUser(_authResult.user?.uid);
       Get.offAll(Root(),transition: Transition.rightToLeft);
-      Get.to(RequirePermission());
+      openPermissionPage();
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "로그인 오류",
@@ -58,6 +64,9 @@ class AuthController extends GetxController {
   void signOut() async {
     try {
       await _auth.signOut();
+
+      checkFirstOpenPermissionPage();
+
       Get.find<UserController>().clear();
       Get.offAll(Root(), transition: Transition.leftToRight);
     } on FirebaseAuthException catch (e) {
@@ -86,7 +95,7 @@ class AuthController extends GetxController {
 
     writeAccountInfo(_authResult.user?.uid, googleUser?.email, googleUser?.displayName, false);
 
-    Get.to(RequirePermission());
+    openPermissionPage();
 
   }
 
@@ -103,7 +112,7 @@ class AuthController extends GetxController {
 
       writeAccountInfo(_authResult.user?.uid, userData['email'], userData['name'], false);
 
-      Get.to(RequirePermission());
+      openPermissionPage();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'account-exists-with-different-credential':
@@ -153,6 +162,21 @@ class AuthController extends GetxController {
         }
       }
       );
+    }
+  }
+
+  checkFirstOpenPermissionPage() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    bool isFirstOpen = sharedPreferences.getBool('isFirstOpen') ?? true;
+
+    this.isFirstOpen = isFirstOpen;
+  }
+
+  openPermissionPage() async {
+    if (isFirstOpen) {
+      Get.to(RequirePermission());
+      await sharedPreferences.setBool('isFirstOpen', false);
     }
   }
 }

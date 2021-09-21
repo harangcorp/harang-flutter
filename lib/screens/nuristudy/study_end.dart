@@ -65,15 +65,6 @@ class StudyEnd extends GetView<NuriStudyController> {
                           ),
                         )
                       ),
-                      Positioned(
-                        top: _height * 0.308,
-                        left: _width * 0.415,
-                        child: Text(
-                          "결과",
-                          style: controller.colorMap[color]["endPage_resultTextStyle"],
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
                       Column(
                         children: [
                           SizedBox(height: _height * 0.035),
@@ -108,10 +99,23 @@ class StudyEnd extends GetView<NuriStudyController> {
                             style: controller.colorMap[color]["endPage_congratsTextStyle"],
                           ),
                           SizedBox(height: _height * 0.02),
-                          Image.asset(
-                            "assets/images/studyNuri/endPage_textDecoration.png",
-                            color: controller.colorMap[color]["endPage_textDecorationColor"],
-                            width: _width * 0.725,
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/studyNuri/endPage_textDecoration.png",
+                                color: controller.colorMap[color]["endPage_textDecorationColor"],
+                                width: _width * 0.725,
+                              ),
+                              Positioned(
+                                left: _width * 0.34,
+                                child: Text(
+                                  "결과",
+                                  style: controller.colorMap[color]["endPage_resultTextStyle"],
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: _height * 0.025),
                           Row(
