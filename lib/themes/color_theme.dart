@@ -21,6 +21,7 @@ final purpleShadow3 = Color(0x4D685DD6);
 final nuriPlayground = Color(0xff8EF6E4);
 final nuriStudy = Color(0xffD59BF6);
 final hallOfFame = Color(0xffEDB1F1);
+final hallOfFame_shadow = Color(0x80edb1f1);
 
 final worldOfCoding = Color(0xff2CBCA3);
 final nuriGrammar = Color(0xb36260be);

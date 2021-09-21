@@ -8,6 +8,7 @@ import 'package:harang/themes/text_theme.dart';
 //누리 놀이터 페이지
 class NuriPlayGround extends GetWidget<NuripgController> {
   const NuriPlayGround({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +90,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                     colorMap[color]["loadingBtn_shadow"],
                     colorMap[color]["loadingBtn_progressIndicator"]
                 )
-                    : buildCompileButton(context, nuriPgController, nuriStudyController, uiMode, colorMap[color]["compileBtn_background"], compileBtnText, colorMap[color]["compileBtn_textStyle"], colorMap[color]["compileBtn_border"], colorMap[color]["compileBtn_startIconBackground"])),
+                    : buildCompileButton(context, nuriPgController, nuriStudyController, uiMode, colorMap[color]["compileBtn_background"], compileBtnText, colorMap[color]["compileBtn_textColor"], colorMap[color]["compileBtn_border"], colorMap[color]["compileBtn_startIconBackground"])),
               ],
             ),
             Container(
@@ -208,7 +209,13 @@ class NuriPlayGround extends GetWidget<NuripgController> {
   }
 
   GestureDetector buildCompileButton(BuildContext context, NuripgController nuriPgController, NuriStudyController? nuriStudyController, String uiMode,
-      Color backgroundColor, String btnText, TextStyle btnTextStyle, Color borderColor, Color startIconColor) {
+      Color backgroundColor, String btnText, Color btnTextColor, Color borderColor, Color startIconColor) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
+    TextStyle btnTextStyle = TextStyle(
+        fontSize: width * 0.0425, color: btnTextColor, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+
     return GestureDetector(
       onTap: () {
         if (uiMode == "nuriPlayground") {
@@ -236,7 +243,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: 5,
+                width: width * 0.01,
               ),
               Container(
                 child: Icon(
@@ -246,11 +253,12 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                 ),
               ),
               SizedBox(
-                width: 10,
+                width: width * 0.02,
               ),
               Text(
                 btnText,
                 style: btnTextStyle,
+                textAlign: TextAlign.center,
               )
             ],
           ),

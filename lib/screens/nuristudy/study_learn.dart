@@ -47,14 +47,15 @@ class StudyLearn extends GetView<NuriStudyController> {
     var result = Stack();
     if (pageKind == "text") {
       TextStyle contentTextStyle = TextStyle(
-          fontSize: (_width * 0.036), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
+          fontSize: (_width * 0.0375), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
 
       result = textStageTemplate(
           Container(
-              width: _width,
+              width: _width * 0.775,
               height: _height * 0.42,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
@@ -62,7 +63,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                       child: Text(
                         (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
                         style: contentTextStyle,
-                      ),
+                      )
                     ),
                   )
                 ],
@@ -548,7 +549,7 @@ class StudyLearn extends GetView<NuriStudyController> {
                                     Container(
                                       width: _width * 0.09,
                                       height: _width * 0.09,
-                                      margin: EdgeInsets.only(left: _width * 0.035, right: _width * 0.045),
+                                      margin: EdgeInsets.only(left: _width * 0.035, right: _width * 0.025),
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(

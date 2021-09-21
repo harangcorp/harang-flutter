@@ -44,6 +44,7 @@ class NuripgController extends GetxController {
       "compileBtn_border": mint,
       "compileBtn_startIconBackground": mint,
       "compileBtn_textStyle": np_btn_mint,
+      "compileBtn_textColor": Color(0xFF2C2C2C),
     },
     "purple": {
       "codeBox_background": purpleTen,
@@ -57,6 +58,7 @@ class NuripgController extends GetxController {
       "compileBtn_border": emptyColor,
       "compileBtn_startIconBackground": purpleEight,
       "compileBtn_textStyle": np_btn_purple,
+      "compileBtn_textColor": purpleEight,
     },
     "pink": {
       "codeBox_background": pinkOne,
@@ -70,6 +72,7 @@ class NuripgController extends GetxController {
       "compileBtn_border": emptyColor,
       "compileBtn_startIconBackground": pinkTwo,
       "compileBtn_textStyle": np_btn_pink,
+      "compileBtn_textColor": pinkTwo,
     },
   };
 }

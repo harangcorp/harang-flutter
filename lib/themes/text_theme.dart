@@ -9,9 +9,9 @@ final btnText = TextStyle(
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.w700);
 final logoHarang = TextStyle(
-  fontSize: 28,
-  fontWeight: FontWeight.w900,
-  fontFamily: 'NanumSquareRound',
+    fontSize: 28,
+    fontWeight: FontWeight.w900,
+    fontFamily: 'NanumSquareRound',
     color: Color(0xFFC067F3)
 );
 final hintStyle = TextStyle(
@@ -86,33 +86,33 @@ final stepStudyDescriptionStyle_nuriPracticalApplication = TextStyle(
 final hallOfFame_BoxTitleStyle = TextStyle(
     fontSize: 20, color: Color(0xffCF50D8), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w800);
 final hallOfFame_BoxDescriptionStyle = TextStyle(
-    fontSize: 13, color: Color(0xffCF50D8), fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 13, color: Color(0xffCF50D8), fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_BoxProfileImagePointStyle = TextStyle(
-    fontSize: 8, color: Colors.white, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 8, color: Colors.white, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_subBoxRankStyle = TextStyle(
     fontSize: 17, color: Color(0xffCF50D8), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w800);
 final hallOfFame_subBoxNameStyle = TextStyle(
     fontSize: 13, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_subBoxPointStyle = TextStyle(
-    fontSize: 15, color: Colors.black, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 15, color: Colors.black, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_goldMedalNameStyle = TextStyle(
     fontSize: 17, color: goldMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_goldMedalPointStyle = TextStyle(
-    fontSize: 17, color: goldMedal, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 17, color: goldMedal, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_silverMedalNameStyle = TextStyle(
     fontSize: 17, color: silverMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_silverMedalPointStyle = TextStyle(
-    fontSize: 17, color: silverMedal, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 17, color: silverMedal, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_bronzeMedalNameStyle = TextStyle(
     fontSize: 17, color: bronzeMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_bronzeMedalPointStyle = TextStyle(
-    fontSize: 17, color: bronzeMedal, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 17, color: bronzeMedal, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_defaultMedalRankStyle = TextStyle(
     fontSize: 17, color: defaultMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w900);
 final hallOfFame_defaultMedalNameStyle = TextStyle(
     fontSize: 15, color: defaultMedal, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final hallOfFame_defaultMedalPointStyle = TextStyle(
-    fontSize: 15, color: defaultMedal, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 15, color: defaultMedal, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 final stepStudy_startPage_stageNum = TextStyle(
     fontSize: 13, color: Colors.white, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -150,31 +150,31 @@ final stepStudy_startPage_lock_stageName = TextStyle(
 final stepStudy_studyPage_textStage_mint_title = TextStyle(
     fontSize: 21, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_mint_choiceText = TextStyle(
-    fontSize: 18, color: mintThree,  fontWeight: FontWeight.w900);
+    fontSize: 18, color: mintThree, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_startPage_mint_pageText = TextStyle(
     fontSize: 13, color: mintFour, fontWeight: FontWeight.normal);
 final stepStudy_studyPage_quizStage_mint_point = TextStyle(
-    fontSize: 12, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 12, color: mintThree, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_mint_circleText = TextStyle(
-    fontSize: 25, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 25, color: mintThree, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 final stepStudy_studyPage_textStage_purple_title = TextStyle(
     fontSize: 21, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_startPage_purple_pageText = TextStyle(
     fontSize: 13, color: purpleSeven, fontWeight: FontWeight.normal);
 final stepStudy_studyPage_quizStage_purple_choiceText = TextStyle(
-    fontSize: 18, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 18, color: purpleEight, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_purple_point = TextStyle(
-    fontSize: 12, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 12, color: purpleEight, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_purple_circleText = TextStyle(
-    fontSize: 25, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 25, color: purpleEight, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 final stepStudy_studyPage_textStage_pink_title = TextStyle(
     fontSize: 21, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_startPage_pointText = TextStyle(
-    fontSize: 13, color: Colors.white, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 13, color: Colors.white, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_successFail_choiceText = TextStyle(
-    fontSize: 18, color: Colors.white, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 18, color: Colors.white, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final stepStudy_studyPage_quizStage_question = TextStyle(
     fontSize: 18, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
@@ -188,7 +188,7 @@ final stepStudy_endPage_mint_congratsText = TextStyle(
 final stepStudy_endPage_mint_resultText = TextStyle(
     fontSize: 10, color: mintThree, fontWeight: FontWeight.normal);
 final stepStudy_endPage_mint_pointText = TextStyle(
-    fontSize: 20, color: mintThree, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 20, color: mintThree, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 final stepStudy_endPage_purple_title = TextStyle(
     fontSize: 18, color: purpleEight, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -197,7 +197,7 @@ final stepStudy_endPage_purple_congratsText = TextStyle(
 final stepStudy_endPage_purple_resultText = TextStyle(
     fontSize: 10, color: purpleSeven, fontWeight: FontWeight.normal);
 final stepStudy_endPage_purple_pointText = TextStyle(
-    fontSize: 20, color: purpleEight, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 20, color: purpleEight, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 final stepStudy_endPage_pink_title = TextStyle(
     fontSize: 18, color: pinkTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
@@ -206,14 +206,14 @@ final stepStudy_endPage_pink_congratsText = TextStyle(
 final stepStudy_endPage_pink_resultText = TextStyle(
     fontSize: 10, color: nuriPracticalApplication, fontWeight: FontWeight.normal);
 final stepStudy_endPage_pink_pointText = TextStyle(
-    fontSize: 20, color: nuriPracticalApplication, fontFamily: 'GmartketSans', fontWeight: FontWeight.w900);
+    fontSize: 20, color: nuriPracticalApplication, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 
 
 final leaderBoard_subtitle = TextStyle(
-  color: black,
-  fontFamily: 'NotoSansKR',
-  fontSize: 15,
-  fontWeight: FontWeight.bold
+    color: black,
+    fontFamily: 'NotoSansKR',
+    fontSize: 15,
+    fontWeight: FontWeight.bold
 );
 final ranking_tiny_name = TextStyle(
   color: black,
@@ -223,10 +223,10 @@ final ranking_tiny_name = TextStyle(
 );
 
 final ranking_tiny_number = TextStyle(
-  color: black,
-  fontFamily: 'GmarketSans',
-  fontSize: 12,
-  fontWeight: FontWeight.bold
+    color: black,
+    fontFamily: 'GmarketSans',
+    fontSize: 12,
+    fontWeight: FontWeight.bold
 );
 
 final ranking_large_name = TextStyle(
@@ -251,7 +251,7 @@ final ranking_large_score = TextStyle(
 );
 
 final  ranking_large_title = TextStyle(
-  color: black,
+    color: black,
     fontFamily: 'NotoSansKR',
     fontSize: 18,
     fontWeight: FontWeight.bold
@@ -264,7 +264,7 @@ final ranking_first_name = TextStyle(
   fontFamily:'NotoSansKR',
 );
 final ranking_first_score = TextStyle(
-  color: Color(0xffFFAC3E),
+    color: Color(0xffFFAC3E),
 
     fontFamily: 'GmarketSans',
     fontSize: 17,
@@ -279,7 +279,7 @@ final ranking_second_name = TextStyle(
 
 );
 final ranking_second_score = TextStyle(
-  color: Color(0xff898989),
+    color: Color(0xff898989),
     fontFamily: 'GmarketSans',
     fontSize: 17,
     fontWeight: FontWeight.bold
@@ -290,12 +290,22 @@ final ranking_third_name = TextStyle(
   color: Color(0xffCE7430),fontSize: 15,
   fontWeight: FontWeight.bold,
   fontFamily:'NotoSansKR',
-
 );
-final ranking_third_score = TextStyle(
-  color: Color(0xffCE7430),
 
+final ranking_third_score = TextStyle(
+    color: Color(0xffCE7430),
     fontFamily: 'GmarketSans',
     fontSize: 17,
     fontWeight: FontWeight.bold
 );
+
+final permissionPage_title = TextStyle(
+    fontSize: 24, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final permissionPage_description = TextStyle(
+    fontSize: 14, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+final permissionPage_boxTitle = TextStyle(
+    fontSize: 18, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final permissionPage_boxDescription = TextStyle(
+    fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+final permissionPage_buttonText = TextStyle(
+    fontSize: 20, color: purpleFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);

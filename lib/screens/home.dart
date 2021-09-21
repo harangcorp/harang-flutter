@@ -23,7 +23,7 @@ class Home extends GetWidget<AuthController> {
     final _width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: Stack(
-      children: [
+          children: [
         Positioned(
           top: -_height * 0.05,
           left: -_height * 0.2,
@@ -94,18 +94,22 @@ class Home extends GetWidget<AuthController> {
                               BoxShadow(color: Colors.white, blurRadius: 8)
                             ]),
                       ),
+                      SizedBox(height: _height * 0.008),
                       Text(
                         "단계별 학습하기",
                         style: TextStyle(
-                            color: Color(0xFF0D7462),
                             fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                            color: mintFour,
+                            fontFamily: 'NotoSansKR',
+                            fontWeight: FontWeight.w700),
                       ),
+                      SizedBox(height: _height * 0.01),
                       Text(
                         "차근차근 알려드립니다!\n당신도 곧 누리 마스터가 될 거예요.",
                         style: TextStyle(
-                          color: Color(0xFF2CBCA3),
+                          color: mintThree,
                           fontSize: 12,
+                          fontFamily: 'NotoSansKR',
                           fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
@@ -142,18 +146,22 @@ class Home extends GetWidget<AuthController> {
                               BoxShadow(color: Colors.white, blurRadius: 8)
                             ]),
                       ),
+                      SizedBox(height: _height * 0.008),
                       Text(
                         "누리 놀이터",
                         style: TextStyle(
                             color: Color(0xFF2E2BAB),
                             fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: 'NotoSansKR',
+                            fontWeight: FontWeight.w700),
                       ),
+                      SizedBox(height: _height * 0.01),
                       Text(
                         "상상하고 이뤄라! 누리 놀이터에서!\n멋진 아이디어를 마음껏 펼칠 공간을 소개합니다.",
                         style: TextStyle(
                           color: Color(0xFF6260BE),
                           fontSize: 12,
+                          fontFamily: 'NotoSansKR',
                           fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
@@ -193,18 +201,22 @@ class Home extends GetWidget<AuthController> {
                               BoxShadow(color: Colors.white, blurRadius: 8)
                             ]),
                       ),
+                      SizedBox(height: _height * 0.008),
                       Text(
                         "나의 학습방",
                         style: TextStyle(
                             color: Color(0xFF69149A),
                             fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: 'NotoSansKR',
+                            fontWeight: FontWeight.w700),
                       ),
+                      SizedBox(height: _height * 0.01),
                       Text(
                         "자신의 실력을 체크해보세요!\n점점 더 나아가는 발판이 될 거예요",
                         style: TextStyle(
                           color: Color(0xFF9F5BC6),
                           fontSize: 12,
+                          fontFamily: 'NotoSansKR',
                           fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
@@ -226,14 +238,35 @@ class Home extends GetWidget<AuthController> {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: IconButton(
                     onPressed: () {
-                      Get.defaultDialog(
-                          title: '로그아웃 하시겠어요?',
-                          middleText: "현재 로그인된 계정은 ${controller.user!.email} 입니다.",
-                          textConfirm: "네",
-                          textCancel: "아니요",
-                          confirmTextColor: Colors.white,
-                          onConfirm: () => controller.signOut(),
-                          onCancel: () => Get.back()
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)
+                            ),
+                            title: Text('로그아웃 하시겠어요?'),
+                            titleTextStyle: TextStyle(
+                                fontSize: _width * 0.06, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700),
+                            content: Text(
+                              "현재 로그인된 계정은 \n${controller.user!.email} 입니다.",
+                              style: TextStyle(
+                                fontSize: _width * 0.035, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500),
+                            ),
+                            actions: <Widget>[
+                              FlatButton(
+                                minWidth: _width * 0.1,
+                                child: Text("네", style: TextStyle(color: Colors.lightBlue)),
+                                onPressed: () => controller.signOut(),
+                              ),
+                              FlatButton(
+                                minWidth: _width * 0.1,
+                                child: Text("아니오", style: TextStyle(color: Colors.lightBlue)),
+                                onPressed: () => Get.back(),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     },
                     icon: Icon(

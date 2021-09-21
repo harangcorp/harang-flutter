@@ -213,10 +213,11 @@ class StudyMain extends GetView<NuriStudyController> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Stack(
+            alignment: Alignment.center,
             children: [
               Positioned(
                   top: -15,
-                  right: _width * 0.564,
+                  left: _width * 0.035,
                   child: Container(
                       margin: EdgeInsets.only(right: 40, top: 30),
                       width: 47,

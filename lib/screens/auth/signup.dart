@@ -32,10 +32,10 @@ class Signup extends GetView<AuthController> {
                   image: new AssetImage('assets/images/logo.png'),
                   fit: BoxFit.fitHeight,
                 ))),
-            textFormBox(nameController, "이름"),
-            textFormBox(emailController, "이메일"),
-            textFormBox(passwordController, "비밀번호", true),
-            textFormBox(passwordCheckController, "비밀번호 확인",true),
+            textFormBox(nameController, "이름을"),
+            textFormBox(emailController, "이메일을"),
+            textFormBox(passwordController, "비밀번호를", true),
+            textFormBox(passwordCheckController, "비밀번호 확인을",true),
             Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
@@ -76,7 +76,7 @@ class Signup extends GetView<AuthController> {
         Padding(
           padding: const EdgeInsets.only(left: 50.0, top: 20, bottom: 5),
           child: Text(
-            "${title}",
+            "${title.substring(0, (title.length-1))}",
             style: signuptext,
           ),
         ),
@@ -93,7 +93,7 @@ class Signup extends GetView<AuthController> {
             controller: tc,
             style: TextStyle(color: pinkFour),
             decoration: InputDecoration(
-              hintText: "${title}을(를) 입력해주세요.",
+              hintText: "${title} 입력해주세요.",
               hintStyle: signuphintStyle,
               border: InputBorder.none,
               focusColor: Colors.amber,
