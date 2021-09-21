@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
-import 'package:harang/screens/nuristudy/study_main.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';

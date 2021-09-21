@@ -86,7 +86,7 @@ final stepStudyDescriptionStyle_nuriPracticalApplication = TextStyle(
 final hallOfFame_BoxTitleStyle = TextStyle(
     fontSize: 20, color: Color(0xffCF50D8), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w800);
 final hallOfFame_BoxDescriptionStyle = TextStyle(
-    fontSize: 13, color: Color(0xffCF50D8), fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
+    fontSize: 12, color: Color(0xffCF50D8), fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_BoxProfileImagePointStyle = TextStyle(
     fontSize: 8, color: Colors.white, fontFamily: 'GmarketSans', fontWeight: FontWeight.w700);
 final hallOfFame_subBoxRankStyle = TextStyle(

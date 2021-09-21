@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/leaderboardController.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:harang/widgets/weekly_chart.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 // 명예의 전당 페이지
 
@@ -57,22 +58,15 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                       blurRadius: 20)
                                 ])
                           : BoxDecoration(
-                              color: Colors.white.withOpacity(0.7),
+                              color: hallOfFame,
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.7),
-                                width: 1,
                               ),
-                              boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0xffEDB1F1).withOpacity(0.5),
-                                      offset: Offset(-4, 4),
-                                      blurRadius: 20)
-                                ]),
-                      height: height * 0.07,
+                      height: controller.isSelected.value
+                          ? height * 0.07
+                          : height * 0.135,
                       width: controller.isSelected.value
                           ? width * 0.69
-                          : width * 0.80,
+                          : width * 0.762,
                       child: controller.isSelected.value
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -120,34 +114,97 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: Color(0xffCF50D8),
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 18,
-                                      backgroundImage: ExactAssetImage(
-                                          controller.profile_image),
+                                  Container(
+                                    width: width * 0.17,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                        controller.profile_image
                                     ),
                                   ),
-                                  Center(
-                                    child: Text(
-                                      controller.name.value,
-                                      style: TextStyle(
-                                          color: black,
-                                          fontFamily: 'NotoSans',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          controller.name.value,
+                                          style: hallOfFame_BoxTitleStyle
+                                      ),
+                                      SizedBox(height: height * 0.016),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container ( //현재 레벨
+                                            width: width * 0.23,
+                                            height: height * 0.031,
+                                            margin: EdgeInsets.only(right: width * 0.025),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(30),
+                                              color: Colors.white,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Container (
+                                                  width: width * 0.0475,
+                                                  alignment: Alignment.center,
+                                                  margin: EdgeInsets.only(left: width * 0.008, right: width * 0.02),
+                                                  decoration: BoxDecoration(
+                                                    color: purpleFour,
+                                                    shape: BoxShape.circle
+                                                  ),
+                                                  child: Image.asset(
+                                                    "assets/images/level.png",
+                                                    width: 10,
+                                                    height: 10,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${controller.progress_stage.value} 단계",
+                                                  style: hallOfFame_BoxDescriptionStyle,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Container ( //포인트
+                                            width: width * 0.2,
+                                            height: height * 0.031,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(30),
+                                              color: Colors.white,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Container (
+                                                    width: width * 0.0475,
+                                                    alignment: Alignment.center,
+                                                    margin: EdgeInsets.only(left: width * 0.008, right: (width * 0.055) - (controller.score.value.toString().length * 2.4)),
+                                                    decoration: BoxDecoration(
+                                                        color: purpleFour,
+                                                        shape: BoxShape.circle
+                                                    ),
+                                                    child: SvgPicture.asset(
+                                                      "assets/images/studyNuri/endPage_pointStar.svg",
+                                                      fit: BoxFit.contain,
+                                                      width: width * 0.035,
+                                                    )
+                                                ),
+                                                Text(
+                                                  "${controller.score.value}",
+                                                  style: hallOfFame_BoxDescriptionStyle,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            )
+                                          )
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    "${controller.score.value}",
-                                    style: TextStyle(
-                                        color: Color(0xffCF50D8),
-                                        fontFamily: 'GmarketSans',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
-                                  )
                                 ],
                               ),
                             ),
@@ -181,61 +238,43 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                                       height: controller.isSelected.value
                                           ? 0
                                           : width * 0.43,
-                                      child: SfCircularChart(annotations: <
-                                          CircularChartAnnotation>[
-                                        CircularChartAnnotation(
-                                            widget: Container(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      '${controller.progress_stage} 단계', style: TextStyle(
-                                                        color:
-                                                        Color(0xffCF50D8),
-                                                        fontSize: 9,
-                                                        fontFamily:
-                                                        'GmarketSans',
-                                                        fontWeight:
-                                                        FontWeight.bold, ),textAlign: TextAlign.center,
-                                                    ),SizedBox(height: 3,),
-                                                    Text(
-                                                        "${controller.progess_percent}%",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color(0xffCF50D8),
-                                                            fontSize: 20,
-                                                            fontFamily:
-                                                                'GmarketSans',
-                                                            fontWeight:
-                                                                FontWeight.bold),textAlign: TextAlign.center),SizedBox(height: 3,),
-                                                  ],
-                                                )))
-                                      ], series: <CircularSeries>[
-                                        RadialBarSeries<ChartData, String>(
-                                          dataSource: [
-                                            ChartData(
-                                                'studypercent',
-                                                controller.progess_percent.value
-                                                    .toDouble())
-                                          ],
-                                          maximumValue: 100,
-                                          xValueMapper: (ChartData data, _) =>
-                                              data.x,
-                                          yValueMapper: (ChartData data, _) =>
-                                              data.y,
-                                          trackColor: Color(0xffF8C0FC),
-
-                                          pointColorMapper: (datum, index) =>
-                                              Color(0xffCF50D8),
-                                          // Radius of doughnut
-                                          selectionBehavior: SelectionBehavior(
-                                              unselectedColor:
-                                                  Color(0xffF8C0FC)),
-                                          cornerStyle: CornerStyle.bothCurve,
-                                          innerRadius: '80%',
-                                        )
-                                      ]),
+                                      child: CircularPercentIndicator(
+                                          radius: width * 0.3,
+                                          lineWidth: width * 0.03,
+                                          animation: true,
+                                          percent: (controller.progess_percent.value / 100),
+                                          circularStrokeCap: CircularStrokeCap.round,
+                                          backgroundColor: Color(0xffF8C0FC),
+                                          progressColor: Color(0xffCF50D8),
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '마스터까지',
+                                                style: TextStyle(
+                                                  color: Color(0xffCF50D8),
+                                                  fontSize: 9,
+                                                  fontFamily: 'GmarketSans',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              SizedBox(height: 3),
+                                              Text(
+                                                  "${controller.progess_percent}%",
+                                                  style: TextStyle(
+                                                      color: Color(0xffCF50D8),
+                                                      fontSize: 20,
+                                                      fontFamily: 'GmarketSans',
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                  textAlign: TextAlign.center
+                                              ),
+                                              SizedBox(height: 3),
+                                            ],
+                                          )
+                                      ),
                                     )
                                   ],
                                 ),
@@ -407,7 +446,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (!controller.isSelected.value)
-                          Text("이번주 학습 ", style: leaderBoard_subtitle),
+                          Text("이번주 학습 시간", style: leaderBoard_subtitle),
                         if (!controller.isSelected.value)
                           SizedBox(
                             height: 10,
