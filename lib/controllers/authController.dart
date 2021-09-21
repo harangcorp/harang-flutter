@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:harang/controllers/userController.dart';
 import 'package:harang/models/user.dart';
+import 'package:harang/screens/require_permission.dart';
 import 'package:harang/services/database.dart';
 import 'package:harang/utils/root.dart';
 
@@ -27,6 +28,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
 
       writeAccountInfo(_authResult.user?.uid, _authResult.user?.email, name, true);
+      Get.to(RequirePermission());
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "회원가입 오류",
@@ -43,6 +45,7 @@ class AuthController extends GetxController {
       Get.find<UserController>().user =
           await Database().getUser(_authResult.user?.uid);
       Get.offAll(Root(),transition: Transition.rightToLeft);
+      Get.to(RequirePermission());
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "로그인 오류",
@@ -83,7 +86,7 @@ class AuthController extends GetxController {
 
     writeAccountInfo(_authResult.user?.uid, googleUser?.email, googleUser?.displayName, false);
 
-    // Once signed in, return the UserCredential
+    Get.to(RequirePermission());
 
   }
 
@@ -100,6 +103,7 @@ class AuthController extends GetxController {
 
       writeAccountInfo(_authResult.user?.uid, userData['email'], userData['name'], false);
 
+      Get.to(RequirePermission());
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'account-exists-with-different-credential':
@@ -133,7 +137,6 @@ class AuthController extends GetxController {
     if (isEmailSignUp) {
       if (await Database().createNewUser(_user)) {
         Get.find<UserController>().user = _user;
-        Get.offAll(Root());
       }
     } else {
       FirebaseFirestore.instance

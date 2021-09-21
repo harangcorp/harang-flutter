@@ -37,6 +37,7 @@ dependencies:
 
   configurable_expansion_tile_null_safety: ^2.0.0
   fluttertoast: ^8.0.8
+  flutter_switch: ^0.3.2
   percent_indicator: ^3.0.1
   syncfusion_flutter_charts: ^19.2.59
   fl_chart: ^0.40.0
@@ -96,7 +97,7 @@ flutter:
     - family: GmarketSans
       fonts:
         - asset: assets/fonts/GmarketSans-Bold.ttf
-          weight: 900
+          weight: 700
         - asset: assets/fonts/GmarketSans-Medium.ttf
           weight: 500
         - asset: assets/fonts/GmarketSans-Light.ttf
