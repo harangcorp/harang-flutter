@@ -146,6 +146,8 @@ final stepStudy_startPage_pink_stageName = TextStyle(
 
 final stepStudy_startPage_lock_stageName = TextStyle(
     fontSize: 12, color: grayTwo, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+final stepStudy_startPage_develop_stageName = TextStyle(
+    fontSize: 12.5, color: Color(0xD1000000), fontFamily: 'NotoSansKR', fontWeight: FontWeight.w900);
 
 final stepStudy_studyPage_textStage_mint_title = TextStyle(
     fontSize: 21, color: mintFour, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);

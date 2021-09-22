@@ -65,6 +65,12 @@ class LeaderBoardController extends GetxController {
     for(var i=1; i<=3; i++){
       LectureContent lectureContent =  await Database().getLectureContent(i);
       _chapterStageAmount += lectureContent.chapterStageAmount!;
+
+      for (int j=1; j<=lectureContent.chapterStageAmount!; j++) {
+        if (lectureContent.chapterContent![j]["isDevelop"] ?? false) {
+          _chapterStageAmount--;
+        }
+      }
     }
 
     int true_cnt = 0;
@@ -78,6 +84,6 @@ class LeaderBoardController extends GetxController {
         }
       }
     });
-    return (true_cnt / _chapterStageAmount * 100 ).toInt();
+    return (true_cnt / _chapterStageAmount * 100).toInt();
   }
 }

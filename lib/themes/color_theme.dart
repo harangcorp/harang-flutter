@@ -57,6 +57,7 @@ final redOne_shadowTwo = Color(0xB3FF5657);
 
 final gray = Color(0xFFE9ECEF);
 final grayTwo = Color(0xFFADB5BD);
+final grayThree = Color(0xFF949A9C);
 
 final goldMedal = Color(0xFFFFAC3E);
 final silverMedal = Color(0xFF898989);

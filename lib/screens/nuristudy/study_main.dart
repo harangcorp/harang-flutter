@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:configurable_expansion_tile_null_safety/configurable_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -91,6 +93,10 @@ class StudyMain extends GetView<NuriStudyController> {
                                                 boxMode = "unlock";
                                               }
                                             }
+
+                                            if (controller.chapterContent[(chapterIndex+1)][(stageIndex + 1)]["isDevelop"] ?? false) {
+                                              boxMode = "develop";
+                                            }
                                             return Column(
                                               children: [
                                                 SizedBox(height: _height * 0.01),
@@ -105,15 +111,27 @@ class StudyMain extends GetView<NuriStudyController> {
                                                         controller.stageName = controller.chapterContent[chapterNum][stageNum]["title"];
                                                         Get.to(StudyStart(), transition: Transition.rightToLeft);
                                                       } else {
-                                                        Fluttertoast.showToast(
-                                                            msg: "스테이지가 잠겨있습니다.",
-                                                            toastLength: Toast.LENGTH_SHORT,
-                                                            gravity: ToastGravity.BOTTOM,
-                                                            timeInSecForIosWeb: 1,
-                                                            backgroundColor: Color(0xE6FFFFFF),
-                                                            textColor: Colors.black,
-                                                            fontSize: 16.0
-                                                        );
+                                                        if (controller.chapterContent[(chapterIndex+1)][(stageIndex + 1)]["isDevelop"] ?? false) {
+                                                          Fluttertoast.showToast(
+                                                              msg: "스테이지가 현재 개발 중입니다. \n다른 스테이지를 이용해주세요.",
+                                                              toastLength: Toast.LENGTH_SHORT,
+                                                              gravity: ToastGravity.BOTTOM,
+                                                              timeInSecForIosWeb: 1,
+                                                              backgroundColor: Color(0xE6FFFFFF),
+                                                              textColor: Colors.black,
+                                                              fontSize: 16.0
+                                                          );
+                                                        } else {
+                                                          Fluttertoast.showToast(
+                                                              msg: "스테이지가 잠겨있습니다.",
+                                                              toastLength: Toast.LENGTH_SHORT,
+                                                              gravity: ToastGravity.BOTTOM,
+                                                              timeInSecForIosWeb: 1,
+                                                              backgroundColor: Color(0xE6FFFFFF),
+                                                              textColor: Colors.black,
+                                                              fontSize: 16.0
+                                                          );
+                                                        }
                                                       }
                                                     },
                                                     child: stageBox(_height, _width, controller.chapterColor[chapterIndex+1], boxMode, controller.chapterContent[chapterIndex+1][stageIndex+1]["title"])
@@ -133,7 +151,7 @@ class StudyMain extends GetView<NuriStudyController> {
                     } else if (snapshot.hasError) { //데이터를 정상적으로 불러오지 못했을 때
                       return Column(
                         children: [
-                          Text("데이터를 정상적으로 불러오지 못했습니다. \n다시 시도해 주세요.")
+                          Text("데이터를 정상적으로 불러오지 못했습니다. \n다시 시도해 주세요.", textAlign: TextAlign.center)
                         ],
                       );
                     } else { //데이터를 불러오는 중
@@ -293,6 +311,8 @@ class StudyMain extends GetView<NuriStudyController> {
     TextStyle stageNameStyle = TextStyle();
     SizedBox lockIconBox = SizedBox();
     Color playBtnColor = Colors.white;
+    ImageFilter imageFilter = ImageFilter.blur();
+    Text developText = Text("");
 
     if (boxMode == "lock") {
       boxDecoration = BoxDecoration(
@@ -308,6 +328,25 @@ class StudyMain extends GetView<NuriStudyController> {
         ),
       );
       playBtnColor = grayTwo;
+    } else if (boxMode == "develop") {
+      boxDecoration = BoxDecoration(
+        color: gray,
+        borderRadius: BorderRadius.circular(30),
+      );
+      stageNameStyle = stepStudy_startPage_lock_stageName;
+      lockIconBox = SizedBox(
+        child: Icon(
+          Icons.lock,
+          size: _width * 0.05,
+          color: grayTwo,
+        ),
+      );
+      playBtnColor = grayTwo;
+      imageFilter = ImageFilter.blur(sigmaX: 1.75, sigmaY: 1.75);
+      developText = Text(
+        "개발중입니다, 조금만 기다려 주세요!",
+        style: stepStudy_startPage_develop_stageName,
+      );
     } else if (boxMode == "unlock") {
       boxDecoration = BoxDecoration(
         color: controller.colorMap[color]["stageBoxInList_background"],
@@ -342,51 +381,60 @@ class StudyMain extends GetView<NuriStudyController> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  stageName,
-                  style: stageNameStyle,
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: _width * 0.04,
-                ),
-                lockIconBox
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: _width * 0.06,
-                  height: _width * 0.06,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: playBtnColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 3,
+            ImageFiltered(
+              imageFilter: imageFilter,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        stageName,
+                        style: stageNameStyle,
                       )
                     ],
                   ),
-                  child: Icon(
-                    Icons.play_arrow,
-                    size: _width * 0.045,
-                    color: Colors.white,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: _width * 0.04,
+                      ),
+                      lockIconBox
+                    ],
                   ),
-                ),
-                SizedBox(
-                  width: _width * 0.03,
-                )
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: _width * 0.06,
+                        height: _width * 0.06,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: playBtnColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white,
+                              blurRadius: 3,
+                            )
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.play_arrow,
+                          size: _width * 0.045,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: _width * 0.03,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
+            developText,
           ],
         )
     );

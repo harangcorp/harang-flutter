@@ -54,14 +54,20 @@ class StudyLearn extends GetView<NuriStudyController> {
               height: _height * 0.42,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Text(
-                        (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
-                        style: contentTextStyle,
+                    child: Scrollbar(
+                      child: SizedBox(
+                        width: _width * 0.775,
+                        height: _height * 0.42,
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Text(
+                              (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
+                              style: contentTextStyle,
+                            )
+                        )
                       )
                     ),
                   )
