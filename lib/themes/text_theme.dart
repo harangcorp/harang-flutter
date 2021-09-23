@@ -31,6 +31,9 @@ final signuphintStyle = TextStyle(
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.w500);
 
+final appTerms = TextStyle(
+    fontSize: 13.5, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+
 final np_title = TextStyle(
     fontSize: 28, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 

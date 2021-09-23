@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:harang/controllers/authController.dart';
 import 'package:harang/screens/auth/login.dart';
 import 'package:harang/screens/auth/signup.dart';
@@ -192,6 +194,48 @@ class Splash extends GetWidget<AuthController> {
                     )
                   ],
                 ),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        style: appTerms,
+                        text: "본 서비스에 회원가입 및 로그인을 진행할 시\n",
+                      ),
+                      TextSpan(
+                        style: appTerms.copyWith(
+                          color: Colors.lightBlueAccent,
+                        ),
+                        text: "개인정보처리약관",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String url = 'https://bit.ly/2XPgDq9';
+                            _launchURL(url);
+                          },
+                      ),
+                      TextSpan(
+                        style: appTerms,
+                        text: "과 ",
+                      ),
+                      TextSpan(
+                        style: appTerms.copyWith(
+                          color: Colors.lightBlueAccent,
+                        ),
+                        text: "이용약관",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String url = 'https://bit.ly/2XKO1OA';
+                            _launchURL(url);
+                          },
+                      ),
+                      TextSpan(
+                        style: appTerms,
+                        text: "에 동의하는 것으로 간주합니다.",
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  style: appTerms,
+                ),
               ],
             )
           ],
@@ -199,4 +243,7 @@ class Splash extends GetWidget<AuthController> {
       ),
     );
   }
+
+  void _launchURL(String _url) async =>
+      await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
 }
