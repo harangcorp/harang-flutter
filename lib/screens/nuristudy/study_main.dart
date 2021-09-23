@@ -105,22 +105,22 @@ class StudyMain extends GetView<NuriStudyController> {
                                                       int chapterNum = chapterIndex+1;
                                                       int stageNum = stageIndex+1;
                                                       bool? isStageProgress = controller.stageProgress[chapterNum.toString()][stageNum.toString()];
-                                                      if (isStageProgress ?? false) {
-                                                        controller.chapter = chapterNum;
-                                                        controller.stageNum = stageNum;
-                                                        controller.stageName = controller.chapterContent[chapterNum][stageNum]["title"];
-                                                        Get.to(StudyStart(), transition: Transition.rightToLeft);
+                                                      if (controller.chapterContent[(chapterIndex+1)][(stageIndex + 1)]["isDevelop"] ?? false) {
+                                                        Fluttertoast.showToast(
+                                                            msg: "스테이지가 현재 개발 중입니다. \n다른 스테이지를 이용해주세요.",
+                                                            toastLength: Toast.LENGTH_SHORT,
+                                                            gravity: ToastGravity.BOTTOM,
+                                                            timeInSecForIosWeb: 1,
+                                                            backgroundColor: Color(0xE6FFFFFF),
+                                                            textColor: Colors.black,
+                                                            fontSize: 16.0
+                                                        );
                                                       } else {
-                                                        if (controller.chapterContent[(chapterIndex+1)][(stageIndex + 1)]["isDevelop"] ?? false) {
-                                                          Fluttertoast.showToast(
-                                                              msg: "스테이지가 현재 개발 중입니다. \n다른 스테이지를 이용해주세요.",
-                                                              toastLength: Toast.LENGTH_SHORT,
-                                                              gravity: ToastGravity.BOTTOM,
-                                                              timeInSecForIosWeb: 1,
-                                                              backgroundColor: Color(0xE6FFFFFF),
-                                                              textColor: Colors.black,
-                                                              fontSize: 16.0
-                                                          );
+                                                        if (isStageProgress ?? false) {
+                                                          controller.chapter = chapterNum;
+                                                          controller.stageNum = stageNum;
+                                                          controller.stageName = controller.chapterContent[chapterNum][stageNum]["title"];
+                                                          Get.to(StudyStart(), transition: Transition.rightToLeft);
                                                         } else {
                                                           Fluttertoast.showToast(
                                                               msg: "스테이지가 잠겨있습니다.",

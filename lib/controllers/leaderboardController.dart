@@ -62,12 +62,16 @@ class LeaderBoardController extends GetxController {
   getProgressPercent(Map? stageProgress) async {
 
     int _chapterStageAmount = 0;
+    Map _chapterContent = {};
     for(var i=1; i<=3; i++){
       LectureContent lectureContent =  await Database().getLectureContent(i);
       _chapterStageAmount += lectureContent.chapterStageAmount!;
 
+      _chapterContent[i] = {};
       for (int j=1; j<=lectureContent.chapterStageAmount!; j++) {
-        if (lectureContent.chapterContent![j]["isDevelop"] ?? false) {
+        _chapterContent[i][j] = lectureContent.chapterContent![j];
+
+        if (_chapterContent[i][j]["isDevelop"] ?? false) {
           _chapterStageAmount--;
         }
       }
@@ -78,12 +82,13 @@ class LeaderBoardController extends GetxController {
       if (key != 'requiredStage') {
         List tmp = value.values.toList();
         for (var i = 0; i < tmp.length; i++) {
-          if (tmp[i]) {
+          if (tmp[i] && !(_chapterContent[int.parse(key)][(i+1)]["isDevelop"] ?? false)) {
             true_cnt++;
           }
         }
       }
     });
+
     return (true_cnt / _chapterStageAmount * 100).toInt();
   }
 }
