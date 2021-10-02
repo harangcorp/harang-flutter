@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,6 +25,7 @@ class NuriStudyController extends GetxController {
 
   Map chapterColor = {};
   Map chapterContent = {};
+  Map chapterContentImageUrl = {};
   Map chapterStageAmount = {};
 
   late UserModel _user;
@@ -56,12 +58,34 @@ class NuriStudyController extends GetxController {
       chapterStageAmount[i] = _lectureContent.chapterStageAmount;
 
       chapterContent[i] = {};
+      chapterContentImageUrl[i] = {};
       for (int j=1; j<=chapterStageAmount[i]; j++) {
         chapterContent[i][j] = _lectureContent.chapterContent![j];
+
+        for (int k=1; k<=chapterContent[i][j]["contents"]["pageAmount"]; k++) {
+          if (chapterContent[i][j]["contents"][k.toString()]["type"] == "text") {
+            String content = chapterContent[i][j]["contents"][k.toString()]["content"];
+
+            int nowIndex = 0;
+            getContentImageLoop: while (true) {
+              if (!content.contains("<img num", nowIndex)) { break getContentImageLoop; }
+              int index = content.indexOf("<img num", nowIndex);
+              getImageUrl(i, j, k, int.parse(content.substring(index+9, content.indexOf(">", index))));
+              nowIndex = index+1;
+            }
+          }
+        }
       }
     }
 
     return true;
+  }
+
+  getImageUrl(int chapter, int stage, int page, int imageNum) async {
+    final ref = FirebaseStorage.instance.ref().child('lectures/chapter${chapter}/${stage}_${page}_${imageNum}.png');
+    String result = await ref.getDownloadURL();
+
+    chapterContentImageUrl[chapter]["${stage}_${page}_${imageNum}"] = result;
   }
 
   goNextPage(int pageAmount) async {
@@ -282,6 +306,7 @@ class NuriStudyController extends GetxController {
       "textStage_contentBox": mintTwo,
       "textStage_contentBoxShadow": mintThree_shadow,
       "textStage_contentTextColor": mintFour,
+      "textStage_scrollBar": mintThree,
       "textStage_nextBtnArrow": mintThree,
       "textStage_nextBtnShadow": mintThree_shadow,
 
@@ -337,6 +362,7 @@ class NuriStudyController extends GetxController {
       "textStage_contentBox": purpleTen,
       "textStage_contentBoxShadow": purpleSeven_shadow,
       "textStage_contentTextColor": nuriGrammar,
+      "textStage_scrollBar": purpleSeven,
       "textStage_nextBtnArrow": purpleSeven,
       "textStage_nextBtnShadow": purpleSeven_shadow,
 
@@ -392,6 +418,7 @@ class NuriStudyController extends GetxController {
       "textStage_contentBox": pinkOne,
       "textStage_contentBoxShadow": pinkShadowThree,
       "textStage_contentTextColor": nuriPracticalApplication,
+      "textStage_scrollBar": nuriPracticalApplication,
       "textStage_nextBtnArrow": nuriPracticalApplication,
       "textStage_nextBtnShadow": pinkShadowTwo,
 

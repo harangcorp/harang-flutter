@@ -214,7 +214,7 @@ class NuriPlayGround extends GetWidget<NuripgController> {
     final width = MediaQuery.of(context).size.width;
 
     TextStyle btnTextStyle = TextStyle(
-        fontSize: width * 0.04, color: btnTextColor, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
+        fontSize: 15.5, color: btnTextColor, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 
     return GestureDetector(
       onTap: () {

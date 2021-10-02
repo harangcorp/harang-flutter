@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/controllers/nuristudyController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
 import 'package:harang/themes/color_theme.dart';
+import 'package:harang/themes/harang_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -48,33 +50,29 @@ class StudyLearn extends GetView<NuriStudyController> {
       TextStyle contentTextStyle = TextStyle(
           fontSize: (_width * 0.0375), color: colorMap[color]["textStage_contentTextColor"], fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500, height: 2.1);
 
-      result = textStageTemplate(
-          Container(
-              width: _width * 0.775,
-              height: _height * 0.42,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Scrollbar(
-                      child: SizedBox(
-                        width: _width * 0.775,
-                        height: _height * 0.42,
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Text(
-                              (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n"),
-                              style: contentTextStyle,
-                            )
-                        )
-                      )
-                    ),
-                  )
-                ],
-              )
-          )
-      );
+
+      List<Widget> contentWidgetList = [];
+      String content = (controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["content"] as String).replaceAll("\\n", "\n");
+      int nowIndex = 0;
+      int beforeIndex = 0;
+
+      contentLoop: while (true) {
+        if (!content.contains("<img num", nowIndex)) {
+          contentWidgetList.add(Text(content.substring(beforeIndex), style: contentTextStyle));
+          break contentLoop;
+        }
+        int index = content.indexOf("<img num", nowIndex);
+
+        contentWidgetList.add(Text(content.substring(beforeIndex, index), style: contentTextStyle));
+        contentWidgetList.add(ExtendedImage.network(controller.chapterContentImageUrl[chapterNum]["${stageNum}_${pageNum}_${content.substring(index+9, content.indexOf(">", index))}"], cache: true));
+
+        nowIndex = index+1;
+        beforeIndex = content.indexOf(">", index)+1;
+      }
+
+      if (contentWidgetList.isEmpty) { contentWidgetList.add(Text(content, style: contentTextStyle)); }
+
+      result = textStageTemplate(contentWidgetList);
     } else if (pageKind == "quiz") {
       quizStagePlusPoint = controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["plusPoint"];
       quizStageAnswer = controller.chapterContent[chapterNum][stageNum]["contents"][pageNum.toString()]["answer"];
@@ -101,7 +99,7 @@ class StudyLearn extends GetView<NuriStudyController> {
     );
   }
 
-  textStageTemplate(Container educationContent) {
+  textStageTemplate(List<Widget> educationContent) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -183,7 +181,40 @@ class StudyLearn extends GetView<NuriStudyController> {
                           children: [
                             Positioned(
                               top: _height * 0.03,
-                              child: educationContent,
+                              left: _width * 0.065,
+                              child: Container(
+                                  width: _width * 0.775,
+                                  height: _height * 0.42,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Theme(
+                                          data: harang_theme.copyWith(
+                                            scrollbarTheme: harang_theme.scrollbarTheme.copyWith(
+                                              thumbColor: MaterialStateProperty.all(colorMap[color]["textStage_scrollBar"].withOpacity(0.85)),
+                                            )
+                                          ),
+                                          child: Scrollbar(
+                                              child: SizedBox(
+                                                  width: _width * 0.75,
+                                                  height: _height * 0.42,
+                                                  child: SingleChildScrollView(
+                                                      scrollDirection: Axis.vertical,
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: educationContent,
+                                                      ),
+                                                  )
+                                              )
+                                          ),
+                                        )
+                                      )
+                                    ],
+                                  )
+                              ),
                             ),
                             Positioned(
                                 top: _height * 0.44,
