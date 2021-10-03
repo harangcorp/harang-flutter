@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:harang/controllers/authController.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:harang/controllers/bindings/leaderboardBinding.dart';
 import 'package:harang/controllers/bindings/nuripgBinding.dart';
 import 'package:harang/controllers/bindings/nuristudyBinding.dart';
-import 'package:harang/controllers/nuripgController.dart';
 import 'package:harang/screens/nuriplayground/nuriplayground.dart';
 import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
@@ -21,6 +19,9 @@ class Home extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
+
+    controller.openAppUpdateDialog(context, _width);
+
     return Scaffold(
         body: Stack(
           children: [
@@ -237,38 +238,15 @@ class Home extends GetWidget<AuthController> {
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)
-                            ),
-                            title: Text('로그아웃 하시겠어요?'),
-                            titleTextStyle: TextStyle(
-                                fontSize: _width * 0.05, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700),
-                            content: Text(
-                              "현재 로그인된 계정은 \n${controller.user!.email} 입니다.",
-                              style: TextStyle(
-                                fontSize: _width * 0.035, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500),
-                            ),
-                            actions: <Widget>[
-                              FlatButton(
-                                minWidth: _width * 0.1,
-                                child: Text("네", style: TextStyle(color: Colors.lightBlue)),
-                                onPressed: () => controller.signOut(),
-                              ),
-                              FlatButton(
-                                minWidth: _width * 0.1,
-                                child: Text("아니오", style: TextStyle(color: Colors.lightBlue)),
-                                onPressed: () => Get.back(),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
+                    onPressed: () => controller.showAlertDialog(
+                        '로그아웃 하시겠어요?',
+                        "현재 로그인된 계정은 \n${controller.user!.email} 입니다.",
+                            () => controller.signOut(),
+                            () => Get.back(),
+                        true,
+                        context,
+                        _width
+                    ),
                     icon: Icon(
                       Icons.logout_outlined,
                       size: 30,
