@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/bindings/authBinding.dart';
 
+import 'controllers/notification_controller.dart';
 import 'themes/harang_theme.dart';
 import 'utils/root.dart';
 
@@ -15,6 +16,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    NotificationController _notiController = Get.put<NotificationController>(NotificationController(), permanent: true);
+    _notiController.initialize();
+
     return GetMaterialApp(
       theme: harang_theme,
         builder: (context, child) => Scaffold(
