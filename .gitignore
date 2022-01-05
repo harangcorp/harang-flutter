@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.gradle/
 
 # IntelliJ related
 *.iml
@@ -55,4 +56,8 @@ app.*.map.json
 /android/app/release
 
 #Harang Release Key
+/android/app/key.properties
 /android/app/*.jks
+
+#Firebase API Key
+google-services.json
