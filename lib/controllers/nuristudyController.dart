@@ -188,7 +188,7 @@ class NuriStudyController extends GetxController {
     String testCaseOutput = chapterContent[chapter][stageNum]["contents"][pageNum.toString()]["testCase"]["output"];
 
     nuriPgController.compile();
-    Nuri testCaseResult = await nuriPgController.nuriAPI.postReq(nuriPgController.codeCtl.text, input: testCaseInput);
+    Nuri testCaseResult = await nuriPgController.nuriAPI.postReq(nuriPgController.replaceIphoneUniqueStr(nuriPgController.codeCtl.text), input: testCaseInput);
 
     String compareOutputText = testCaseResult.output;
     if (compareOutputText.length != 0) {

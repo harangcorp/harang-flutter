@@ -13,6 +13,7 @@ import 'package:harang/utils/root.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'dart:io';
 
 class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -107,8 +108,6 @@ class AuthController extends GetxController {
   }
 
   void signInWithFacebook() async {
-    //TODO iOS 부분 페이스북 로그인은 맥북이 없으므로 작성하지 않았음, 추후 iOS 배포할 시 관련 작업 필요.
-
     try {
       final facebookLoginResult = await FacebookAuth.instance.login();
       final userData = await FacebookAuth.instance.getUserData();
@@ -222,8 +221,7 @@ class AuthController extends GetxController {
     int localVersion = int.parse(packageInfo.buildNumber);
 
     remoteConfig.setDefaults({"latest_versionCode": localVersion});
-    remoteConfig.fetch();
-    remoteConfig.fetchAndActivate();
+    await remoteConfig.fetchAndActivate();
 
     int nowVersion = remoteConfig.getInt("latest_versionCode");
 
@@ -260,7 +258,7 @@ class AuthController extends GetxController {
 
   openPermissionPage() async {
     if (isFirstOpen) {
-      Get.to(RequirePermission());
+      if (Platform.isAndroid) { Get.to(RequirePermission()); }
       await sharedPreferences.setBool('isFirstOpen', false);
     }
   }

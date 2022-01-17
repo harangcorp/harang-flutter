@@ -9,6 +9,7 @@ import 'package:harang/themes/color_theme.dart';
 import 'package:harang/themes/text_theme.dart';
 import 'package:harang/widgets/weekly_chart.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'dart:io';
 
 // 명예의 전당 페이지
 
@@ -40,7 +41,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    title(),
+                    title(width),
                     AnimatedContainer(
                       duration: Duration(milliseconds: 200),
                       decoration: controller.isSelected.value
@@ -460,7 +461,7 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
                               controller.isSelected.value ? 0 : height * 0.23,
                           child: controller.isSelected.value
                               ? null
-                              : WeeklyChart(),
+                              : (Platform.isAndroid ? WeeklyChart() : Center(child: Text("현재 아이폰에서는 학습 시간 \n분석 기능을 제공하지 않습니다.", textAlign: TextAlign.center, style: leaderboard_studyTime_notSupportOnIOS))),
                         )
                       ],
                     )),
@@ -494,10 +495,12 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
         ));
   }
 
-  Center title() {
+  Center title(double width) {
     return Center(
       child: Stack(
+        alignment: Alignment.center,
         children: [
+          SizedBox(width: width),
           Positioned(
             bottom: 0,
             child: Container(
@@ -510,6 +513,17 @@ class LeaderBoard extends GetWidget<LeaderBoardController> {
             "나의 학습방",
             style: np_title,
           ),
+          Positioned(
+              left: width * 0.04,
+              child: GestureDetector(
+                onTap: () => Get.back(),
+                child: Icon(
+                  Icons.chevron_left,
+                  color: Colors.black,
+                  size: width * 0.12,
+                ),
+              )
+          )
         ],
       ),
     );

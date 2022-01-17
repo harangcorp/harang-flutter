@@ -41,12 +41,14 @@ class StudyMain extends GetView<NuriStudyController> {
                             height: _height * 0.07,
                           ),
                           Stack(
+                              alignment: Alignment.center,
                               children: [
+                                SizedBox(width: _width),
                                 Positioned(
                                   bottom: 0,
                                   child: Container(
                                     height: 10,
-                                    width: 220,
+                                    width: 190,
                                     color: nuriStudy,
                                   ),
                                 ),
@@ -54,6 +56,17 @@ class StudyMain extends GetView<NuriStudyController> {
                                   "단계별 학습하기",
                                   style: homeTitleStyle,
                                 ),
+                                Positioned(
+                                    left: _width * 0.04,
+                                    child: GestureDetector(
+                                      onTap: () => Get.back(),
+                                      child: Icon(
+                                        Icons.chevron_left,
+                                        color: purpleOne,
+                                        size: _width * 0.12,
+                                      ),
+                                    )
+                                )
                               ]
                           ),
                           SizedBox(

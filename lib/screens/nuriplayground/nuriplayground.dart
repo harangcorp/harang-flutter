@@ -11,6 +11,9 @@ class NuriPlayGround extends GetWidget<NuripgController> {
 
   @override
   Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -24,7 +27,9 @@ class NuriPlayGround extends GetWidget<NuripgController> {
               children: [
                 Center(
                   child: Stack(
+                    alignment: Alignment.center,
                     children: [
+                      SizedBox(width: _width),
                       Positioned(
                         bottom: 0,
                         child: Container(
@@ -37,6 +42,17 @@ class NuriPlayGround extends GetWidget<NuripgController> {
                         "누리 놀이터",
                         style: np_title,
                       ),
+                      Positioned(
+                          left: 0,
+                          child: GestureDetector(
+                            onTap: () => Get.back(),
+                            child: Icon(
+                              Icons.chevron_left,
+                              color: nuriPlayground,
+                              size: _width * 0.12,
+                            ),
+                          )
+                      )
                     ],
                   ),
                 ),

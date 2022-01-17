@@ -24,11 +24,20 @@ class NuripgController extends GetxController {
 
   //누리를 컴파일하고 결과값 적용
   compile() async {
-    Nuri result = await nuriAPI.postReq(codeCtl.text, input: inputCtl.text);
+    Nuri result = await nuriAPI.postReq(replaceIphoneUniqueStr(codeCtl.text), input: inputCtl.text);
     output?.value = result.output;
     output?.value.removeAllWhitespace;
     await Future.delayed(Duration(seconds: 1));
     isCompiling.value = false;
+  }
+  
+  replaceIphoneUniqueStr(String code) { //아이폰 특수문자 변환
+    code = code.replaceAll("“", "\"");
+    code = code.replaceAll("”", "\"");
+    code = code.replaceAll("‘", "\'");
+    code = code.replaceAll("’", "\'");
+    
+    return code;
   }
 
   final Map colorMap = {

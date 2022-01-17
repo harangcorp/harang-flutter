@@ -304,6 +304,9 @@ final ranking_third_score = TextStyle(
     fontWeight: FontWeight.bold
 );
 
+final leaderboard_studyTime_notSupportOnIOS = TextStyle(
+    fontSize: 16, color: Colors.black, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w400);
+
 final permissionPage_title = TextStyle(
     fontSize: 24, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final permissionPage_description = TextStyle(

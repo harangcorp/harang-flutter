@@ -31,6 +31,7 @@
 .pub-cache/
 .pub/
 /build/
+ios/build
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -61,3 +62,7 @@ app.*.map.json
 
 #Firebase API Key
 google-services.json
+GoogleService-Info.plist
+
+#Project API Token
+InfoPlist.strings
