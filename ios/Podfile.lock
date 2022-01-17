@@ -395,7 +395,7 @@ PODS:
   - Firebase/Storage (8.9.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 8.9.0)
-  - firebase_auth (3.1.1):
+  - firebase_auth (3.2.0):
     - Firebase/Auth (= 8.9.0)
     - firebase_core
     - Flutter
@@ -574,6 +574,8 @@ PODS:
   - PromisesObjC (2.0.0)
   - shared_preferences (0.0.1):
     - Flutter
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - store_redirect (0.0.1):
     - Flutter
   - Toast (4.0.0)
@@ -599,6 +601,7 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - store_redirect (from `.symlinks/plugins/store_redirect/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -672,6 +675,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   store_redirect:
     :path: ".symlinks/plugins/store_redirect/ios"
   url_launcher:
@@ -688,7 +693,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 8f978bce195845f609b0ec6b425949d0d24f525b
   FBSDKLoginKit: d65eb587a9eaa89295338fb0bb3b358bde0b7ae4
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
-  firebase_auth: 061935771473cb724ed62c5760729f35ca99696e
+  firebase_auth: 0d56cc4d105ff70d1547a7fcb10ee574ad05adf5
   firebase_core: f770e033e790657b3505f04be4cb24c482912f11
   firebase_crashlytics: 849cb8be075f476ca12aa22d50ca7523591a058a
   firebase_messaging: 0c8d1a1732487db7f332fb65232053e93201e2fb
@@ -725,6 +730,7 @@ SPEC CHECKSUMS:
   path_provider: d1e9807085df1f9cc9318206cd649dc0b76be3de
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   shared_preferences: 5033afbb22d372e15aff8ff766df9021b845f273
+  sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   store_redirect: 2977747cf81689a39bd62c248c2deacb7a0d131e
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher: b6e016d912f04be9f5bf6e8e82dc599b7ba59649

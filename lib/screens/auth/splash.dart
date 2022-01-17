@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -191,7 +193,28 @@ class Splash extends GetWidget<AuthController> {
                           fit: BoxFit.contain,
                         ),
                       ),
-                    )
+                    ),
+                    GestureDetector(
+                      onTap: () => Platform.isIOS ? controller.signInWithApple() : Get.snackbar('애플 로그인 오류', '현재 안드로이드 기기에서 \n애플 로그인은 지원되지 않습니다.', snackPosition: SnackPosition.BOTTOM),
+                      child: Container(
+                        margin: EdgeInsets.only(left: 16, bottom: 16),
+                        padding: EdgeInsets.all(6),
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                            color: purpleOne,
+                            borderRadius: BorderRadius.circular(17.5),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: purpleShadow,
+                                  blurRadius: 10,
+                                  spreadRadius: 1)
+                            ]),
+                        child: SvgPicture.asset(
+                            'assets/images/appleIcon.svg',
+                            color: Colors.white),
+                      ),
+                    ),
                   ],
                 ),
                 Text.rich(

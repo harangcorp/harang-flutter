@@ -12,6 +12,7 @@ import 'package:harang/services/database.dart';
 import 'package:harang/utils/root.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'dart:io';
 
@@ -42,6 +43,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
 
       writeAccountInfo(_authResult.user?.uid, _authResult.user?.email, name, true);
+      Get.offAll(Root(),transition: Transition.rightToLeft);
       openPermissionPage();
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
@@ -125,6 +127,30 @@ class AuthController extends GetxController {
           print("This account exists with a different sign in provider");
           break;
       }
+    }
+  }
+
+  void signInWithApple() async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+
+      writeAccountInfo(_authResult.user?.uid, appleCredential.email, "${appleCredential.familyName}${appleCredential.givenName}", false);
+
+      openPermissionPage();
+    } catch(error) {
+      print(error);
     }
   }
 
@@ -258,8 +284,9 @@ class AuthController extends GetxController {
 
   openPermissionPage() async {
     if (isFirstOpen) {
-      if (Platform.isAndroid) { Get.to(RequirePermission()); }
       await sharedPreferences.setBool('isFirstOpen', false);
+
+      if (Platform.isAndroid) { Get.to(RequirePermission()); } else { Get.offAll(Root()); }
     }
   }
 }
