@@ -48,3 +48,7 @@
 - [[STAC2021] '하랑', "한글형 프로그래밍 기반의 코딩 교육 어때요?" (동아일보)](https://game.donga.com/101434/)
 - [국민대 LINC+사업단, ‘국민대-JA Korea 창업캠프’ 성료 (BusinessKorea)](http://www.businesskorea.co.kr/news/articleView.html?idxno=84655)
 
+### 소개 영상
+<div align="center">
+<a href="https://www.youtube.com/watch?v=MFm2XrKlOS4"><img src="https://img.youtube.com/vi/MFm2XrKlOS4/maxresdefault.jpg" style="width:75%;"></a>
+</div>
